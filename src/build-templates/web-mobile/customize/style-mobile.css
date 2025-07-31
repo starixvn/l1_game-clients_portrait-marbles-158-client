@@ -1,0 +1,526 @@
+html {
+    -ms-touch-action: none;
+    /* height: 100%; */
+}
+
+body,
+canvas,
+div {
+    display: block;
+    outline: none;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+}
+
+/* Remove spin of input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+iframe {
+    overflow-x: hidden;
+}
+
+body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    background-size: auto 100vh;
+
+    cursor: default;
+    background-color: #000;
+
+    text-align: center;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+
+    /* fix bug: https://github.com/cocos-creator/2d-tasks/issues/791 */
+    /* overflow cannot be applied in Cocos2dGameContainer,
+  otherwise child elements will be hidden when Cocos2dGameContainer rotated 90 deg */
+    overflow: hidden;
+}
+
+.container-themes {
+    position: relative;
+    top: 5.22vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-themes {
+    background-size: auto 89.56vh;
+    width: auto;
+    height: 89.56vh;
+}
+
+.game-container {
+    position: absolute;
+    top: 0;
+}
+
+#Cocos3dGameContainer {
+    position: absolute;
+    margin: 0;
+    left: 0px;
+    top: 0px;
+
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+
+    width: 100%;
+    z-index: 1;
+    height: 100vh !important;
+    height: calc(var(--vh, 1vh) * 100) !important;
+}
+
+#Cocos3dGameContainer > div[style*="overflow-x"] {
+    overflow-x: hidden !important;
+}
+
+a:link,
+a:visited {
+    color: #666;
+}
+
+a:active,
+a:hover {
+    color: #666;
+}
+
+p.header {
+    font-size: small;
+}
+
+p.footer {
+    font-size: x-small;
+}
+
+#Background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    background-size: auto 100vh;
+}
+
+.splash-container {
+    position: absolute;
+    top: var(--scrollY, 0px);
+    left: 0;
+    width: 100%;
+    height: var(--ih, 100vh);
+    z-index: 999;
+}
+
+.splash {
+    position: absolute;
+    top: calc(var(--vh, 1vh) * 38);
+    --logo-height: calc(var(--vh, 1vh) * 11.95);
+    background: url("./../images/logo_saba.webp?v=3") no-repeat top center;
+    background-size: auto var(--logo-height);
+    width: 100%;
+    height: var(--logo-height);
+}
+
+.splash_text {
+    position: absolute;
+    top: calc(var(--vh, 1vh) * 50.6);
+    background: no-repeat center;
+    background-size: auto calc(var(--vh, 1vh) * 2.5);
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 3.44);
+}
+
+#splash.instant-game .splash_Vgaming {
+    top: 1vh;
+    background-size: auto 16.5vh;
+    height: 16.5vh;
+}
+
+.splash_Vgaming {
+    position: relative;
+    top: calc(var(--vh, 1vh) * 31.7);
+    --logo-height: calc(var(--vh, 1vh) * 18.32);
+    background: url("./../images/logo_vgaming.webp?v=3") no-repeat center;
+    background-size: auto var(--logo-height);
+    width: auto;
+    height: var(--logo-height);
+}
+
+.splash_sabaplay {
+    position: relative;
+    top: calc(var(--vh, 1vh) * 26.1);
+    --logo-height: calc(var(--vh, 1vh) * 23.79);
+    background: url("./../images/logo_sabaplay.webp?v=3") no-repeat center;
+    background-size: auto var(--logo-height);
+    width: auto;
+    height: var(--logo-height);
+}
+
+.splash_tip88 {
+    position: relative;
+    top: calc(var(--vh, 1vh) * 26.1);
+    --logo-height: calc(var(--vh, 1vh) * 24.04);
+    background: url("./../images/logo_tip88.webp?v=3") no-repeat center;
+    background-size: auto var(--logo-height);
+    width: auto;
+    height: var(--logo-height);
+}
+
+.splash_text_vi {
+    background-image: url("./../images/splash_text_vi.webp?v=1");
+}
+
+.splash_text_en {
+    background-image: url("./../images/splash_text_en.webp?v=1");
+}
+
+.splash_text_th {
+    background-image: url("./../images/splash_text_th.webp?v=1");
+}
+
+.splash_text_id {
+    background-image: url("./../images/splash_text_id.webp?v=1");
+}
+
+.splash_text_zh_cn {
+    background-image: url("./../images/splash_text_zh_cn.webp?v=1");
+}
+
+.splash_text_zh_tw {
+    background-image: url("./../images/splash_text_zh_tw.webp?v=1");
+}
+
+#splash.instant-game .splash_game_name {
+    display: none;
+}
+
+#splash.instant-game .splash {
+    top: 4vh;
+    background-size: auto 11.1vh;
+}
+
+#splash.instant-game .splash_bg_game {
+    top: 1.9vh;
+    background-image: url("./../splash-resources/landscape_game_background.webp?v=2");
+    background-size: auto;
+}
+
+#splash.instant-game .splash_tip88 {
+    top: 0.7vh;
+    background-size: auto 17.76vh;
+    height: 17.76vh;
+}
+
+#splash.instant-game .splash_sabaplay {
+    top: 0.7vh;
+    background-size: auto 16.96vh;
+    height: 16.96vh;
+}
+
+#powered-by {
+    position: absolute;
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+#powered-by.powered-by {
+    background: url("./../images/powered_by.webp?v=1") no-repeat top center;
+    --powered-by-height: calc(var(--vh, 1vh) * 4.07);
+    background-size: auto var(--powered-by-height);
+    width: 100%;
+    height: var(--powered-by-height);
+    top: calc(var(--vh, 1vh) * 84.35);
+}
+
+#powered-by.powered-by_tip88 {
+    width: 100%;
+    --powered-by-height: calc(var(--vh, 1vh) * 4.8);
+    height: var(--powered-by-height);
+    bottom: calc(var(--vh, 1vh) * 10.8);
+    background: no-repeat center;
+    background-size: auto var(--powered-by-height);
+}
+
+#powered-by.powered-by_tip88.en {
+    background-image: url("./../images/powered_by_Vgaming_en.webp?v=1");
+}
+
+#powered-by.powered-by_tip88.vi {
+    background-image: url("./../images/powered_by_Vgaming_vi.webp?v=1");
+}
+
+#powered-by.powered-by_tip88.th {
+    background-image: url("./../images/powered_by_Vgaming_th.webp?v=1");
+}
+
+#powered-by.powered-by_tip88.id {
+    background-image: url("./../images/powered_by_Vgaming_id.webp?v=1");
+}
+
+#powered-by.powered-by_tip88.zh_cn {
+    background-image: url("./../images/powered_by_Vgaming_zh_cn.webp?v=1");
+}
+
+#powered-by.powered-by_tip88.zh_tw {
+    background-image: url("./../images/powered_by_Vgaming_zh_tw.webp?v=1");
+}
+
+.waiting-message {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    bottom: calc(var(--vh, 1vh) * 5.3);
+    width: 100%;
+    font-size: calc(var(--vh, 1vh) * 2.65);
+    opacity: 0;
+    color: #ccc7b4;
+    letter-spacing: -0.2px;
+    transition: all 1s ease;
+    transform: translateY(20px);
+    visibility: hidden;
+}
+
+.waiting-message.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.waiting-message.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    visibility: hidden;
+}
+
+.conner-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.centered-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+}
+
+#splash.instant-game .splash_text {
+    top: 19.6vh;
+    background-size: auto 4.28vh;
+    height: 4.28vh;
+}
+
+.text {
+    margin-bottom: 36px;
+    text-transform: capitalize;
+    background: linear-gradient(to bottom, #ffe28e 0%, #f9a71a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8em;
+    font-family: Arial;
+}
+
+.loading_icon {
+    position: absolute;
+    top: calc(var(--vh, 1vh) * 60.17);
+    --loading-icon-height: calc(var(--vh, 1vh) * 0.76);
+    left: 50%;
+    transform: translateX(-50%);
+    background: url("./../images/loading-bar.gif?v=1") no-repeat center;
+    background-size: auto var(--loading-icon-height);
+    width: 100%;
+    height: var(--loading-icon-height);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1024px) and (orientation: portrait) {
+    body {
+        background-size: 100vh auto;
+    }
+
+    .splash-container {
+        height: 100vw;
+        width: 100vh;
+        width: var(--ih, 100vh);
+        transform: rotate(90deg);
+        transform-origin: 50vw;
+    }
+
+    .container-themes {
+        position: fixed;
+        height: calc(89.56vw - 70px);
+        -ms-transform: translateY(-89.56vw) rotate(90deg);
+        -o-transform: translateY(-89.56vw) rotate(90deg);
+        -ms-transform: translateY(-89.56vw) rotate(90deg);
+        -o-transform: translateY(-89.56vw) rotate(90deg);
+        transform: translateY(-89.56vw) rotate(90deg);
+        -webkit-transform-origin: left bottom;
+        -moz-transform-origin: left bottom;
+        top: unset;
+        bottom: unset;
+        right: unset;
+        left: 5.22vw;
+    }
+
+    .img-themes {
+        background-size: auto 50.36vh;
+        width: auto;
+        height: 50.36vh;
+    }
+
+    #Background {
+        background-size: 100vh 100vw;
+        transform: rotate(90deg);
+        transform-origin: bottom left;
+        width: 100vh;
+        height: 100vw;
+        top: -100vw;
+    }
+
+    .light {
+        background-size: 31.47vw 8.79vw;
+        width: 31.47vw;
+        height: 8.79vw;
+    }
+
+    .splash {
+        top: 37.9vw;
+        background-size: auto 11.95vw;
+        height: 11.95vw;
+    }
+
+    .splash_text {
+        top: 50.6vw;
+        background-size: auto 2.5vw;
+        height: 3.44vw;
+    }
+
+    .splash_Vgaming {
+        top: 31.67vw;
+        background-size: auto 18.32vw;
+        height: 18.32vw;
+    }
+
+    .splash_sabaplay {
+        top: 26.1vw;
+        background-size: auto 23.79vw;
+        height: 23.79vw;
+    }
+
+    .splash_tip88 {
+        top: 25.95vw;
+        background-size: auto 24.04vw;
+    }
+
+    #splash.instant-game .splash_Vgaming {
+        top: 0vh;
+        left: 0px;
+        background-size: auto 14.1vh;
+    }
+
+    .centered-image {
+        top: 50vh;
+    }
+
+    .splash_bg_game {
+        background-size: auto 25vh;
+    }
+
+    body.instant-game {
+        background-size: auto 100vh;
+    }
+
+    #splash.instant-game {
+        transform: rotate(0deg);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+    }
+
+    #splash.instant-game .splash {
+        top: 4vh;
+        background-size: auto 9.5vh;
+    }
+
+    #splash.instant-game .splash_bg_game {
+        top: -1vh;
+        background-image: url("./../splash-resources/portrait_game_background.webp?v=2");
+    }
+
+    #splash.instant-game .splash_sabaplay {
+        top: 0vh;
+        background-size: auto 14.5vh;
+    }
+
+    #splash.instant-game .splash_tip88 {
+        top: 0.7vh;
+        background-size: auto 15.18vh;
+        height: 15.18vh;
+    }
+
+    #splash.instant-game .splash_text {
+        top: 17.5vh;
+        background-size: auto 3.66vh;
+        height: 3.66vh;
+    }
+
+    .loading_icon {
+        top: 60.17vw;
+        background-size: auto 0.76vw;
+        height: 0.76vw;
+    }
+
+    #powered-by.powered-by {
+        background-size: auto 4.07vw;
+        height: 4.07vw;
+        top: 84.35vw;
+    }
+
+    #powered-by.powered-by_tip88 {
+        height: 4.8vw;
+        bottom: 10.8vw;
+        background-size: auto 4.8vw;
+    }
+
+    .waiting-message {
+        bottom: 5.3vw;
+        font-size: 2.65vw;
+    }
+}
+
+@keyframes animate-stripes {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 60px 0;
+    }
+}
