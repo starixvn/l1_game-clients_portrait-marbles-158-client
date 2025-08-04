@@ -138,23 +138,15 @@ export default class VideoStreamIntegration extends ObserverComponent {
 
     @render(VideoStreamStore, (store) => ({
         videoResult: store.videoResult,
-        isLoadFirstHalf: store.isLoadFirstHalf,
     }))
-    bufferVideo({ isLoadFirstHalf, videoResult }: { isLoadFirstHalf: boolean; videoResult: MarbleFootballServiceMessages.VideoStream }) {
+    bufferVideo({ videoResult }: { videoResult: MarbleFootballServiceMessages.VideoStream }) {
         if (!videoResult) {
             return;
         }
-
-        if (isLoadFirstHalf && videoResult.firstHalfVideo) {
+            console.log(`LOADING VIDEO ${JSON.stringify(videoResult)}`)
             this.backgroundVideoPlayer.currentTime = 0;
-            this.backgroundVideoPlayer.loadVideoByName(videoResult.firstHalfVideo);
-            return;
-        }
+            this.backgroundVideoPlayer.loadVideoByName(videoResult.video);
 
-        if (!isLoadFirstHalf && videoResult.secondHalfVideo) {
-            this.backgroundVideoPlayer.currentTime = 0;
-            this.backgroundVideoPlayer.loadVideoByName(videoResult.secondHalfVideo);
-        }
     }
 
     @render(gc.Rounds.RoundTimeStore, (store) => store.isStartRound)
@@ -171,6 +163,7 @@ export default class VideoStreamIntegration extends ObserverComponent {
 
     @render(VideoStreamStore, (store) => store.liveStreamServer)
     private onLiveStreamServer(liveStreamServer: string) {
+        console.log("live stream server", liveStreamServer)
         this.backgroundVideoPlayer.init(liveStreamServer, this.handlePlayVideo);
     }
 

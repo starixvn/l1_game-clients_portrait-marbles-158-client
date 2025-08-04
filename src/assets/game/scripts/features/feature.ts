@@ -4,5 +4,6 @@ export * from "./tournament/tournament-handlers";
 export * from "./video-stream/video-stream-handlers";
 export * from "./dynamic-odds/odds-handler";
 export * from "./commentators-voices/commentators-voices-handler";
+export * from "./match/match-handlers";
 
 export const FEATURE_NAME = "MarbleFootball";

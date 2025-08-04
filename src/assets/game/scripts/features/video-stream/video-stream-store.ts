@@ -2,13 +2,13 @@ import inversify from "inversify";
 import mobx from "mobx";
 import { MarbleFootballServiceMessages } from "../../marble-football-service-messages";
 import { settings } from "./../../game-settings";
+import { log } from "cc";
 
 const { injectable } = inversify;
 
 export type StreamingVideo = {
     videoName: string;
     time: number;
-    isFirstHalf: boolean;
 };
 
 type VideoData = {
@@ -41,12 +41,15 @@ export class VideoStreamStore {
     }
 
     updateWithRoundTime(roundTime: number) {
+        log("roundTime ", roundTime);
         this._roundTime = roundTime;
         this._currentVideoTime = this.calculateCurrentVideoTime();
+        console.log("currentVideoTime ", this._currentVideoTime);
         this._isLoadFirstHalf = roundTime > settings.points.placingBetLiveMatch;
 
         if (this._currentVideoTime > 0 && this._currentVideoTime <= settings.durations.halfDuration) {
             this._currentMatchTime++;
+            console.log("currentMatchTime ", this._currentMatchTime);
         }
 
         const endOfFirstHalf = settings.points.streamingFirstHalfVideo - settings.durations.videoDuration;
@@ -65,6 +68,7 @@ export class VideoStreamStore {
     updateCurrentVideoAndScores() {
         const currentVideoTime = this._currentVideoTime;
         const videoData = this.getVideoData();
+        console.log("VIDEO DATA on load ", videoData);
 
         if (!videoData) {
             return;
@@ -81,13 +85,10 @@ export class VideoStreamStore {
             return;
         }
 
-        if (this._currentVideo.videoName !== videoData.videoName || this._currentVideo.isFirstHalf !== this.isFirstHalf) {
-            this._currentVideo = {
-                videoName: videoData.videoName,
-                time: currentVideoTime,
-                isFirstHalf: this._isFirstHalf,
-            };
-        }
+        this._currentVideo = {
+            videoName: videoData.videoName,
+            time: currentVideoTime,
+        };
 
         this.updateCurrentScores(videoData, currentVideoTime);
     }
@@ -99,14 +100,14 @@ export class VideoStreamStore {
         let time = currentMatchTime;
 
         if (time >= settings.durations.halfDuration) {
-            homeScore = this._videoResult.firstHalf?.split("H").length - 1;
-            awayScore = this._videoResult.firstHalf?.split("A").length - 1;
+            homeScore = this._videoResult.video?.split("H").length - 1;
+            awayScore = this._videoResult.video?.split("A").length - 1;
             time -= settings.durations.halfDuration;
         }
 
         if (time >= settings.durations.halfDuration) {
-            homeScore += this._videoResult.secondHalf?.split("H").length - 1;
-            awayScore += this._videoResult.secondHalf?.split("A").length - 1;
+            homeScore += this._videoResult.video?.split("H").length - 1;
+            awayScore += this._videoResult.video?.split("A").length - 1;
             time -= settings.durations.halfDuration;
         }
 
@@ -143,11 +144,9 @@ export class VideoStreamStore {
     }
 
     private getVideoData(): VideoData {
-        const isSecondHalf = this._isSecondHalf;
-
-        const videoName = isSecondHalf ? this._videoResult.secondHalfVideo : this._videoResult.firstHalfVideo;
-        const videoTimeline = isSecondHalf ? this._videoResult.secondHalfTimeline : this._videoResult.firstHalfTimeline;
-        const videoResult = isSecondHalf ? this._videoResult.secondHalf : this._videoResult.firstHalf;
+        const videoName = this._videoResult.video;
+        const videoTimeline = this._videoResult.timeline;
+        const videoResult = this._videoResult.result;
 
         if (!videoTimeline || !videoResult) {
             return null;
@@ -170,8 +169,7 @@ export class VideoStreamStore {
             return videoTime <= settings.durations.videoDuration ? videoTime : -1;
         }
 
-        const streamingSecondHalfVideoTime =
-            settings.points.streamingFirstHalfVideo - settings.durations.videoDuration - settings.durations.breakTime;
+        const streamingSecondHalfVideoTime = settings.points.streamingSecondHalfVideo;
 
         if (roundTime <= streamingSecondHalfVideoTime && roundTime >= 0) {
             return streamingSecondHalfVideoTime - roundTime;
@@ -181,6 +179,7 @@ export class VideoStreamStore {
     }
 
     calculateCurrentMatchTime() {
+        console.log(" calc match time on start ", this._roundTime);
         const roundTime = this._roundTime;
 
         if (roundTime > settings.points.placingBetPreMatch + settings.durations.startRound) {

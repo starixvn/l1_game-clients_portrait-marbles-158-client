@@ -18,15 +18,12 @@ export class PhasesRegistry extends ObserverComponent {
     }
 
     protected registerAllPhases() {
-        this.registerPhaseMatchWinner();
-        this.registerPhaseShowWinnerAndTournament();
         this.registerPhaseShowBetChoicesPrev();
+        this.registerPhaseHideBetChoicesPrev();
         this.registerPhaseShowBetChoicesLive();
         this.registerPhaseShowIntroVideo();
         this.registerPhaseShowPrevVideo();
         this.registerPhaseShowLiveVideo();
-        this.registerSettlement();
-        this.registerPhaseHideBetChoicesPrev();
         this.registerPhaseHideBetChoicesLive();
     }
 

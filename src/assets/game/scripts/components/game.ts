@@ -151,9 +151,9 @@ export default class Game extends GameComponent {
             }
             if (hasAnimation) {
                 await AnimationUtils.delayTime(settings.durations.outro);
-                await matchResult.show(hasAnimation);
+                // await matchResult.show(hasAnimation);
             } else {
-                matchResult.show(false);
+                // matchResult.show(false);
             }
         } catch (e) {
             log("showResult error", e);

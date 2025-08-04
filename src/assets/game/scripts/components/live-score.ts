@@ -74,8 +74,8 @@ export class LiveScore extends ObserverComponent {
             this.stop = true;
         } else {
             this.stop = false;
-
             if (currentMatchTime === settings.durations.halfDuration && (isFirstHalf || isBreakTime)) {
+                
                 this.stop = true;
             }
 

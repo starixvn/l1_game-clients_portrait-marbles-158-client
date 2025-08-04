@@ -21,7 +21,7 @@ const defaultConfig: gc.Configs.SiteConfigs = {
     enableMsgpackParserOnNotification: false,
     websocket: {
         proxyPath: "marblefootball2",
-        route: "marblefootball2",
+        route: "soccermarble",
     },
     mainObserverNamespace: "MarbleFootball2",
     tolgeeUrl: "",

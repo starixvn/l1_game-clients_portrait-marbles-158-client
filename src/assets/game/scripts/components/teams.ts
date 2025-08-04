@@ -5,6 +5,7 @@ import { TournamentStore } from "../features/tournament/tournament-store";
 import { MarbleFootballServiceMessages } from "../marble-football-service-messages";
 import { Flag } from "./flag";
 import { TeamName } from "./team-name";
+import { MatchStore } from "../features/match/match-store";
 
 const { ccclass, property } = _decorator;
 const { render } = Observer;
@@ -29,8 +30,8 @@ export class Teams extends ObserverComponent {
     @property(Label)
     private awayCode: Label = null;
 
-    @render(TournamentStore, (store) => store.currentMatch)
-    setTeams(currentMatch: MarbleFootballServiceMessages.MatchType) {
+    @render(MatchStore, (store) => store.match)
+    setTeams(currentMatch: MarbleFootballServiceMessages.Match) {
         if (currentMatch && currentMatch.home && currentMatch.away) {
             this.home?.setIcon(currentMatch.home);
             this.away?.setIcon(currentMatch.away);
