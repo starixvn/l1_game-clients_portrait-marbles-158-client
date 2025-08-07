@@ -22,17 +22,12 @@ const INTRO_SFX = "intro_video";
 
 @ccclass
 export default class VideoStreamIntegration extends ObserverComponent {
-    @property(BackgroundVideoPlayer)
-    private backgroundVideoPlayer: BackgroundVideoPlayer = null;
 
     @property(Node)
     private nodeBreakTime: Node = null;
 
     @property(Node)
     private nodeSystemIndicator: Node = null;
-
-    @property(IntroOutro)
-    private introOutro: IntroOutro = null;
 
     @property(Prefab)
     private warnPrefab: Prefab = null;
@@ -77,19 +72,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
     }
 
     onLoad(): void {
-        this.backgroundVideoPlayer?.node.on("hlsLevelSwitched", this.updateSystemIndicator, this);
-        this.backgroundVideoPlayer?.node.on("hlsError", this.updateSystemIndicator, this);
-        this.backgroundVideoPlayer?.node.on("hlsError", this.onHLSError, this);
-        this.backgroundVideoPlayer?.node.on("hlsManifestLoading", () => (this.introOutro.showField = true));
-        this.backgroundVideoPlayer?.node.on("syncNativeCurrentTime", (time: number) => {
-            if (this.blockShowFieldWithSyncNativeCurrentTime) {
-                return;
-            }
-
-            const showField = time <= 0;
-            this.introOutro.showField = showField;
-        });
-        this.backgroundVideoPlayer?.node.on("hlsNotSupported", this.onHSLNotSupported, this);
         this.warnContainer?.removeAllChildren();
 
         super.onLoad();
@@ -112,7 +94,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
         // Show field before first half video end 100ms
         if ((isFirstHalf || isSecondHalf) && currentVideoTime === settings.durations.videoDuration - 1) {
             this.scheduleOnce(() => {
-                this.introOutro.showField = true;
                 this.blockShowFieldWithSyncNativeCurrentTime = true;
 
                 // Unblock show field after 2 seconds
@@ -120,14 +101,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
                     this.blockShowFieldWithSyncNativeCurrentTime = false;
                 }, 2);
             }, 0.9);
-        }
-    }
-
-    @render(VideoStreamStore, (store) => store.currentVideo)
-    renderVideoSource(currentVideo: StreamingVideo) {
-        if (currentVideo?.videoName) {
-            this.backgroundVideoPlayer.currentTime = currentVideo.time;
-            this.backgroundVideoPlayer.playVideoByName(currentVideo.videoName, this.handlePlayVideo);
         }
     }
 
@@ -143,9 +116,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
         if (!videoResult) {
             return;
         }
-            console.log(`LOADING VIDEO ${JSON.stringify(videoResult)}`)
-            this.backgroundVideoPlayer.currentTime = 0;
-            this.backgroundVideoPlayer.loadVideoByName(videoResult.video);
 
     }
 
@@ -164,7 +134,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
     @render(VideoStreamStore, (store) => store.liveStreamServer)
     private onLiveStreamServer(liveStreamServer: string) {
         console.log("live stream server", liveStreamServer)
-        this.backgroundVideoPlayer.init(liveStreamServer, this.handlePlayVideo);
     }
 
     @render(gc.Settlements.SettlementStore, (store) => store.currentFinish, {
@@ -174,7 +143,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
         if (!currentFinish) {
             return;
         }
-        this.introOutro.playOutroAnimation(0, settings.durations.outro);
     }
 
     @render(gc.Rounds.RoundTimeStore, (store) => store.roundTime)
@@ -183,7 +151,6 @@ export default class VideoStreamIntegration extends ObserverComponent {
             this.scheduleOnce(() => {
                 this.playSound();
             }, 0.75);
-            this.introOutro.playIntroAnimation();
             this.breakTime?.playAnimation(0);
         }
     }
@@ -212,7 +179,7 @@ export default class VideoStreamIntegration extends ObserverComponent {
             const segmentTime = 3; // second
 
             this.scheduleOnce(() => {
-                this.systemIndicator.networkStatus = this.backgroundVideoPlayer.level + 2;
+                this.systemIndicator.networkStatus = NetworkStatus.GOOD
             }, segmentTime);
         }
     }
@@ -246,10 +213,7 @@ export default class VideoStreamIntegration extends ObserverComponent {
     }
 
     private setGameBackgroundVisibility(show: boolean) {
-        if (this.introOutro) {
-            show && this.introOutro.setMaxBackgroundOpacity();
-            this.introOutro.showGameBackground = show;
-        }
+
     }
 
     @render(GamePhaseStore, (store) => store.enterPhase)

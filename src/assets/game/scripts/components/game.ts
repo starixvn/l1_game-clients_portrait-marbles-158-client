@@ -76,7 +76,7 @@ export default class Game extends GameComponent {
     override renderRoundId(roundId: number) {}
 
     protected onEnable(): void {
-        this.initBackgroundImage();
+        // this.initBackgroundImage();
     }
 
     @handle(gc.Rounds.RoundRunningHandlers, (handle) => handle.stopRunner())

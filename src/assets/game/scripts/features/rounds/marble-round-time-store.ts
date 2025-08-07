@@ -246,6 +246,7 @@ export class MarbleRoundTimeStore {
     }
 
     resetRoundTime() {
+        console.log("reset round time called")
         this._roundTime = this.wholeRound;
     }
 

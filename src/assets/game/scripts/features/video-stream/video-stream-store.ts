@@ -2,7 +2,6 @@ import inversify from "inversify";
 import mobx from "mobx";
 import { MarbleFootballServiceMessages } from "../../marble-football-service-messages";
 import { settings } from "./../../game-settings";
-import { log } from "cc";
 
 const { injectable } = inversify;
 
@@ -41,15 +40,12 @@ export class VideoStreamStore {
     }
 
     updateWithRoundTime(roundTime: number) {
-        log("roundTime ", roundTime);
         this._roundTime = roundTime;
         this._currentVideoTime = this.calculateCurrentVideoTime();
-        console.log("currentVideoTime ", this._currentVideoTime);
         this._isLoadFirstHalf = roundTime > settings.points.placingBetLiveMatch;
 
         if (this._currentVideoTime > 0 && this._currentVideoTime <= settings.durations.halfDuration) {
             this._currentMatchTime++;
-            console.log("currentMatchTime ", this._currentMatchTime);
         }
 
         const endOfFirstHalf = settings.points.streamingFirstHalfVideo - settings.durations.videoDuration;
@@ -68,7 +64,6 @@ export class VideoStreamStore {
     updateCurrentVideoAndScores() {
         const currentVideoTime = this._currentVideoTime;
         const videoData = this.getVideoData();
-        console.log("VIDEO DATA on load ", videoData);
 
         if (!videoData) {
             return;
@@ -179,7 +174,6 @@ export class VideoStreamStore {
     }
 
     calculateCurrentMatchTime() {
-        console.log(" calc match time on start ", this._roundTime);
         const roundTime = this._roundTime;
 
         if (roundTime > settings.points.placingBetPreMatch + settings.durations.startRound) {

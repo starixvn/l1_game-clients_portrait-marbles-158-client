@@ -10,4 +10,8 @@ window.envConfig = {
     SGConnectSubDomain: "l1-connectsite1",
     backgroundNoTranslate: true,
     boostedOddsDelayTimeByMinutes: 1,
+    websocket: {
+        proxyPath: "marblefootball2",
+        route: "soccermarble",
+    },
 };
