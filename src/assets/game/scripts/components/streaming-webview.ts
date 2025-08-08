@@ -17,6 +17,7 @@ export default class StreamingWebview extends ObserverComponent {
 
     @render(VideoStreamStore, (store) => store.liveStreamServer)
     renderLiveStreamServer(liveStreamServer: string) {
+        if (!this._webview) return;
         this._webview.url = liveStreamServer;
     }
 }

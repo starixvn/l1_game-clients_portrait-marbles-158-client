@@ -1,4 +1,4 @@
-import { _decorator, Color, Label } from "cc";
+import { _decorator, Color, Label, log } from "cc";
 import gc from "@sg/game-client-base";
 import { BaseResultBodyItem } from "db://shared-components/game/bet-history/scripts/components/bet-history-body-item";
 import { Flag } from "./flag";
@@ -51,18 +51,14 @@ export class BetHistoryResult extends BaseResultBodyItem {
     }
 
     setData(result: gc.BetHistory.DynamicObject<any>, settlementResult: gc.BetHistory.DynamicObject<any>) {
-        const { teamName, firstHalf, secondHalf } = result as RoundResult;
-        this.setTeams(teamName.home, teamName.away);
-        const fullScore = `${firstHalf}${secondHalf}`;
-        const homeScore = this.countCharacters(fullScore, "H");
-        const awayScore = this.countCharacters(fullScore, "A");
-        this.setScore(homeScore, awayScore);
+        const { home, away } = result;
+        this.setScore(home, away);
 
-        if (homeScore > awayScore) {
+        if (home > away) {
             this.highlightLabels([this.homeCode, this.homeScore]);
         }
 
-        if (homeScore < awayScore) {
+        if (home < away) {
             this.highlightLabels([this.awayCode, this.awayScore]);
         }
     }
