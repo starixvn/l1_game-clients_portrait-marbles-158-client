@@ -21,7 +21,7 @@ export const settings = {
         hidePreviewBetChoices: 2,
     },
     points: {
-        placingBetPreMatch: 127,
+        placingBetPreMatch: 121,
         placingBetLiveMatch: 60,
         lockingBetPreMatch: 104,
         lockingBetLiveMatch: 44,

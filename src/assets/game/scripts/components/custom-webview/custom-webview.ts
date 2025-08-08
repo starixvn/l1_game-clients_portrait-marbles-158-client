@@ -27,8 +27,7 @@ export default class CustomWebview extends ObserverComponent {
 
     @render(gc.UserSettings.UserSettingStore, (store) => store.sfxEnable)
     renderSfxComp(enable: boolean) {
-        log("POST MESSAGE", enable);
-        (document.getElementById("marble-tv-webview") as HTMLIFrameElement).contentWindow?.postMessage(["AudioStore", {muted: !enable, browserBlocked: false}], this.webview.url);
+        (document.getElementById("marble-tv-webview") as HTMLIFrameElement)?.contentWindow?.postMessage(["AudioStore", {muted: !enable, browserBlocked: false}], this.webview.url);
     }
 
     modifyWebViewWrapper() {
