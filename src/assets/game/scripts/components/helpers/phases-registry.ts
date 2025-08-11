@@ -24,6 +24,7 @@ export class PhasesRegistry extends ObserverComponent {
         this.registerPhaseHideBetChoicesLive();
         this.registerPhaseShowLiveVideo();
         this.registerPhaseShowPrevVideo();
+        this.registerSettlement();
     }
 
     @handle(GamePhaseHandler, (handler, config: GamePhaseConfig) => handler.registerPhase(config))

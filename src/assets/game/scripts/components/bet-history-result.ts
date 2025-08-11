@@ -32,10 +32,14 @@ export class BetHistoryResult extends BaseResultBodyItem {
     awayScore: Label = null;
 
     setTeams(home: string, away: string) {
-        this.home.setIcon(home);
-        this.homeCode.string = home;
-        this.away.setIcon(away);
-        this.awayCode.string = away;
+
+        const processedHome = home.split("_")[1];
+        const processedAway = away.split("_")[1];
+
+        this.home.setIcon(processedHome.toUpperCase());
+        this.homeCode.string = processedHome;
+        this.away.setIcon(processedAway.toUpperCase());
+        this.awayCode.string = processedAway;
     }
 
     highlightLabels(label: Label[]) {
@@ -51,7 +55,9 @@ export class BetHistoryResult extends BaseResultBodyItem {
     }
 
     setData(result: gc.BetHistory.DynamicObject<any>, settlementResult: gc.BetHistory.DynamicObject<any>) {
-        const { home, away } = result;
+        const { firstHalf, secondHalf, match } = result;
+        const home = firstHalf.home + secondHalf.home;
+        const away = firstHalf.away + secondHalf.away;
         this.setScore(home, away);
 
         if (home > away) {
@@ -61,6 +67,7 @@ export class BetHistoryResult extends BaseResultBodyItem {
         if (home < away) {
             this.highlightLabels([this.awayCode, this.awayScore]);
         }
+        this.setTeams(match.home, match.away);
     }
 
     private countCharacters(str: string, char: string) {

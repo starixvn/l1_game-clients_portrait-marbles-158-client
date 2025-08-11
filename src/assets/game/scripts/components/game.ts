@@ -5,7 +5,6 @@ import Observer from "observer";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
 import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
 import "../../../resources/i18n";
-import { BackgroundVideoPlayer } from "../../../scripts/background-video-player";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { GamePhase, PhaseId, TimePointTournament } from "../features/game-phase/game-phase-definitions";
@@ -40,9 +39,6 @@ export default class Game extends GameComponent {
     @property(Node)
     betResultNode: Node = null;
 
-    @property(BackgroundVideoPlayer)
-    private backgroundVideoPlayer: BackgroundVideoPlayer = null;
-
     @property(Node)
     private nodeSystemIndicator: Node = null;
 
@@ -69,14 +65,9 @@ export default class Game extends GameComponent {
         return this._chipFlying;
     }
 
-    override onHideGame() {
-        this.backgroundVideoPlayer.stop();
-    }
-
     override renderRoundId(roundId: number) {}
 
     protected onEnable(): void {
-        // this.initBackgroundImage();
     }
 
     @handle(gc.Rounds.RoundRunningHandlers, (handle) => handle.stopRunner())
@@ -89,7 +80,6 @@ export default class Game extends GameComponent {
             this.systemIndicator.networkStatus = NetworkStatus.DISCONNECTED;
             this.scheduleOnce(() => {
                 this.stopRoundTimeRunner();
-                this.backgroundVideoPlayer.pause();
             }, 3);
         }
     }

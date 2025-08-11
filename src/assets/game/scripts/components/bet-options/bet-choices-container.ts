@@ -87,6 +87,7 @@ export class BetChoicesContainer extends ObserverComponent {
         },
         [PhaseId.Settlement]: {
             previewBetsEnabled: false,
+            liveDisabled: true,
         },
         [PhaseId.MatchWinner]: {
             previewBetsEnabled: false,

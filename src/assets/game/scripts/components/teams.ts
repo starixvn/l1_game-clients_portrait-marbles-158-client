@@ -33,12 +33,14 @@ export class Teams extends ObserverComponent {
     @render(MatchStore, (store) => store.match)
     setTeams(currentMatch: MarbleFootballServiceMessages.Match) {
         if (currentMatch && currentMatch.home && currentMatch.away) {
-            this.home?.setIcon(currentMatch.home);
-            this.away?.setIcon(currentMatch.away);
-            this.homeName?.setName(currentMatch.home);
-            this.awayName?.setName(currentMatch.away);
-            this.homeCode && (this.homeCode!.string = currentMatch.home);
-            this.awayCode && (this.awayCode!.string = currentMatch.away);
+            const processedHome = currentMatch.home.split("_")[1];
+            const processedAway = currentMatch.away.split("_")[1];
+            this.home?.setIcon(processedHome.toUpperCase());
+            this.away?.setIcon(processedAway.toUpperCase());
+            this.homeName?.setName(processedHome);
+            this.awayName?.setName(processedAway);
+            this.homeCode && (this.homeCode!.string = processedHome);
+            this.awayCode && (this.awayCode!.string = processedAway);
         }
     }
 }
