@@ -15,6 +15,8 @@ const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 const { Rounds, GameBaccaratX } = gc;
 
+const CARD_SCALE = 0.34;
+
 type ServiceCardHand = {
     card1: ServiceCard;
     card2: ServiceCard;
@@ -80,6 +82,12 @@ export class BaccaratXCardsUI extends ObserverComponent {
 
     @property(Node)
     nodeLuckyCardsEffect: Node = null;
+
+    @property
+    cardScale = CARD_SCALE;
+
+    @property
+    cardScaleWaiting = CARD_SCALE;
 
     @property
     spineCutCardPath = "";
@@ -178,7 +186,7 @@ export class BaccaratXCardsUI extends ObserverComponent {
 
     private createNewCardNode() {
         const node = instantiate(this.prfCard);
-        node.setScale(v3(0.34, 0.34));
+        node.setScale(v3(CARD_SCALE, CARD_SCALE));
         return node;
     }
 
@@ -345,7 +353,7 @@ export class BaccaratXCardsUI extends ObserverComponent {
     moveCardAnimation(node: Node, position: Vec3, animated) {
         if (!animated) {
             node.position = position;
-            return;
+            return Promise.resolve();
         }
 
         return new Promise((resolve) => {
@@ -387,33 +395,7 @@ export class BaccaratXCardsUI extends ObserverComponent {
         let index = 0;
         this.beforeOpenCards();
         for (const [dataIndex, data] of dataCards.entries()) {
-            if (data) {
-                const card = this.cards[index];
-                card.node.active = true;
-                card.setCardData(data);
-                if (index > 3) {
-                    this.playSoundDrawCard();
-                    const newLocation = dataIndex === 4 ? CardLocation.Player3 : CardLocation.Banker3;
-                    if (animated) {
-                        await this.moveCard(card, newLocation, animated);
-                    } else {
-                        this.moveCard(card, newLocation, animated);
-                    }
-
-                    // update remove from waiting cards
-                    const item = this.cardPool.find((item) => item.card === card);
-                    item.location = newLocation;
-                }
-                if (animated) {
-                    this.playSoundOpeningCard();
-                    await card.openCard(animated, this.openCardDuration);
-                } else {
-                    card.openCard(animated);
-                }
-                this.luckyCardEffect.checkLuckyCard({ card, data, animated });
-                this.updateCardStates(data, dataIndex);
-                index++;
-            }
+            index = await this.processDataCard(data, index, dataIndex, animated);
         }
         this.updateFinalPayout(settlemenResult);
         if (!settlemenResult[gc.GameBaccaratX.BetChoice.Tie]) {
@@ -424,6 +406,37 @@ export class BaccaratXCardsUI extends ObserverComponent {
             const comp = this.cardHands[index];
             comp.setScore(handData.score);
         });
+    }
+
+    private async processDataCard(data: ServiceCard, index: number, dataIndex: number, animated: boolean) {
+        if (data) {
+            const card = this.cards[index];
+            card.node.active = true;
+            card.setCardData(data);
+            if (index > 3) {
+                this.playSoundDrawCard();
+                const newLocation = dataIndex === 4 ? CardLocation.Player3 : CardLocation.Banker3;
+                if (animated) {
+                    await this.moveCard(card, newLocation, animated);
+                } else {
+                    this.moveCard(card, newLocation, animated);
+                }
+
+                // update remove from waiting cards
+                const item = this.cardPool.find((item) => item.card === card);
+                item.location = newLocation;
+            }
+            if (animated) {
+                this.playSoundOpeningCard();
+                await card.openCard(animated, this.openCardDuration);
+            } else {
+                card.openCard(animated);
+            }
+            this.luckyCardEffect.checkLuckyCard({ card, data, animated });
+            this.updateCardStates(data, dataIndex);
+            index++;
+        }
+        return index;
     }
 
     private beforeOpenCards() {
@@ -650,18 +663,23 @@ export class BaccaratXCardsUI extends ObserverComponent {
 
             case CardLocation.Player3:
                 eulerAngles = v3(0, 0, -90);
-                scale = v3(1, 1, 1).multiplyScalar(0.34);
+                scale = v3(1, 1, 1).multiplyScalar(this.cardScale);
                 break;
             case CardLocation.Banker3:
                 eulerAngles = v3(0, 0, 90);
-                scale = v3(1, 1, 1).multiplyScalar(0.34);
+                scale = v3(1, 1, 1).multiplyScalar(this.cardScale);
                 break;
-
+            case CardLocation.Waiting1:
+            case CardLocation.Waiting2:
+                eulerAngles = v3(0);
+                scale = v3(1, 1, 1).multiplyScalar(this.cardScaleWaiting);
+                break;
             default:
                 eulerAngles = v3(0);
-                scale = v3(1, 1, 1).multiplyScalar(0.34);
+                scale = v3(1, 1, 1).multiplyScalar(this.cardScale);
                 break;
         }
+
         if (animated) {
             tween(node).to(0.5, { scale, eulerAngles }).start();
         } else {

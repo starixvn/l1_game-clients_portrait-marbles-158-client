@@ -13,7 +13,7 @@ export class SystemIndicator extends Component {
     private _networkStatus: NetworkStatus = NetworkStatus.GOOD;
 
     @property(Node)
-    private liveNode: Node = null;
+    liveNode: Node = null;
 
     set networkStatus(value: NetworkStatus) {
         this._networkStatus = value;

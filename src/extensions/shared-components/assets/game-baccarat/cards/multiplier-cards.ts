@@ -3,7 +3,7 @@ import { Label, Node, Prefab, _decorator, instantiate, v3 } from "cc";
 import Observer from "observer";
 import { ServiceCard } from "../../game/poker-cards/scripts/poker-card";
 import { ObserverComponent } from "../../shared/common-components/observer-component/scripts/observer-component";
-import { ComponentUtils, FunctionUtils } from "../../shared/utils";
+import { AnimationUtils, ComponentUtils, FunctionUtils } from "../../shared/utils";
 import { MultiplierCard } from "./multiplier-card";
 const { ccclass, property } = _decorator;
 const { observer, render, handle } = Observer;
@@ -22,6 +22,9 @@ export class MultiplierCards extends ObserverComponent {
 
     @property(Label)
     lblExtraFee: Label = null;
+
+    @property
+    luckyCardWidth = 52;
 
     private minBet = 0;
     private maxBet = 0;
@@ -66,7 +69,7 @@ export class MultiplierCards extends ObserverComponent {
             if (animated) {
                 this.playSound("multiplier");
                 comp.playAnimCard();
-                await FunctionUtils.delay(130);
+                await AnimationUtils.delayTime(0.13);
             } else {
                 comp.card.setGoldenCard(true, false);
             }
@@ -120,8 +123,7 @@ export class MultiplierCards extends ObserverComponent {
     }
 
     async cardPosition(node: Node, index: number) {
-        const cardWidth = 52;
-        const origin = index * cardWidth;
+        const origin = index * this.luckyCardWidth;
         node.position = v3(origin, node.position.y, 0);
     }
 

@@ -31,6 +31,4 @@ export class GamePhaseStore {
             this.beforeEnterPhase = phase;
         }, 0);
     }
-
-
 }

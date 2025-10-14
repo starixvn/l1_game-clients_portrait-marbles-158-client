@@ -7,55 +7,45 @@ import { GamePhase, PhaseId } from "../features/game-phase/game-phase-definition
 import { GamePhaseStore } from "../features/game-phase/game-phase-store";
 import { settings } from "../game-settings";
 import { BetChoicesContainer } from "./bet-options/bet-choices-container";
-import { ButtonsBetStore } from "../features/preview-bets/buttons-bet-store";
 import { AnimationHelper } from "./helpers/animation-helper";
-import { TweenConfigs, TweenKey, DEFAULT_TWEEN_CONFIGS } from "./helpers/tween-configs";
+import { DEFAULT_TWEEN_CONFIGS, TweenConfigs, TweenKey } from "./helpers/tween-configs";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
-type BetState = "prev" | "live" | "final";
+export type BetState = "prev" | "live" | "final";
 
 @ccclass("PlayArea")
 export class PlayArea extends ObserverComponent {
     @property(Node)
-    private chipContainersParent: Node = null;
+    chipContainersParent: Node = null;
 
     @property(BetChoicesContainer)
-    private betChoicesContainer: BetChoicesContainer = null;
+    betChoicesContainer: BetChoicesContainer = null;
 
     @property(Node)
-    private scoreBoard: Node = null;
+    scoreBoard: Node = null;
 
     @property(Node)
-    private chips: Node = null;
+    chips: Node = null;
 
     @property(Node)
-    private teamScore: Node = null;
+    teamScore: Node = null;
 
     @property(Node)
-    private firstHalfScore: Node = null;
+    hiddenPlayersNode: Node = null;
 
-    @property(Node)
-    private mainPlayerNode: Node = null;
+    protected isBetOptionsZoomedOut = false;
 
-    @property([Node])
-    private disappearingNodes: Node[] = [];
+    protected tweenConfigs: Record<TweenKey, TweenConfigs> = DEFAULT_TWEEN_CONFIGS;
 
-    private isZoomOut: boolean = false;
-    private mainPlayAreaTargets: Array<{ target: Node; key: TweenKey }>;
-
-    private readonly tweenConfigs: Record<TweenKey, TweenConfigs> = DEFAULT_TWEEN_CONFIGS;
-
-    private phasePreviewBets: BetState = "prev";
-    private phaseShowBetChoices: BetState = "prev";
+    protected phasePreviewBets: BetState = "prev";
+    protected phaseShowBetChoices: BetState = "prev";
 
     protected betChoicesParentContainer: Node = null;
 
     onLoad() {
         this.initBetChoicesContainer();
-        this.setupMainPlayAreaTargets();
-        this.setupDisappearingNodes();
         this.setupStaticTargets();
         super.onLoad();
 
@@ -66,35 +56,16 @@ export class PlayArea extends ObserverComponent {
         this.betChoicesParentContainer = this.betChoicesContainer?.betChoicesPrev?.parent;
     }
 
-    private setupMainPlayAreaTargets() {
-        this.mainPlayAreaTargets = [
-            { target: this.betChoicesParentContainer, key: "betChoiceZoomInOut" as TweenKey },
-            { target: this.chips, key: "chipsFlyDown" as TweenKey },
-            { target: this.chipContainersParent, key: "chipContainerFlyDown" as TweenKey },
-        ];
-    }
-
-    private setupDisappearingNodes() {
-        this.disappearingNodes.forEach((node) => {
-            node && this.mainPlayAreaTargets.push({ target: node, key: "fadeInOut" });
-        });
-    }
-
-    private setupStaticTargets() {
+    protected setupStaticTargets() {
         const staticTargets = [
-            { node: this.teamScore, config: this.tweenConfigs.teamScoreFlyUp.out },
-            { node: this.scoreBoard, config: this.tweenConfigs.scoreboardFlyUp.out },
-            { node: this.chips, config: this.tweenConfigs.chipsFlyDown.out },
-            { node: this.firstHalfScore, config: this.tweenConfigs.teamScoreLiveFlyUp.out },
-            { node: this.mainPlayerNode, config: this.tweenConfigs.fadeInOut.out },
+            { node: this.teamScore, config: this.tweenConfigs.fadeInOut.out },
+            { node: this.scoreBoard, config: this.tweenConfigs.fadeInOut.out },
+            { node: this.chips, config: this.tweenConfigs.fadeInOut.out },
+            { node: this.hiddenPlayersNode, config: this.tweenConfigs.fadeInOut.out },
         ];
 
         staticTargets.forEach(({ node, config }) => {
             AnimationHelper.setStaticTarget(node, config);
-        });
-
-        this.disappearingNodes.forEach((node) => {
-            AnimationHelper.setStaticTarget(node, this.tweenConfigs.fadeInOut.out);
         });
     }
 
@@ -104,88 +75,80 @@ export class PlayArea extends ObserverComponent {
             return;
         }
 
-        if (phase.id === PhaseId.MatchWinner) {
-            !this.isZoomOut && this.zoomPlayArea("out");
-            await Promise.all([
-                AnimationHelper.playAnimByPhaseProgress(this.disappearingNodes, this.tweenConfigs.fadeInOut.out, phase.progress),
-                AnimationHelper.playAnimByPhaseProgress(this.chips, this.tweenConfigs.chipsFlyDown.out, phase.progress),
-            ]);
-
+        if (phase.id === PhaseId.Settlement || phase.id === PhaseId.ShowWinnerAndTournament) {
+            this.handleSettlementOrShowWinnerPhase(phase);
             return;
         }
 
-        if (phase.id === PhaseId.Settlement) {
-            await Promise.all([
-                AnimationHelper.playAnimByPhaseProgress(this.disappearingNodes, this.tweenConfigs.fadeInOut.in, phase.progress),
-                AnimationHelper.playAnimByPhaseProgress(this.mainPlayerNode, this.tweenConfigs.fadeInOut.in, phase.progress),
-            ]);
-
+        if (phase.id === PhaseId.MatchWinner) {
+            this.handleMatchWinnerPhase(phase);
             return;
         }
 
         if (phase.id === PhaseId.ShowBetChoicesPrev || phase.id === PhaseId.ShowBetChoicesLive) {
-            this.phaseShowBetChoices = phase.id === PhaseId.ShowBetChoicesPrev ? "prev" : "live";
-
-            if (phase.progress === 0) {
-                this.isZoomOut && this.zoomPlayArea("in");
-                const animations: Promise<any>[] = [];
-
-                // playAreaAnim
-                animations.push(
-                    AnimationHelper.playAnimByPhaseProgress(
-                        [this.scoreBoard, this.mainPlayerNode, this.chips],
-                        [this.tweenConfigs.scoreboardFlyUp.in, this.tweenConfigs.fadeInOut.in, this.tweenConfigs.chipsFlyDown.in],
-                        0
-                    )
-                );
-
-                // disappearingAnim
-                animations.push(AnimationHelper.playAnimByPhaseProgress(this.disappearingNodes, this.tweenConfigs.fadeInOut.in, 0));
-
-                // live bet
-                if (phase.id === PhaseId.ShowBetChoicesLive) {
-                    animations.push(
-                        AnimationHelper.playAnimByPhaseProgress(this.firstHalfScore, this.tweenConfigs.teamScoreLiveFlyUp.in, 0)
-                    );
-                }
-
-                await Promise.all(animations);
-            } else {
-                if (phase.id === PhaseId.ShowBetChoicesLive) {
-                    AnimationHelper.setStaticTarget(this.firstHalfScore, this.tweenConfigs.teamScoreLiveFlyUp.in);
-                }
-                AnimationHelper.setStaticTarget(this.mainPlayerNode, this.tweenConfigs.fadeInOut.in);
-                AnimationHelper.setStaticTarget(this.scoreBoard, this.tweenConfigs.scoreboardFlyUp.in);
-                this.setStaticPlayArea("in");
-            }
-
+            await this.handleShowBetChoicesPhase(phase);
             return;
         }
 
         if (phase.id === PhaseId.ShowIntroVideo || phase.id === PhaseId.ShowPrevVideo || phase.id === PhaseId.ShowLiveVideo) {
-            this.phasePreviewBets = "prev";
-
-            await Promise.all([
-                AnimationHelper.playAnimByPhaseProgress(
-                    [this.teamScore, this.scoreBoard, this.mainPlayerNode],
-                    [this.tweenConfigs.teamScoreFlyUp.in, this.tweenConfigs.scoreboardFlyUp.out, this.tweenConfigs.fadeInOut.out],
-                    phase.progress
-                ),
-                !this.isZoomOut && this.zoomPlayArea("out"),
-                phase.id === PhaseId.ShowLiveVideo
-                    ? (() => {
-                          this.phasePreviewBets = "live";
-                          AnimationHelper.playAnimByPhaseProgress(
-                              this.firstHalfScore,
-                              this.tweenConfigs.teamScoreLiveFlyUp.out,
-                              phase.progress
-                          );
-                      })()
-                    : Promise.resolve(),
-            ]);
-
-            return;
+            await this.handleShowVideoPhase(phase);
         }
+    }
+
+    protected handleSettlementOrShowWinnerPhase(phase: GamePhase) {
+        AnimationHelper.playAnimByPhaseProgress(this.hiddenPlayersNode, this.tweenConfigs.hiddenPlayersWhenLive.in, phase.progress);
+        if (phase.progress === 0) {
+            AnimationHelper.playAnimByPhaseProgress([this.betChoicesParentContainer], [this.tweenConfigs.betChoiceSettlement.in], 0);
+        }
+    }
+
+    protected handleMatchWinnerPhase(phase: GamePhase) {
+        if (!this.isBetOptionsZoomedOut) {
+            this.zoomBetChoices("out", phase.progress);
+        }
+        AnimationHelper.playAnimByPhaseProgress([this.hiddenPlayersNode], [this.tweenConfigs.fadeInOut.out], phase.progress);
+    }
+
+    protected getShowBetChoicesAnimConfig(): { nodes: Node[]; configs: any[] } {
+        return {
+            nodes: [this.scoreBoard, this.chips, this.hiddenPlayersNode, this.teamScore, this.betChoicesContainer.swapBetsButton],
+            configs: [
+                this.tweenConfigs.fadeInOut.in,
+                this.tweenConfigs.fadeInOut.in,
+                this.tweenConfigs.hiddenPlayersFlyUpBet.in,
+                this.tweenConfigs.fadeInOut.in,
+                this.tweenConfigs.swapButtonWhenBet.in,
+            ],
+        };
+    }
+
+    protected async handleShowBetChoicesPhase(phase: GamePhase) {
+        this.phaseShowBetChoices = phase.id === PhaseId.ShowBetChoicesPrev ? "prev" : "live";
+        const zoomPromise = this.isBetOptionsZoomedOut ? this.zoomBetChoices("in", phase.progress) : undefined;
+        const { nodes, configs } = this.getShowBetChoicesAnimConfig();
+        const animPromise = AnimationHelper.playAnimByPhaseProgress(nodes, configs, phase.progress);
+        await Promise.all([zoomPromise, animPromise]);
+    }
+
+    protected getShowVideoAnimConfig(): { nodes: Node[]; configs: any[] } {
+        return {
+            nodes: [this.teamScore, this.scoreBoard, this.chips, this.hiddenPlayersNode, this.betChoicesContainer.swapBetsButton],
+            configs: [
+                this.tweenConfigs.fadeInOut.in,
+                this.tweenConfigs.fadeInOut.out,
+                this.tweenConfigs.fadeInOut.out,
+                this.tweenConfigs.fadeInOut.out,
+                this.tweenConfigs.swapButtonWhenLive.in,
+            ],
+        };
+    }
+
+    protected async handleShowVideoPhase(phase: GamePhase) {
+        this.phasePreviewBets = phase.id === PhaseId.ShowLiveVideo ? "live" : "prev";
+        const { nodes, configs } = this.getShowVideoAnimConfig();
+        const animPromise = AnimationHelper.playAnimByPhaseProgress(nodes, configs, phase.progress);
+        const zoomPromise = !this.isBetOptionsZoomedOut ? this.zoomBetChoices("out", phase.progress) : undefined;
+        await Promise.all([animPromise, zoomPromise]);
     }
 
     @render(GamePhaseStore, (store) => store.exitPhase)
@@ -195,7 +158,7 @@ export class PlayArea extends ObserverComponent {
         }
 
         if (phase.id === PhaseId.Halftime) {
-            AnimationHelper.playAnimByPhaseProgress(this.teamScore, this.tweenConfigs.teamScoreFlyUp.out, phase.progress);
+            AnimationHelper.playAnimByPhaseProgress(this.teamScore, this.tweenConfigs.fadeInOut.out, phase.progress);
         }
     }
 
@@ -208,47 +171,34 @@ export class PlayArea extends ObserverComponent {
         }
         try {
             await AnimationUtils.delayTime(settings.durations.outro);
-            if (this.isZoomOut) {
-                this.zoomPlayArea("in");
-            }
-            AnimationHelper.playAnimForTarget(this.teamScore, this.tweenConfigs.teamScoreFlyUp.out);
+            this.playOutroAnim();
         } catch (e) {}
     }
 
-    private getMainPlayAreaTargets(): Array<{ target: Node; key: TweenKey }> {
-        return this.mainPlayAreaTargets;
+    protected playOutroAnim(): void {
+        AnimationHelper.playAnimByPhaseProgress(
+            [this.teamScore, this.betChoicesParentContainer],
+            [this.tweenConfigs.fadeInOut.out, this.tweenConfigs.betChoiceSettlement.in],
+            0
+        );
     }
 
-    private async zoomPlayArea(direction: "in" | "out"): Promise<void> {
-        this.isZoomOut = direction === "out";
+    protected async zoomBetChoices(direction: "in" | "out", progress: number): Promise<void> {
+        this.isBetOptionsZoomedOut = direction === "out";
 
-        const targets = this.getMainPlayAreaTargets();
-        await Promise.all(targets.map(({ target, key }) => AnimationHelper.playAnimForTarget(target, this.tweenConfigs[key][direction])));
+        const target = { target: this.betChoicesParentContainer, key: "betChoiceZoomInOut" as TweenKey };
+        if (progress === 0) {
+            await AnimationHelper.playAnimForTarget(target.target, this.tweenConfigs[target.key][direction]);
+        } else {
+            await this.setStaticBetChoices(direction);
+        }
     }
 
-    private async setStaticPlayArea(direction: "in" | "out"): Promise<void> {
-        this.isZoomOut = direction === "out";
+    private async setStaticBetChoices(direction: "in" | "out"): Promise<void> {
+        this.isBetOptionsZoomedOut = direction === "out";
 
-        const targets = this.getMainPlayAreaTargets();
-        await Promise.all(targets.map(({ target, key }) => AnimationHelper.setStaticTarget(target, this.tweenConfigs[key][direction])));
-    }
-
-    private async animateBetElements(isPreviewBets: boolean) {
-        const direction = isPreviewBets ? "in" : "out";
-
-        this.phasePreviewBets === "prev" && this.betChoicesContainer.setEnableBetChoices("prev");
-        this.phasePreviewBets === "live" && this.betChoicesContainer.setEnableBetChoices("live");
-
-        AnimationHelper.setStaticTarget(this.chips, this.tweenConfigs.chipsFlyDown[direction]);
-        AnimationHelper.setStaticTarget(this.mainPlayerNode, this.tweenConfigs.fadeInOut[direction]);
-        AnimationHelper.setStaticTarget(this.betChoicesParentContainer, this.tweenConfigs.betChoiceZoomInOut[direction]);
-        AnimationHelper.setStaticTarget(this.chipContainersParent, this.tweenConfigs.chipContainerFlyDown[direction]);
-    }
-
-    @render(ButtonsBetStore, (store) => store.isPreviewBets, { fireImmediately: false })
-    async renderButtonsBet(isPreviewBets: boolean) {
-        this.betChoicesContainer.statusBetsButton.setVisibilityState(isPreviewBets);
-        this.animateBetElements(isPreviewBets);
+        const target = { target: this.betChoicesParentContainer, key: "betChoiceZoomInOut" as TweenKey };
+        AnimationHelper.setStaticTarget(target.target, this.tweenConfigs[target.key][direction]);
     }
 
     @handle(gc.Audios.AudioHandler, (handle) => handle.playSFX(gc.Audios.AudioIds.CLICK))

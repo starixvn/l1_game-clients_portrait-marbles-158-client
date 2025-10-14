@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Enum, log, Toggle } from "cc";
+import { _decorator, Enum, Toggle } from "cc";
 import Observer from "observer";
 import { ObserverComponent } from "../../../../shared/common-components/observer-component/scripts/observer-component";
 
@@ -25,7 +25,6 @@ export default class AudioCmp extends ObserverComponent {
 
     @render(gc.UserSettings.UserSettingStore, (store) => store.sfxEnable)
     renderSfxComp(enable: boolean) {
-        log("RENDER SFX COMP", enable);
         if (this.type !== Audios.AudioType.SFX) {
             return;
         }

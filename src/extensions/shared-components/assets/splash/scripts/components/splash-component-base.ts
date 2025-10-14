@@ -127,7 +127,11 @@ export default class SplashComponentBase extends Component {
         }
 
         const envConfig = window.envConfig;
-        gc.sentryLogger.start(envConfig?.sentryUrl, envConfig?.env, settings.name);
+        gc.sentryLogger.start({
+            ...envConfig.sentry,
+            env: envConfig.env,
+            identifier: settings.name,
+        });
     }
 
     connectToGameService() {
@@ -270,8 +274,7 @@ export default class SplashComponentBase extends Component {
 
     private loadScript(src: string) {
         return new Promise(function (resolve, reject) {
-            let script: HTMLScriptElement;
-            script = document.createElement("script");
+            const script: HTMLScriptElement = document.createElement("script");
             script.src = src;
             script.async = true;
             script.onload = resolve;

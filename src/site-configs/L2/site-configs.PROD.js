@@ -8,7 +8,5 @@ window.envConfig = {
     enableMsgpackParserAllGames: true,
     enableMsgpackParserOnNotification: true,
     SGConnectSubDomain: "connect",
-    backgroundNoTranslate: true,
-    boostedOddsDelayTimeByMinutes: 15,
     clientSubDomain: "client",
 };

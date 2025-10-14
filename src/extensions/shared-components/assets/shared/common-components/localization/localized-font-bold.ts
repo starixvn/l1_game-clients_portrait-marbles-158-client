@@ -8,12 +8,31 @@ export default class LocalizedFontBold extends LocalizedFont {
     initData() {
         const notoBold = "noto-serif-bold";
         this.fontBases = {
-            vi: notoBold,
-            id: notoBold,
-            en: notoBold,
-            th: "noto-serif-bold-thai",
-            zh_cn: "noto-serif-bold-zhcn",
-            zh_tw: "noto-serif-bold-zhtw",
+            vi: {
+                name: notoBold,
+                loadRemote: false,
+            },
+            id: {
+                name: notoBold,
+                loadRemote: false,
+            },
+            en: {
+                name: notoBold,
+                loadRemote: false,
+            },
+            th: {
+                name: "noto-serif-bold-thai",
+                loadRemote: false,
+            },
+            zh_tw: {
+                name: "noto-serif-bold-zhtw",
+                loadRemote: false,
+            },
+            zh_cn: {
+                name: "noto-serif-bold-zhcn",
+                loadRemote: false,
+            },
+            ...globalThis?.fontMapping?.bold,
         } as FontMapping;
     }
 }

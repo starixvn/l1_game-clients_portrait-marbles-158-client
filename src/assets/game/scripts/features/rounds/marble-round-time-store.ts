@@ -3,7 +3,6 @@ import inversify from "inversify";
 const { injectable, inject } = inversify;
 import gc from "@sg/game-client-base";
 import { MarbleGameSetting } from "../game-configs/marble-game-setting";
-import { log } from "cc";
 
 export const MARBLE_ROUND_STATE = {
     START_GAME_LOOP: "startGameLoop",
@@ -246,7 +245,6 @@ export class MarbleRoundTimeStore {
     }
 
     resetRoundTime() {
-        console.log("reset round time called")
         this._roundTime = this.wholeRound;
     }
 

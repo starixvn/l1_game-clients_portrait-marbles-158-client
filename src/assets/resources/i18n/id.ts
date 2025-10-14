@@ -41,6 +41,7 @@ export const languages = {
         "hot": "PANAS",
         "invalid_bet": "Taruhan Tidak Valid",
         "invalid_deal_hands": "Jumlah Tangan tidak valid",
+        "invalid_free_spin": "Free Spin tidak valid",
         "invalid_position": "Posisi Tidak Valid",
         "invalid_stake_level": "Level Taruhan Tidak Valid",
         "join_game": "Gabung\nPermainan",
@@ -58,7 +59,7 @@ export const languages = {
         "message_account_notexist_place_bet": "Permainan %{gameName} (#%{gameRoundId})\n\nGagal memasang taruhan! Sebuah kesalahan telah terjadi. Silakan hubungi CSD untuk lebih lanjut, terima kasih. (%{errorCode})",
         "message_account_signout": "Akun telah keluar karena orang lain masuk ke akun ini.",
         "message_account_suspended": "Permainan %{gameName} (#%{gameRoundId})\n\nGagal memasang taruhan! Akun telah ditangguhkan. Silakan hubungi upline Anda untuk lebih lanjut, terima kasih. (%{errorCode})",
-        "message_balanced_betting_pool": "Kumpulan taruhan seimbang.",
+        "message_balanced_betting_pool": "Kumpulan taruhan seimbang",
         "message_bet_limit_change": "Batas taruhan Anda baru saja diubah.",
         "message_cannot_bet": "Tidak bisa bertaruh saat ini. Harap tunggu beberapa detik.",
         "message_close_account": "Akun telah ditutup. Sesi Anda akan kedaluwarsa setelah 10 detik, silakan hubungi CSD untuk detailnya. (%{errorCode})",
@@ -204,7 +205,35 @@ export const languages = {
         "under_maintenance_time": "Mulai dari %{startTime} hingga %{endTime} (GMT+8)",
         "win": "Menang",
         "win_loss": "Menang Kalah",
-        "you_reach_max_win": "Anda mencapai Maksimal Menang"
+        "you_reach_max_win": "Anda mencapai Maksimal Menang",
+        "game_category_new_releases": "Baru Rilis",
+        "message_invalid_payline": "Payline tidak valid",
+        "message_invalid_bonus": "Permainan Bonus Tidak Valid",
+        "message_invalid_jackpot": "Permainan Jackpot Tidak Valid",
+        "message_opened_jackpot": "Permainan Jackpot Tidak Valid",
+        "message_opened_bonus": "Permainan Bonus Tidak Valid",
+        "invalid_payline": "invalid_payline",
+        "invalid_bonus": "invalid_bonus",
+        "opened_bonus": "opened_bonus",
+        "invalid_jackpot": "invalid_jackpot",
+        "opened_jackpot": "opened_jackpot",
+        "invalid_hand_id": "ID di Tangan Tidak Valid",
+        "hand_already_splitted": "Tangan ini sudah terpecahkan. ",
+        "cant_split_child_hand": "Opsi \"Split\" tidak tersedia untuk tangan ini.",
+        "cant_double_hand": "Opsi \"Ganda\" tidak tersedia untuk tangan ini.",
+        "cant_hit": "Tidak dapat menarik lebih banyak kartu.",
+        "cards_not_equal": "Kartu tidak sama nilainya.",
+        "hand_is_stand": "Tangan Berakhir",
+        "cant_split_hand": "Opsi \"Split\" tidak tersedia untuk tangan ini.",
+        "bet_type": "Jenis Taruhan",
+        "no_data": null,
+        "all": null,
+        "sabaplay_tagline": "BUKAN SEKADAR PERMAINAN",
+        "message_loading": "Loading",
+        "pf_header_server_seed_sha256_single": "Server Seed SHA256 ",
+        "pf_ header_merge_client_seed_single": "Gabungkan Seed Klien",
+        "message_error_claim_expired": "Bonus berakhir. Tidak lagi tersedia. (%{errorCode})",
+        "player": "Player"
     },
     "MarbleFootball": {
         "1st_half": "Paruh Pertama",
@@ -305,7 +334,7 @@ export const languages = {
         "glossary_overLive": "Besar 4.5 (Langsung)",
         "glossary_under": "Kecil 4.5",
         "glossary_underLive": "Kecil 4.5 (Langsung)",
-        "header_betlimit": "Batas taruhan",
+        "header_betlimit": "Batas Taruhan (Min-Max)",
         "header_match": "Pertandingan",
         "live": "Langsung",
         "pre_match": "Pra-pertandingan",
@@ -336,5 +365,5 @@ export const languages = {
 if (!win.languages) {
     win.languages = {};
 }
-                          
+
 win.languages.id = languages;

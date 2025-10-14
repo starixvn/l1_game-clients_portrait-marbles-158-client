@@ -1,5 +1,5 @@
-import inversify from "inversify";
 import gc from "@sg/game-client-base";
+import inversify from "inversify";
 import { MarbleAudioStore } from "./marble-audio-store";
 
 const { injectable, inject } = inversify;
@@ -7,8 +7,8 @@ const { Audios } = gc;
 
 @injectable()
 export class MarbleAudioHandlers {
-    @inject(MarbleAudioStore) private marbleAudioStore: MarbleAudioStore;
-    @inject(gc.UserSettings.UserSettingStore) private userSettingsStore: gc.UserSettings.UserSettingStore;
+    @inject(MarbleAudioStore) private readonly marbleAudioStore: MarbleAudioStore;
+    @inject(gc.UserSettings.UserSettingStore) private readonly userSettingsStore: gc.UserSettings.UserSettingStore;
 
     playSFX(audioId: string) {
         if (this.userSettingsStore.musicEnable) {

@@ -1,5 +1,5 @@
 import { _decorator } from "cc";
-import { GridLayout } from "../../../../shared/common-components/grid-layout/scripts/components/grid-layout";
+import { GridLayout, RenderOptions } from "../../../../shared/common-components/grid-layout/scripts/components/grid-layout";
 import { ScoreboardPrediction } from "./baccarat/derived/scoreboard-prediction";
 import { Scoreboard } from "./scoreboard";
 import { ScoreboardDataConverter } from "./scoreboard-converter";
@@ -21,7 +21,7 @@ export class ScoreboardDerived extends Scoreboard {
     override algorithm: ScoreboardDerivedAlgorithm = null;
 
     @property({ type: GridLayout })
-    protected grids: GridLayout[] = [];
+    grids: GridLayout[] = [];
 
     @property(ScoreboardPrediction)
     prediction: ScoreboardPrediction = null;
@@ -33,13 +33,14 @@ export class ScoreboardDerived extends Scoreboard {
         this.prediction = this.getComponentInChildren(ScoreboardPrediction);
     }
 
-    public render<T>(rounds: T[], hasBlinkNode = false) {
+    public render<T>(rounds: T[], options: RenderOptions = { isDefaultSize: true, isRenderAgain: false, hasBlinkNode: false }) {
+        this.enableCache && (this.cached = rounds);
         const converted = this.converter.convert(rounds);
-        this.algorithm.apply(converted, hasBlinkNode);
+        this.algorithm.apply(converted, options.hasBlinkNode);
 
         this.grids.forEach((grid) => {
-            const derivedData = this.algorithm.getDerivedData(grid.node.name as DerivedScoreboardKey);
-            grid.render(ScoreboardGridItem, derivedData);
+            const derivedData = this.algorithm.getDerivedData(grid.node.name as DerivedScoreboardKey, grid.settings);
+            grid.render(ScoreboardGridItem, derivedData, options);
         });
 
         if (this.prediction) {

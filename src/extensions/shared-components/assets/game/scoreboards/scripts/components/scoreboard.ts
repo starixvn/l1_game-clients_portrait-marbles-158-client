@@ -1,5 +1,5 @@
 import { _decorator, Component } from "cc";
-import { GridLayout } from "../../../../shared/common-components/grid-layout/scripts/components/grid-layout";
+import { GridLayout, RenderOptions } from "../../../../shared/common-components/grid-layout/scripts/components/grid-layout";
 import { ScoreboardAlgorithm } from "./scoreboard-algorithm";
 import { ScoreboardDataConverter } from "./scoreboard-converter";
 import { ScoreboardGridItem } from "./scoreboard-grid-item";
@@ -18,16 +18,23 @@ export class Scoreboard extends Component {
     @property(ScoreboardAlgorithm)
     algorithm: ScoreboardAlgorithm = null;
 
+    @property
+    enableCache = false;
+
+    public cached = null;
+
     onFocusInEditor(): void {
         this.grid = this.node.getComponent(GridLayout);
         this.converter = this.node.getComponent(ScoreboardDataConverter);
         this.algorithm = this.node.getComponent(ScoreboardAlgorithm);
     }
 
-    public render<T>(rounds: T[]) {
+    public render<T>(rounds: T[], options: RenderOptions = { isDefaultSize: true, isRenderAgain: false, hasBlinkNode: false }) {
+        this.enableCache && (this.cached = rounds);
+
         const converted = this.converter.convert(rounds);
         const data = this.algorithm.apply(converted);
 
-        this.grid.render(ScoreboardGridItem, data);
+        this.grid.render(ScoreboardGridItem, data, options);
     }
 }

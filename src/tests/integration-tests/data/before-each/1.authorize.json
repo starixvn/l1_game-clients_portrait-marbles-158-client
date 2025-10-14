@@ -30,18 +30,10 @@
                             "offerGames": [
                                 {
                                     "_id": "64993d4a7d27c898f074f5ad",
+                                    "gameId": 73,
                                     "minBet": 1,
                                     "maxBet": 2000,
-                                    "maxBetPerChoices": {
-                                        "yellow": 2000,
-                                        "red": 2000,
-                                        "pink": 2000,
-                                        "white": 2000,
-                                        "blue": 2000,
-                                        "green": 2000,
-                                        "hot": 2000,
-                                        "cold": 2000
-                                    }
+                                    "maxBetPerChoices": {}
                                 }
                             ],
                             "fractionalOddsFormat": true,

@@ -5,10 +5,10 @@ const { ccclass, property } = _decorator;
 @ccclass("Flag")
 export class Flag extends Component {
     @property(Sprite)
-    private icon: Sprite = null;
+    icon: Sprite = null;
 
     setIcon(icon: string) {
-        const atlas = this.icon.spriteAtlas;
+        const atlas = this.icon?.spriteAtlas;
         if (!atlas) {
             return;
         }

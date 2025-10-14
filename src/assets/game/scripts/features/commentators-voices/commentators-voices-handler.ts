@@ -1,14 +1,14 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
-import { CommentatorsVoicesStore, IVoices } from "./commentators-voices-store";
-import { VideoStreamStore } from "../video-stream/video-stream-store";
 import mobx from "mobx";
+import { VideoStreamStore } from "../video-stream/video-stream-store";
+import { CommentatorsVoicesStore, IVoices } from "./commentators-voices-store";
 
 const { injectable, inject } = inversify;
 
 @injectable()
 export class CommentatorsVoicesHandler implements gc.Shared.IHandler<IVoices> {
-    @inject(CommentatorsVoicesStore) private store: CommentatorsVoicesStore;
+    @inject(CommentatorsVoicesStore) private readonly store: CommentatorsVoicesStore;
     @inject(VideoStreamStore) protected readonly videoStreamStore: VideoStreamStore;
     name = "voices";
 

@@ -15,4 +15,5 @@ export class Component {
     protected onDestroy() {}
 
     onDisable() {}
+    schedule = jest.fn();
 }

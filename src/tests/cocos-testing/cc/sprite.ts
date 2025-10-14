@@ -12,6 +12,14 @@ export class Sprite {
     color: Color = new Color();
 
     sizeMode = "sizeMode";
+
+    private _trim: boolean = false;
+    get trim(): boolean {
+        return this._trim;
+    }
+    set trim(value: boolean) {
+        this._trim = value;
+    }
 }
 
 export class SpriteFrame {}

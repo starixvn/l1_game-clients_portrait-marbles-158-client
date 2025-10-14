@@ -6,17 +6,13 @@ export namespace MarbleFootballServiceMessages {
         homeWins?: boolean;
     };
 
-    export class Match {
-        home: string;
-        away: string;
-
-        static eventName = "match";
-    }
-
     export class VideoStream {
-        video: string;
-        timeline: number[];
-        result: string;
+        firstHalfVideo: string;
+        secondHalfVideo: string;
+        firstHalfTimeline: number[];
+        secondHalfTimeline: number[];
+        firstHalf: string;
+        secondHalf: string;
 
         static eventName = "videoResult";
     }

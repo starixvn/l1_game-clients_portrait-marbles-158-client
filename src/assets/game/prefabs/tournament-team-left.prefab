@@ -25,19 +25,19 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 42
+        "__id__": 40
       },
       {
-        "__id__": 44
+        "__id__": 42
       }
     ],
     "_prefab": {
-      "__id__": 46
+      "__id__": 44
     },
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 227.5,
       "z": 0
     },
     "_lrot": {
@@ -82,14 +82,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 39
+        "__id__": 37
       },
       {
         "__id__": 16
       }
     ],
     "_prefab": {
-      "__id__": 41
+      "__id__": 39
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -201,7 +201,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -15,
-      "y": 0,
+      "y": 1.120719178082192,
       "z": 0
     },
     "_lrot": {
@@ -351,8 +351,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 74,
+      "height": 74
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -461,19 +461,19 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 34
+        "__id__": 32
       },
       {
-        "__id__": 36
+        "__id__": 34
       }
     ],
     "_prefab": {
-      "__id__": 38
+      "__id__": 36
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 2.87,
-      "y": 0,
+      "x": 0,
+      "y": 1,
       "z": 0
     },
     "_lrot": {
@@ -524,17 +524,14 @@
       },
       {
         "__id__": 29
-      },
-      {
-        "__id__": 31
       }
     ],
     "_prefab": {
-      "__id__": 33
+      "__id__": 31
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 11,
+      "x": 17.295,
       "y": 0,
       "z": 0
     },
@@ -547,8 +544,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.5,
+      "y": 0.5,
       "z": 1
     },
     "_mobility": 0,
@@ -575,8 +572,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 149.70703125,
-      "height": 25.2
+      "width": 308,
+      "height": 40.32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -614,11 +611,11 @@
     "_string": "Bayern Leverkitchen",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
-    "_actualFontSize": 15,
-    "_fontSize": 15,
+    "_actualFontSize": 30,
+    "_fontSize": 30,
     "_fontFamily": "Arial",
-    "_lineHeight": 20,
-    "_overflow": 0,
+    "_lineHeight": 32,
+    "_overflow": 3,
     "_enableWrapText": false,
     "_font": {
       "__uuid__": "0b9efa3d-c517-4301-af5b-ac67552528db",
@@ -703,24 +700,6 @@
     "fileId": "88sxFnnCtJp5SZOgUeMDA3"
   },
   {
-    "__type__": "d64e4oNcsRBYp6eh7Xn+DLt",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 20
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 30
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "e3roMZRF9EGJK1pm6OS/oy"
-  },
-  {
     "__type__": "d14d6oFVMxLJIQbpw0szHS6",
     "_name": "",
     "_objFlags": 0,
@@ -730,7 +709,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 32
+      "__id__": 30
     },
     "_id": ""
   },
@@ -761,12 +740,12 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 35
+      "__id__": 33
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 154,
+      "height": 53
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -789,7 +768,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 37
+      "__id__": 35
     },
     "skeleton": {
       "__id__": 16
@@ -824,11 +803,11 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 40
+      "__id__": 38
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 215,
+      "width": 210,
       "height": 53
     },
     "_anchorPoint": {
@@ -865,12 +844,12 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 43
+      "__id__": 41
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 215,
-      "height": 402
+      "width": 210,
+      "height": 53
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -893,13 +872,13 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 45
+      "__id__": 43
     },
     "flag": {
       "__id__": 9
     },
     "teamName": {
-      "__id__": 31
+      "__id__": 29
     },
     "_id": ""
   },

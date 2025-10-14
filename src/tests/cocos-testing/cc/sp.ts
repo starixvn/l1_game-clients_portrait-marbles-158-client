@@ -33,10 +33,17 @@ export namespace sp {
         timeScale: number;
         setAnimation = jest.fn();
         addAnimation = jest.fn();
+        clearAnimation = jest.fn();
         findAnimation = jest.fn();
         setSkin = jest.fn();
         getCurrent = jest.fn();
         getState = jest.fn().mockReturnValue(new AnimationState());
-        node: Node;
+        get node() {
+            return this._node;
+        }
+        private _node = new Node();
+        setMix = jest.fn();
     }
+
+    export class SkeletonData {}
 }

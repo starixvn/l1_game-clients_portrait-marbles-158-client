@@ -1,4 +1,5 @@
 import { Color } from "./color";
+import { Font } from "./font";
 import { Node } from "./node";
 
 export enum Overflow {
@@ -54,4 +55,12 @@ export class Label {
     cacheMode = 2;
 
     overflow = Overflow.NONE;
+
+    private _font: Font | null = null;
+    get font(): Font | null {
+        return this._font;
+    }
+    set font(value: Font | null) {
+        this._font = value;
+    }
 }

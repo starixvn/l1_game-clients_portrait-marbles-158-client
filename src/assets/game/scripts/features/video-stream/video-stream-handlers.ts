@@ -1,6 +1,6 @@
-import { VideoStreamStore } from "./video-stream-store";
-import { MarbleFootballServiceMessages } from "../../marble-football-service-messages";
 import inversify from "inversify";
+import { MarbleFootballServiceMessages } from "../../marble-football-service-messages";
+import { VideoStreamStore } from "./video-stream-store";
 
 const { injectable, inject } = inversify;
 

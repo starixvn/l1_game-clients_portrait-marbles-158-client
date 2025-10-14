@@ -24,9 +24,9 @@ export class GamePhaseHandler {
         }, 0);
     }
 
-    private configs: GamePhaseConfig[] = [];
+    private readonly configs: GamePhaseConfig[] = [];
 
-    private cache = {};
+    private readonly cache = {};
 
     registerPhase(config: GamePhaseConfig) {
         this.configs.push(config);

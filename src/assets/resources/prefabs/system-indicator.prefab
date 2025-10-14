@@ -39,8 +39,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 327.728,
+      "y": 477.941,
       "z": 0
     },
     "_lrot": {
@@ -444,7 +444,7 @@
         "__id__": 19
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 25
@@ -459,7 +459,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -31,
+      "y": -61,
       "z": 0
     },
     "_lrot": {
@@ -765,7 +765,6 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
-    "instance": null,
     "targetOverrides": null
   }
 ]

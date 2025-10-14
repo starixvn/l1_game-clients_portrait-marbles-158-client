@@ -1,7 +1,10 @@
-import { _decorator, Label } from "cc";
+import { _decorator, Label, Node } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { LocalizedLabel } from "../../../../extensions/i18n/assets/LocalizedLabel";
+import { GamePhase, PhaseId } from "../features/game-phase/game-phase-definitions";
+import { GamePhaseStore } from "../features/game-phase/game-phase-store";
 import { VideoStreamStore } from "../features/video-stream/video-stream-store";
 import { settings } from "../game-settings";
 import { Flag } from "./flag";
@@ -12,19 +15,22 @@ const { render } = Observer;
 @ccclass("LiveScore")
 export class LiveScore extends ObserverComponent {
     @property(Flag)
-    private home: Flag = null;
+    home: Flag = null;
 
     @property(Flag)
-    private away: Flag = null;
+    away: Flag = null;
 
     @property(Label)
-    private minutesLabel: Label = null;
+    minutesLabel: Label = null;
 
     @property(Label)
-    private secondsLabel: Label = null;
+    secondsLabel: Label = null;
 
     @property(Label)
-    private half: Label = null;
+    half: Label = null;
+
+    @property(Node)
+    containerTime: Node = null;
 
     seconds = 0;
     minutes = 0;
@@ -74,8 +80,8 @@ export class LiveScore extends ObserverComponent {
             this.stop = true;
         } else {
             this.stop = false;
+
             if (currentMatchTime === settings.durations.halfDuration && (isFirstHalf || isBreakTime)) {
-                
                 this.stop = true;
             }
 
@@ -100,5 +106,18 @@ export class LiveScore extends ObserverComponent {
         }
 
         this.secondsLabel.string = this.seconds.toString().padStart(2, "0");
+    }
+    @render(GamePhaseStore, (store) => store.enterPhase)
+    async renderEnterPhase(phase: GamePhase) {
+        if (!phase?.id) {
+            return;
+        }
+        if (phase.id === PhaseId.ShowBetChoicesLive || phase.id === PhaseId.ShowBetChoicesPrev) {
+            ComponentUtils.setOpacityNode(this.containerTime, 1);
+        }
+
+        if (phase.id === PhaseId.ShowIntroVideo || phase.id === PhaseId.ShowPrevVideo || phase.id === PhaseId.ShowLiveVideo) {
+            ComponentUtils.setOpacityNode(this.containerTime, 255);
+        }
     }
 }

@@ -139,8 +139,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1398,
-      "height": 786
+      "width": 828,
+      "height": 1107
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -476,7 +476,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 65.319,
+      "y": 109.5,
       "z": 0
     },
     "_lrot": {
@@ -516,7 +516,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1227.8200000000002,
+      "width": 780,
       "height": 7
     },
     "_anchorPoint": {
@@ -651,7 +651,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -65.319,
+      "y": -109.5,
       "z": 0
     },
     "_lrot": {
@@ -691,7 +691,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1227.8200000000002,
+      "width": 780,
       "height": 7
     },
     "_anchorPoint": {
@@ -813,8 +813,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1247.8200000000002,
-      "height": 161.638
+      "width": 800,
+      "height": 250
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -886,8 +886,8 @@
     },
     "_alignFlags": 45,
     "_target": null,
-    "_left": -4,
-    "_right": -4,
+    "_left": 14,
+    "_right": 14,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -966,7 +966,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 11.7585,
+      "y": 4.293,
       "z": 0
     },
     "_lrot": {
@@ -1006,7 +1006,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1191.2359999999999,
+      "width": 700,
       "height": 91.28
     },
     "_anchorPoint": {
@@ -1042,7 +1042,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Your device's current browser and OS version does not support viewing live streams in this game (you can still place bets and collect rewards normally), please consider updating to the version mentioned in Game Guides or above to fully enjoy the game.",
+    "_string": "您的裝置目前瀏覽器和作業系統版本不支援觀看本遊戲直播（您仍可以正常下注、領取獎勵），請考慮更新至遊戲指南或以上版本，以充分享受遊戲樂趣。",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 24,
@@ -1170,8 +1170,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1239.8200000000002,
-      "height": 161.638
+      "width": 828,
+      "height": 250
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1302,8 +1302,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1398,
-      "height": 786
+      "width": 828,
+      "height": 1107
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1362,8 +1362,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1398,
-      "height": 786
+      "width": 828,
+      "height": 1107
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

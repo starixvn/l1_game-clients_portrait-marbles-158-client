@@ -1,10 +1,10 @@
+import { audioManager } from "db://shared-components/game/audios/scripts/audio-manager";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
+import { FunctionUtils } from "db://shared-components/shared/utils";
 import inversify from "inversify";
 import mobx from "mobx";
-import { AudioUtils } from "db://shared-components/game/audios/utils";
-import { VideoStreamStore } from "../video-stream/video-stream-store";
 import { MarbleRoundTimeStore } from "../rounds/marble-round-time-store";
-import { audioManager } from "db://shared-components/game/audios/scripts/audio-manager";
-import { FunctionUtils } from "db://shared-components/shared/utils";
+import { VideoStreamStore } from "../video-stream/video-stream-store";
 
 const { injectable, inject } = inversify;
 
@@ -106,7 +106,7 @@ export class CommentatorsVoicesStore {
         return voices?.[index] ?? null;
     }
 
-    private checkAndGetSound = () => {
+    private readonly checkAndGetSound = () => {
         const currentTime = Math.ceil(this.videoStreamStore.currentVideoTime);
         const index = this.findMatchingVoiceIndex(currentTime);
         const soundId = this.getSoundIdByIndex(index);

@@ -3,7 +3,7 @@
         "name": "Sign In",
         "server": {
             "waitForRequest": {
-                "namespace": "/user/colorgame",
+                "namespace": "/user/spaceflight",
                 "event": "signin",
                 "payload": {
                     "ss": "ss",
@@ -13,7 +13,7 @@
             },
             "response": [
                 {
-                    "namespace": "/user/colorgame",
+                    "namespace": "/user/spaceflight",
                     "event": "message",
                     "payload": {
                         "userStakeLevel": {
@@ -23,15 +23,15 @@
                     }
                 },
                 {
-                    "namespace": "/user/colorgame",
+                    "namespace": "/user/spaceflight",
                     "event": "signedIn",
                     "payload": {}
                 },
                 {
-                    "namespace": "/user/colorgame",
+                    "namespace": "/user/spaceflight",
                     "event": "message",
                     "payload": {
-                        "toGame": "ColorGame"
+                        "toGame": "Spaceflight"
                     }
                 }
             ]

@@ -2,19 +2,32 @@ import gc from "@sg/game-client-base";
 import { _decorator } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
+import { AnimationUtils, ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
+import { GamePhase, PhaseId } from "../../features/game-phase/game-phase-definitions";
+import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
+import { Teams } from "../teams";
 const { ccclass } = _decorator;
 const { render } = Observer;
 const { Rounds } = gc;
 
+const SHOW_WINNER_DELAY_SECONDS = 1;
+
 @ccclass("BetItemsFinal")
 export class BetItemsFinal extends BetItemsPolygonBase {
+    team: Teams = null;
+
+    onLoad() {
+        super.onLoad();
+        this.team = this.node?.getComponent(Teams);
+    }
+
     @render(Rounds.RoundStore, (store) => store.ownBets, { fireImmediately: false })
     renderOwnBets(ownBets: gc.GameServiceMessage.OwnBets) {}
 
     bindOwnBets(ownBets: gc.GameServiceMessage.OwnBets) {
         this.betItemComponents.forEach((betItem) => {
-            const choice = betItem.betChoice;
+            const choice = betItem?.betChoice;
             const sum = (ownBets[choice] || 0) + (ownBets[`${choice}Live`] || 0);
             betItem.renderOwnBet(sum !== 0 ? gc.FormatUtils.numberWithCommas(sum) : "");
         });
@@ -24,7 +37,7 @@ export class BetItemsFinal extends BetItemsPolygonBase {
 
     bindTotalBets(totalBets: gc.GameServiceMessage.TotalBets) {
         this.betItemComponents.forEach((betItem) => {
-            const choice = betItem.betChoice;
+            const choice = betItem?.betChoice;
             const sum = (totalBets[choice] || 0) + (totalBets[`${choice}Live`] || 0);
             betItem.renderTotalBet(sum !== 0 ? gc.FormatUtils.numberWithCommas(sum) : "");
         });
@@ -37,7 +50,7 @@ export class BetItemsFinal extends BetItemsPolygonBase {
     bindUserBetPercentage(userBetPercentage: gc.GameServiceMessage.UserBetPercentage) {
         this.init();
         this.betItemComponents.forEach((betItem) => {
-            const choice = `${betItem.node.name}Final`;
+            const choice = `${betItem?.node?.name}Final`;
             betItem.renderUserBetPercentage(userBetPercentage?.[choice] ?? 0);
         });
     }
@@ -46,8 +59,8 @@ export class BetItemsFinal extends BetItemsPolygonBase {
     handleHighlightAnim(highLightInfo: gc.Rounds.THighlightAnim) {
         const { settlementResult, isAnim } = highLightInfo;
         if (highLightInfo?.settlementResult) {
-            this.betItemComponents.forEach((betItem) => {
-                const choice = betItem.node.name;
+            this.betItemComponents?.forEach((betItem) => {
+                const choice = betItem?.node?.name;
                 const winPre = this.isWinning(+settlementResult?.[choice]);
                 const winLive = this.isWinning(+settlementResult?.[`${choice}Live`]);
                 const win = winPre || winLive;
@@ -61,14 +74,64 @@ export class BetItemsFinal extends BetItemsPolygonBase {
     renderOdds(roundOdds: gc.Rounds.RoundOdds): void {}
 
     get lostBetItems(): BetItem[] {
-        return this.betItemComponents.filter(
+        return this.betItemComponents?.filter(
             (item: BetItem) => !this.settlementResult?.[item.betChoice] && !this.settlementResult?.[`${item.betChoice}Live`]
         );
     }
 
     get winBetItems(): BetItem[] {
-        return this.betItemComponents.filter(
+        return this.betItemComponents?.filter(
             (item: BetItem) => this.settlementResult?.[item.betChoice] || this.settlementResult?.[`${item.betChoice}Live`]
         );
+    }
+
+    @render(GamePhaseStore, (store) => store.enterPhase)
+    async renderEnterPhase(phase: GamePhase) {
+        if (!phase) {
+            return;
+        }
+
+        if (phase.id === PhaseId.ShowWinnerAndTournament || phase.id === PhaseId.MatchWinner) {
+            if (phase.progress === 0) {
+                await AnimationUtils.delayTime(SHOW_WINNER_DELAY_SECONDS);
+            }
+
+            this.clearHighlights();
+            this.clearTotalBet();
+            this.clearOwnBet();
+            this.clearPercentBet();
+            this.handleShowFlag(false);
+        }
+    }
+
+    private clearHighlights() {
+        this.betItemComponents?.forEach((betItem) => {
+            betItem?.handleHighlightStatic(false);
+        });
+    }
+
+    private clearTotalBet() {
+        this.betItemComponents?.forEach((betItem) => {
+            betItem?.renderTotalBet("");
+        });
+    }
+
+    private clearOwnBet() {
+        this.betItemComponents?.forEach((betItem) => {
+            betItem?.renderOwnBet("");
+        });
+    }
+
+    private clearPercentBet() {
+        this.betItemComponents?.forEach((betItem) => {
+            betItem?.renderUserBetPercentage(0);
+        });
+    }
+
+    public handleShowFlag(isShow: boolean) {
+        if (this?.team?.home?.node && this?.team?.away?.node) {
+            ComponentUtils.setOpacityNode(this.team?.home?.node, isShow ? 255 : 1);
+            ComponentUtils.setOpacityNode(this.team?.away?.node, isShow ? 255 : 1);
+        }
     }
 }

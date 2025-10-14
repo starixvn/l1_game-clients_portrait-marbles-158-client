@@ -23,7 +23,7 @@ export const languages = {
         "button_confirm": "Confirm",
         "character_name": "Nickname",
         "copy_failed_md5": "Copy function is temporarily unavailable.",
-        "copy_successfully_md5": "Copy successful!",
+        "copy_successfully_md5": "Copy Successful!",
         "create_nick_name": "Create Your Nickname",
         "details": "Details",
         "enter_your_name": "Enter your nickname.",
@@ -41,6 +41,7 @@ export const languages = {
         "hot": "Hot",
         "invalid_bet": "Invalid Bet",
         "invalid_deal_hands": "The number of Hands is invalid",
+        "invalid_free_spin": "Invalid Free Spin ",
         "invalid_position": "Invalid Position",
         "invalid_stake_level": "Invalid Stake level",
         "join_game": "Join Game",
@@ -58,7 +59,7 @@ export const languages = {
         "message_account_notexist_place_bet": "Game %{gameName} (#%{gameRoundId})\n\nFailed to place bet! An error has occurred. Please contact CSD for details, thank you. (%{errorCode})",
         "message_account_signout": "The account has been signed out because someone else logged into this account.",
         "message_account_suspended": "Game %{gameName} (#%{gameRoundId})\n\nFailed to place bet! Account has been suspended. Please contact your upline for details, thank you. (%{errorCode})",
-        "message_balanced_betting_pool": "Balanced Betting Pool.",
+        "message_balanced_betting_pool": "Balanced Betting Pool",
         "message_bet_limit_change": "Your bet limit has just been changed.",
         "message_cannot_bet": "Cannot bet at the moment. Please wait for a few seconds.",
         "message_close_account": "Account has been closed. Your session will expire after 10 seconds, please contact CSD for details. (%{errorCode})",
@@ -204,7 +205,35 @@ export const languages = {
         "under_maintenance_time": "Starting from %{startTime} to %{endTime} (GMT+8)",
         "win": "Win",
         "win_loss": "Win Loss",
-        "you_reach_max_win": "You reached the max win"
+        "you_reach_max_win": "You reached the max win",
+        "game_category_new_releases": "New Releases",
+        "message_invalid_payline": "Invalid Payline",
+        "message_invalid_bonus": "Invalid Bonus Game",
+        "message_invalid_jackpot": "Invalid Jackpot Game",
+        "message_opened_jackpot": "Invalid Jackpot Game",
+        "message_opened_bonus": "Invalid Bonus Game",
+        "invalid_payline": "invalid_payline",
+        "invalid_bonus": "invalid_bonus",
+        "opened_bonus": "opened_bonus",
+        "invalid_jackpot": "invalid_jackpot",
+        "opened_jackpot": "opened_jackpot",
+        "invalid_hand_id": "Invalid Hand ID",
+        "hand_already_splitted": "This hand has already splitted.",
+        "cant_split_child_hand": "\"Split\" option is not available for this hand.",
+        "cant_double_hand": "\"Double\" option is not available for this hand.",
+        "cant_hit": "Cannot draw more cards",
+        "cards_not_equal": "Cards are not equal value.",
+        "hand_is_stand": "Ending Hand",
+        "cant_split_hand": "\"Split\" option is not available for this hand.",
+        "bet_type": "Bet Type",
+        "no_data": "No data available",
+        "all": "All",
+        "sabaplay_tagline": "Beyond the Game",
+        "message_loading": "Loading",
+        "pf_header_server_seed_sha256_single": "Server Seed SHA256",
+        "pf_ header_merge_client_seed_single": "Merge Client Seed",
+        "message_error_claim_expired": "The Bonus is expired. No longer available. (%{errorCode}) ",
+        "player": "Player"
     },
     "MarbleFootball": {
         "1st_half": "1st Half",
@@ -305,7 +334,7 @@ export const languages = {
         "glossary_overLive": "Over 4.5 (Live)",
         "glossary_under": "Under 4.5",
         "glossary_underLive": "Under 4.5 (Live)",
-        "header_betlimit": "Bet Limit",
+        "header_betlimit": "Bet Limit (Min - Max)",
         "header_match": "Match",
         "live": "Live",
         "pre_match": "Pre-match",
@@ -336,5 +365,5 @@ export const languages = {
 if (!win.languages) {
     win.languages = {};
 }
-                          
+
 win.languages.en = languages;

@@ -38,9 +38,9 @@
         <link rel="stylesheet" type="text/css" href="<%= cssUrl %>" />
         <link rel="icon" id="favicon" />
         <link rel="stylesheet" type="text/css" href="./customize/style-mobile.css?v=<%= Date.now() %>" />
-        <link rel="stylesheet" type="text/css" href="./customize/fullscreen.css?v=<%= Date.now() %>" />
         <link rel="stylesheet" type="text/css" href="./splash-resources/splash-style.css?v=<%= Date.now() %>" />
     </head>
+
     <body>
         <div id="GameDiv" cc_exact_fit_screen="true">
             <div id="Cocos3dGameContainer">
@@ -49,26 +49,23 @@
         </div>
 
         <div id="splash" class="splash-container">
-            <div id="splash_logo"></div>
-            <div id="splash_text" class="splash_text"></div>
-            <div class="loading_icon" id="loading_icon"></div>
+            <div class="splash-logo-container" id="splash-logo-container">
+                <div id="splash_logo" class="logo"></div>
+                <div id="slogan" class="slogan"></div>
+                <div class="progress-bar-container" id="progress-bar">
+                    <img src="./images/loading-bar.gif" alt="loading" />
+                </div>
+            </div>
             <div id="powered-by"></div>
             <div id="waiting-message"></div>
         </div>
-        <div id="ios-instruction">
-            <div class="instruction-bg"></div>
-            <div class="indicator">
-                <div class="arrow"></div>
-                <div class="hand"></div>
-            </div>
-        </div>
-        <div id="icon-fullscreen"></div>
 
         <!-- Configs. -->
         <script type="text/javascript" src="./splash-resources/cross-config.js?v=<%= Date.now() %>"></script>
         <script type="text/javascript" src="./c/c.js?v=<%= Date.now() %>"></script>
+        <script type="text/javascript" src="./splash-resources/load-mapping.js?v=<%= Date.now() %>"></script>
         <script type="text/javascript" src="./customize/customize-splash.js?v=<%= Date.now() %>"></script>
-        <script type="text/javascript" src="./customize/fullscreen.js?v=<%= Date.now() %>"></script>
+
         <!-- Polyfills bundle. -->
         <script src="<%= polyfillsBundleFile %>" charset="utf-8"></script>
 
@@ -76,7 +73,7 @@
         <script src="<%= systemJsBundleFile %>" charset="utf-8"></script>
 
         <!-- Import map -->
-        <script src="./customize/import-map.json?v=3" type="systemjs-importmap" charset="utf-8"></script>
+        <script src="./customize/import-map.json?v=2" type="systemjs-importmap" charset="utf-8"></script>
 
         <script>
             System.import("./<%= indexJsName %>").catch(function (err) {

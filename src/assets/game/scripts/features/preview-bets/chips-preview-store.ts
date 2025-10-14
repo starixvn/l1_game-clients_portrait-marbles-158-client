@@ -1,6 +1,6 @@
+import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
-import gc from "@sg/game-client-base";
 import { MarbleRoundTimeStore } from "../rounds/marble-round-time-store";
 
 const { injectable, inject } = inversify;
@@ -43,12 +43,12 @@ export class ChipsPreviewStore {
         this._boundChipsFirstHalf = boundChipsFirstHalf;
     }
 
-    set boundChipsSecondHalf(boundChipsSecondHalf: boolean) {
-        this._boundChipsSecondHalf = boundChipsSecondHalf;
-    }
-
     get boundChipsFirstHalf() {
         return this._boundChipsFirstHalf;
+    }
+
+    set boundChipsSecondHalf(boundChipsSecondHalf: boolean) {
+        this._boundChipsSecondHalf = boundChipsSecondHalf;
     }
 
     get boundChipsSecondHalf() {

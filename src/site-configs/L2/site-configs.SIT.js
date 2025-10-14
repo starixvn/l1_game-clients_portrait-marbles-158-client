@@ -10,7 +10,5 @@ window.envConfig = {
     subDirectory: "sit",
     SGConnectSubDomain: "l2-connect-sit",
     defaultLanguage: "en",
-    backgroundNoTranslate: true,
-    boostedOddsDelayTimeByMinutes: 2,
     clientSubDomain: "l2uatclient",
 };

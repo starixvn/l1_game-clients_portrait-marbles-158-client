@@ -9,15 +9,45 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{1092,310}</string>
+                <string>{820,448}</string>
                 <key>spriteSourceSize</key>
-                <string>{1096,312}</string>
+                <string>{826,454}</string>
                 <key>textureRect</key>
-                <string>{{3,3},{1092,310}}</string>
+                <string>{{3,495},{820,448}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
+            </dict>
+            <key>bet_options_portrait.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{747,442}</string>
+                <key>spriteSourceSize</key>
+                <string>{747,444}</string>
+                <key>textureRect</key>
+                <string>{{3,945},{747,442}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>border-stream.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{828,490}</string>
+                <key>spriteSourceSize</key>
+                <string>{828,490}</string>
+                <key>textureRect</key>
+                <string>{{3,3},{828,490}}</string>
+                <key>textureRotated</key>
+                <false/>
             </dict>
             <key>disable-frame.webp</key>
             <dict>
@@ -30,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{48,48}</string>
                 <key>textureRect</key>
-                <string>{{372,289},{42,44}}</string>
+                <string>{{943,263},{42,44}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -45,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{258,67}</string>
                 <key>textureRect</key>
-                <string>{{422,47},{258,67}}</string>
+                <string>{{943,3},{258,67}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -56,11 +86,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{240,105}</string>
+                <string>{242,108}</string>
                 <key>spriteSourceSize</key>
-                <string>{240,105}</string>
+                <string>{242,108}</string>
                 <key>textureRect</key>
-                <string>{{315,47},{240,105}}</string>
+                <string>{{833,3},{242,108}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -71,13 +101,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{187,42}</string>
+                <string>{242,108}</string>
                 <key>spriteSourceSize</key>
-                <string>{187,42}</string>
+                <string>{242,108}</string>
                 <key>textureRect</key>
-                <string>{{315,3},{187,42}}</string>
+                <string>{{833,247},{242,108}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>disable_under_even.png</key>
             <dict>
@@ -86,15 +116,15 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{219,55}</string>
+                <string>{242,108}</string>
                 <key>spriteSourceSize</key>
-                <string>{219,55}</string>
+                <string>{242,108}</string>
                 <key>textureRect</key>
-                <string>{{315,289},{219,55}}</string>
+                <string>{{833,247},{242,108}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>title-bet.webp</key>
+            <key>title-bet.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -105,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{264,32}</string>
                 <key>textureRect</key>
-                <string>{{418,307},{264,32}}</string>
+                <string>{{989,263},{264,32}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -120,7 +150,7 @@
                 <key>spriteSourceSize</key>
                 <string>{264,32}</string>
                 <key>textureRect</key>
-                <string>{{372,333},{264,32}}</string>
+                <string>{{943,307},{264,32}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -136,9 +166,9 @@
             <key>realTextureFileName</key>
             <string>backgrounds.webp</string>
             <key>size</key>
-            <string>{512,2048}</string>
+            <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4f6f143501b7f9d31786cb7594764c0f:a743bcab9800b0a2e5a853ca234e2eab:50d396e5ee50d30c72c827b4c94d9057$</string>
+            <string>$TexturePacker:SmartUpdate:9db06acf780369be6759d9cc1df5ac5e:f4ce626ac035640225203afe8b7fbda1:50d396e5ee50d30c72c827b4c94d9057$</string>
             <key>textureFileName</key>
             <string>backgrounds.webp</string>
         </dict>

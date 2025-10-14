@@ -24,7 +24,7 @@ export class RenderFakeData extends Component {
         const isBanker = value < 2;
         const isTie = value >= 8;
 
-        const randomRank = () => (4 + Math.random() * 5) >> 0;
+        const randomRank = () => (4 + Math.random() * 5) >> 0; //NOSONAR
         const result = {
             player: {
                 card1: { rank: 3 },
@@ -73,7 +73,7 @@ export class RenderFakeData extends Component {
         this.scoreboards.forEach((scoreboard) => {
             const derivedScoreboard = scoreboard.getComponent(ScoreboardDerived);
             if (derivedScoreboard) {
-                derivedScoreboard.render(this.results, true);
+                derivedScoreboard.render(this.results, { hasBlinkNode: true });
             } else {
                 scoreboard.render(rounds);
             }

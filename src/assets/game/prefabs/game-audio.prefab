@@ -213,10 +213,7 @@
     "propertyPath": [
       "audioConfig"
     ],
-    "value": {
-      "__uuid__": "99851487-efe5-428b-ae71-bf1dd4b90cb7",
-      "__expectedType__": "cc.JsonAsset"
-    }
+    "value": null
   },
   {
     "__type__": "CCPropertyOverrideInfo",

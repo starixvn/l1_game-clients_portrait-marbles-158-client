@@ -1,0 +1,242 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+## 🧪 Cocos Creator Unit Testing Rules (Jest & Inversify)
+
+**Tags:** `jest`, `typescript`, `inversify`, `cocos-creator`, `unit-testing`
+
+---
+
+### 0. Philosophy
+
+-   Unit tests should focus on a single unit (class/module), mocking its dependencies.
+-   Tests should be independent and repeatable.
+-   Aim for clear and readable test cases.
+
+---
+
+### 1. 📝 General Setup
+
+-   **`reflect-metadata`**: Ensure `import "reflect-metadata";` is the very first import in your test file.
+    // should be the first import
+    import "reflect-metadata";
+    // rest of the imports
+    import { Container } from "inversify";
+    // ... other imports
+-   **Imports**:
+    -   Group imports: `gc` (game client base), `inversify`, project-specific definitions/handlers/stores.
+-   **`describe` Blocks**:
+    -   Use a top-level `describe("ClassNameUnderTest", () => { ... });` for each test suite.
+    -   Nest `describe` blocks for individual methods or related groups of functionality (e.g., `describe("methodName", () => { ... });` or `describe("feature group", () => { ... });`).
+-   **`it` Blocks**:
+    -   Use descriptive names for `it` blocks, clearly stating what is being tested (e.g., `it("should do X when Y occurs", () => { ... });`).
+
+---
+
+### 2. 🔧 Dependency Injection & Container
+
+-   **`inversify` Container**:
+
+    -   Create a new `Container` instance from `inversify` in `beforeEach`.
+
+    ```typescript
+    import { Container } from "inversify";
+    // ...
+    let container: Container;
+
+    beforeEach(() => {
+        container = new Container();
+        // ...
+    });
+    ```
+
+-   **Binding Dependencies**:
+
+    -   Bind the class under test to itself: `container.bind(MyClass).toSelf();`.
+    -   Bind mocked dependencies (stores, other handlers) using `toConstantValue` with a pre-constructed mock instance:
+
+        ```typescript
+        // For a store defined in the project
+        // Assuming MyStore is mocked via jest.mock
+        const mockMyStoreInstance = new (jest.requireMock("../path/to/my-store").MyStore)();
+        container.bind(MyStore).toConstantValue(mockMyStoreInstance);
+
+        // For a gc component
+        // Assuming gc.SomeNamespace.SomeComponent is mocked via jest.mock
+        const MockedGcComponent = jest.requireMock("@sg/game-client-base").SomeNamespace.SomeComponent;
+        const mockGcComponentInstance = new MockedGcComponent();
+        container.bind(gc.SomeNamespace.SomeComponent).toConstantValue(mockGcComponentInstance);
+        ```
+
+-   **Retrieving Instances**:
+
+    -   Get the instance of the class under test and its direct dependencies from the container in `beforeEach`:
+
+        ```typescript
+        let myClassInstance: MyClass;
+        let myStoreMock: jest.Mocked<MyStore>; // Use jest.Mocked for type safety
+
+        beforeEach(() => {
+            // ... container setup and bindings
+            myClassInstance = container.get(MyClass);
+            myStoreMock = container.get(MyStore) as jest.Mocked<MyStore>;
+        });
+        ```
+
+-   **Manual Dependency Assignment (If Necessary)**:
+    -   If the class under test has properties that are dependencies (and not solely constructor-injected from the container, or if complex mock setups are needed post-instantiation), assign them manually _after_ retrieving the instance from the container. This is common when the actual class constructor might initialize these, but tests need to override them with specific mock instances.
+        ```typescript
+        // In beforeEach, after getting myClassInstance and relevant mocks:
+        Object.assign(myClassInstance, {
+            dependencyStore: myStoreMock, // myStoreMock obtained from container or created directly
+            anotherDependency: anotherMockInstance,
+        });
+        ```
+        Ensure that these assigned mocks are the same instances bound to and retrieved from the container if they are managed by `inversify`.
+
+---
+
+### 3. 🎭 Mocking
+
+-   **`jest.mock`**:
+
+    -   Use `jest.mock("path/to/module", () => ({ ... }));` at the top level of your test file (outside `describe` blocks) to mock entire modules.
+    -   **External Dependencies (e.g., Stores, `gc` components)**:
+
+        -   Mock them by providing a factory function that returns an object with mocked methods and properties.
+
+        ```typescript
+        // Example: Mocking a project store
+        jest.mock("../../assets/scripts/handlers/stores/my-store", () => {
+            return {
+                MyStore: jest.fn().mockImplementation(() => ({
+                    propertyA: "defaultValue",
+                    methodX: jest.fn(),
+                    get someGetter() {
+                        return "mockValue";
+                    },
+                    // ... other properties and methods needed for tests
+                })),
+            };
+        });
+
+        // Example: Mocking a gc component
+        jest.mock("@sg/game-client-base", () => {
+            const actualGc = jest.requireActual("@sg/game-client-base");
+            return {
+                ...actualGc, // Preserve other parts of gc
+                SomeNamespace: {
+                    ...actualGc.SomeNamespace,
+                    SomeComponent: jest.fn().mockImplementation(() => ({
+                        someMethod: jest.fn(),
+                        // ... other component methods/properties
+                    })),
+                },
+            };
+        });
+        ```
+
+    -   **Parent Classes (from `gc` or elsewhere)**:
+        -   If a class under test extends a base class with methods you need to control/ignore, mock the module providing the base class, targeting the specific base class.
+        ```typescript
+        // Example: Mocking a parent handler from gc.Bet
+        jest.mock("@sg/game-client-base", () => ({
+            ...jest.requireActual("@sg/game-client-base"),
+            Bet: {
+                ...jest.requireActual("@sg/game-client-base").Bet,
+                BetHandler: jest.fn().mockImplementation(() => ({
+                    // Mock specific base class
+                    parentMethodToMock: jest.fn(),
+                    // ... other parent methods that need to be controlled
+                })),
+            },
+        }));
+        ```
+    -   **Class Under Test (Partial Mocking - Advanced & Use Sparingly)**:
+        -   The pattern observed in `slot-bet-handlers.test.ts` involves mocking the module of the class under test, then using `jest.requireActual` to get the real prototype methods for some parts, while mocking others. This is complex and should be used judiciously. Often, it's preferable to test the class as a whole and mock its external dependencies.
+        -   If this pattern is used:
+            1.  `const actualClassUnderTest = jest.requireActual("path/to/class-under-test").ClassName;`
+            2.  `jest.mock("path/to/class-under-test", () => { return { ClassName: jest.fn().mockImplementation(function() { /* setup instance with actual and mocked methods */ }) }; });`
+            3.  Inside the mock implementation, selectively assign `actualClassUnderTest.prototype.methodName` to the instance for methods to keep real, and `jest.fn()` for methods to mock.
+            4.  Ensure proper binding of `this` context for all methods.
+            5.  Inject/assign mocked dependencies (like stores) to this partially mocked instance, often by adding them as `null` properties in the mock and setting them in `beforeEach`.
+
+-   **`jest.spyOn`**:
+    -   Use `jest.spyOn(object, "methodName")` to spy on method calls on an _actual instance_ (or a mock instance whose methods are actual functions or `jest.fn()`).
+    -   Commonly used on the instance under test or its mocked dependencies retrieved from the container.
+        ```typescript
+        const methodSpy = jest.spyOn(myClassInstance, "methodToWatch");
+        // ... perform action
+        expect(methodSpy).toHaveBeenCalled();
+        ```
+
+---
+
+### 4. 🧹 `beforeEach` & `afterEach`
+
+-   **`beforeEach`**:
+    -   Initialize the `inversify` container.
+    -   Create instances of mocked classes (these are often created when `jest.requireMock` or `jest.mock`'s factory runs, but you might instantiate them explicitly using `new MockedClass()`).
+    -   Bind all necessary classes (SUT) and mock instances (dependencies) to the container.
+    -   Get instances of the SUT and its dependencies from the container.
+    -   Perform any manual mock assignments to the SUT instance if needed (see rule 2).
+    -   If testing time-dependent logic, call `jest.useFakeTimers();`.
+    -   Clear specific mock call counts if they might be invoked during the setup phase of other components: e.g., `mockRetryGameHandler.clearInterval.mockClear();`.
+-   **`afterEach`**:
+    -   `jest.clearAllMocks();` to reset call counts, mock implementations, etc., for all mocks.
+    -   If using fake timers, `jest.clearAllTimers();`.
+
+---
+
+### 5. ⚙️ Test Case Structure (Arrange-Act-Assert)
+
+-   **Arrange**:
+    -   Set up the specific conditions for the test case. This includes:
+        -   Setting properties on mocked stores or dependencies (e.g., `betControlStoreMock.stake = 100;`, `mockBetStore.isProcessingBet = true;`).
+        -   Configuring return values or implementations for mocked methods for this specific test (`mockDependency.method.mockReturnValueOnce(...);`).
+-   **Act**:
+    -   Execute the method or action being tested on the SUT (e.g., `slotBetHandlerInstance.callBet();`).
+-   **Assert**:
+    -   Verify the outcome using `expect` and Jest matchers.
+    -   Check if methods were called (or not called): `expect(spy).toHaveBeenCalled()`, `expect(spy).not.toHaveBeenCalled()`, `expect(spy).toHaveBeenCalledWith(...)`.
+    -   Check state changes in stores or the SUT: `expect(mockStore.property).toBe(...)`, `expect(slotBoardStore.slotState).toBe(SlotState.BET);`.
+    -   Check return values: `expect(result).toEqual(...)`, `expect(result).toBe(false);`.
+
+---
+
+### 6. ⏳ Timers
+
+-   If your code uses `setTimeout`, `setInterval`, etc.:
+    -   Call `jest.useFakeTimers();` in `beforeEach` (or at the top of your `describe` block if all tests in it use fake timers).
+    -   Use `jest.advanceTimersByTime(milliseconds);` to move time forward.
+    -   Call `jest.clearAllTimers();` in `afterEach`.
+
+---
+
+### 7. ⚠️ Specifics from Examples
+
+-   **Mocking Stores**:
+    -   When mocking stores using `jest.fn().mockImplementation(() => ({ ... }))`, ensure all properties and getters accessed by the class under test are defined in the returned object.
+    -   For mutable properties on mocks (like `mockBetStore.availableBalance`), you can define them with initial values in the mock implementation and then modify them directly in your `beforeEach` or specific `it` blocks to set up different scenarios.
+-   **Testing Protected/Private Methods**:
+    -   Best practice is to test private/protected methods indirectly through the public API of the class.
+    -   If direct testing of a protected method is deemed necessary for a specific, isolated piece of logic (as seen with `// @ts-ignore` in `slot-bet-response-handlers.test.ts`), do so sparingly and acknowledge it with a comment.
+-   **`eventHandleList`**:
+    -   If a handler class (like `SlotBetResponseHandler`) defines an `eventHandleList` property to configure its event listeners, include a test to verify its structure and content (e.g., correct event names, expected number of handlers).
+
+---
+
+### 8. TypeScript
+
+-   Use `jest.Mocked<Type>` when working with mocked objects to get better type checking and autocompletion for mock-specific properties (`.mockReturnValue`, etc.).
+    ```typescript
+    let betControlStore: jest.Mocked<BetControlStore>;
+    // ...
+    betControlStore = container.get(BetControlStore) as jest.Mocked<BetControlStore>;
+    ```
+-   Be explicit with types for variables holding mock instances.
+-   Don't need to mock anythings from "cc". They are mocked by "moduleNameMapper" with "cc": "<rootDir>/tests/cocos-testing/cc"
+-   Don't need to mock anythings from "observer".

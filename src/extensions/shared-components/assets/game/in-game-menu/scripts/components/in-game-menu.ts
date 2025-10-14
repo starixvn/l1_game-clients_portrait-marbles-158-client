@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator } from "cc";
+import { _decorator, EventTouch } from "cc";
 import Observer from "observer";
 import { ExpandableNode } from "../../../../shared/common-components/expandable-node/scripts/expandable-node";
 import { ObserverComponent } from "../../../../shared/common-components/observer-component/scripts/observer-component";
@@ -16,6 +16,11 @@ export class InGameMenu extends ObserverComponent {
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
     playSoundClick() {
         return gc.Audios.AudioIds.CLICK;
+    }
+
+    onClickExpand() {
+        this.playSoundClick();
+        this.expandableNode?.onClickExpand();
     }
 
     protected doCommons() {
@@ -78,5 +83,10 @@ export class InGameMenu extends ObserverComponent {
     onOpenGuideScrollMd5() {
         this.doCommons();
         this.handleEvent(InGameMenuEvents.OPEN_GUIDE_SCROLL_MD5);
+    }
+
+    onOpenCustomParams(event: EventTouch, params: string) {
+        this.doCommons();
+        this.handleEvent(params);
     }
 }

@@ -1,0 +1,149 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Refactor Chat Code Best Practices
+
+> Apply clean code principles to make chat logic more testable, readable, and maintainable.
+
+---
+
+## 🚫 Avoid nested functions inside handlers
+
+```ts
+const handleSendMessage = () => {
+  const fetchReply = async () => {
+    ...
+  };
+};
+```
+
+💡 **Suggestion**: Extract `fetchReply` into a top-level named function:
+
+```ts
+async function fetchReply(message: string) { ... }
+```
+
+---
+
+## 🚫 Avoid calling APIs directly inside handlers
+
+```ts
+const handleSend = () => {
+  fetch('/api/chat', {
+    method: "POST",
+    body: JSON.stringify({ message }),
+  });
+};
+```
+
+💡 **Suggestion**: Move the API logic into a separate function:
+
+```ts
+async function fetchBotReply(message: string): Promise<string> {
+  ...
+}
+```
+
+---
+
+## 🚫 Avoid inline message object creation
+
+```ts
+const message = { text: inputValue, sender: "user" };
+```
+
+💡 **Suggestion**: Use a factory function:
+
+```ts
+const message = createUserMessage(inputValue);
+```
+
+---
+
+## 🚫 Avoid relying on outer-scope or global variables
+
+```ts
+const send = () => {
+  const userId = currentUser.id;
+  ...
+}
+```
+
+💡 **Suggestion**: Pass required data as function parameters:
+
+```ts
+const send = (userId: string) => {
+  ...
+}
+```
+
+---
+
+## 🚫 Avoid creating bot messages inline
+
+```ts
+const message = { text: reply, sender: "bot" };
+```
+
+💡 **Suggestion**:
+
+```ts
+const message = createBotMessage(reply);
+```
+
+---
+
+## 🚫 Avoid unnamed inline return types
+
+```ts
+private calculateFinalDimensions(): { width: number; height: number } {
+  ...
+}
+```
+
+💡 **Suggestion**:
+
+```ts
+interface Dimensions {
+  width: number;
+  height: number;
+}
+
+private calculateFinalDimensions(): Dimensions {
+  ...
+}
+```
+# Remove Redundant Type Annotation for Destructured Values
+
+> When calling a function that already has a return type (like `Dimensions`), avoid re-declaring that type during destructuring.
+
+---
+
+## 🚫 Unnecessary type annotation
+
+```ts
+const { width: fieldWidth, height: fieldHeight }: Dimensions = this.getFieldNodeWorldSize();
+```
+
+💡 **Suggestion**:
+
+```ts
+const { width: fieldWidth, height: fieldHeight } = this.getFieldNodeWorldSize();
+```
+
+---
+
+## ✅ Summary of Best Practices
+
+- Separate **pure functions** from **side-effects**
+- Use **clear, single-responsibility function names**
+- Avoid unnecessary **nested** or **anonymous functions**
+- Ensure all logic is **unit testable**
+- Pass required data explicitly; **avoid implicit context**
+- Encourages reuse in other areas of code
+- Reduces redundancy without losing type safety
+
+---
+

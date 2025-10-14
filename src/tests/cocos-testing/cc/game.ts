@@ -5,7 +5,11 @@ export class Game {
     on = jest.fn();
     off = jest.fn();
 
-    canvas: HTMLCanvasElement = null;
+    canvas: HTMLCanvasElement = {
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        focus: jest.fn(),
+    } as any;
 }
 
 export const game = new Game();

@@ -1,10 +1,10 @@
 import { _decorator, Node } from "cc";
-import Observer from "observer";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
+import { ComponentUtils } from "db://shared-components/shared/utils";
+import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
-import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
 import { GamePhase, PhaseId } from "../../features/game-phase/game-phase-definitions";
-import { AnimationUtils } from "db://shared-components/shared/utils";
+import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
 
 const { property, ccclass } = _decorator;
 const { render } = Observer;
@@ -51,14 +51,14 @@ export default class BetItemCustomize extends BetItem {
     }
 
     private hideOddsIndicators(): void {
-        AnimationUtils.setOpacityNode(this.increaseOdd, 1);
-        AnimationUtils.setOpacityNode(this.decreaseOdd, 1);
+        ComponentUtils.setOpacityNode(this.increaseOdd, 1);
+        ComponentUtils.setOpacityNode(this.decreaseOdd, 1);
     }
 
     private updateOddsIndicators(deltaOdd: number): void {
         const isIncrease = deltaOdd > 0;
-        AnimationUtils.setOpacityNode(this.increaseOdd, isIncrease ? 255 : 1);
-        AnimationUtils.setOpacityNode(this.decreaseOdd, isIncrease ? 1 : 255);
+        ComponentUtils.setOpacityNode(this.increaseOdd, isIncrease ? 255 : 1);
+        ComponentUtils.setOpacityNode(this.decreaseOdd, isIncrease ? 1 : 255);
     }
 
     setDisabledVisibility(status: boolean) {

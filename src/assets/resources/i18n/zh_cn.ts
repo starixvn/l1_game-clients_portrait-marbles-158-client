@@ -41,6 +41,7 @@ export const languages = {
         "hot": "热",
         "invalid_bet": "无效投注",
         "invalid_deal_hands": "这数量手牌无效",
+        "invalid_free_spin": "无效的免费旋转",
         "invalid_position": "无效位置",
         "invalid_stake_level": "无效的赌注级别",
         "join_game": "加入游戏",
@@ -58,7 +59,7 @@ export const languages = {
         "message_account_notexist_place_bet": "%{gameName} 游戏 (#%{gameRoundId})\n\n下注失败！ 发生了错误。 详情请联系CSD，谢谢。(%{errorCode})",
         "message_account_signout": "该帐户已被注销，因为其他人已登录此帐户。",
         "message_account_suspended": "%{gameName} 游戏 (#%{gameRoundId})\n\n下注失败！ 帐户已被暂停。 详情请联络您的上线，谢谢。(%{errorCode})",
-        "message_balanced_betting_pool": "平衡的投注池。",
+        "message_balanced_betting_pool": "平衡的投注池",
         "message_bet_limit_change": "您的投注限额刚刚更改。",
         "message_cannot_bet": "暂时不能下注。 请等待几秒钟。",
         "message_close_account": "帐户已关闭。 您的会话将在 10 秒后过期，详情请联系 CSD。(%{errorCode})",
@@ -204,7 +205,35 @@ export const languages = {
         "under_maintenance_time": "从 %{startTime} 到 %{endTime} (GMT+8)",
         "win": "赢",
         "win_loss": "赢 输",
-        "you_reach_max_win": "您达到了最大胜利"
+        "you_reach_max_win": "您达到了最大胜利",
+        "game_category_new_releases": "新品发布",
+        "message_invalid_payline": "无效的支付线",
+        "message_invalid_bonus": "无效的奖金游戏",
+        "message_invalid_jackpot": "无效Jackpot游戏",
+        "message_opened_jackpot": "无效Jackpot游戏",
+        "message_opened_bonus": "无效的奖金游戏",
+        "invalid_payline": "invalid_payline",
+        "invalid_bonus": "invalid_bonus",
+        "opened_bonus": "opened_bonus",
+        "invalid_jackpot": "invalid_jackpot",
+        "opened_jackpot": "opened_jackpot",
+        "invalid_hand_id": "无效的手 ID",
+        "hand_already_splitted": "这只手已经分牌了。",
+        "cant_split_child_hand": "\"分牌\"选项不适用于这手牌",
+        "cant_double_hand": "\"加倍\"选项不适用于这手牌",
+        "cant_hit": "不能抽更多的牌。",
+        "cards_not_equal": "卡牌不等价。",
+        "hand_is_stand": "结束手牌",
+        "cant_split_hand": "“分牌”选项不适用于这手牌",
+        "bet_type": "投注类型",
+        "no_data": null,
+        "all": null,
+        "sabaplay_tagline": "趣游无限",
+        "message_loading": "Loading",
+        "pf_header_server_seed_sha256_single": "服务器种子 SHA256",
+        "pf_ header_merge_client_seed_single": "合并客户种子",
+        "message_error_claim_expired": "奖金已过期，不再有效。 (%{errorCode})",
+        "player": "玩家"
     },
     "MarbleFootball": {
         "1st_half": "上半场",
@@ -305,7 +334,7 @@ export const languages = {
         "glossary_overLive": "大 4.5（现场）",
         "glossary_under": "小 4.5",
         "glossary_underLive": "小 4.5（现场）",
-        "header_betlimit": "投注限額",
+        "header_betlimit": "投注限额（最小-最大）",
         "header_match": "比赛",
         "live": "现场",
         "pre_match": "赛前",
@@ -336,5 +365,5 @@ export const languages = {
 if (!win.languages) {
     win.languages = {};
 }
-                          
+
 win.languages.zh_cn = languages;

@@ -1,19 +1,19 @@
 import gc from "@sg/game-client-base";
-import { Node, _decorator, Button, Vec3, sys } from "cc";
-import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { AnimationUtils } from "db://shared-components/shared/utils";
-import Observer from "observer";
-import { StatusBetsButton } from "./status-bets-button";
-import { BetItemsFinal } from "./bet-items-final";
-import { BetItems } from "./bet-items";
-import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
-import { GamePhase, PhaseId } from "../../features/game-phase/game-phase-definitions";
+import { Button, Node, _decorator } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
-import { PreviewBetsHandler } from "../../features/preview-bets/preview-bets-handler";
-import { ButtonsBetStore } from "../../features/preview-bets/buttons-bet-store";
-import BetItemCustomize from "./bet-item-customize";
+import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { AnimationUtils, ComponentUtils } from "db://shared-components/shared/utils";
+import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
+import { GamePhase, PhaseId } from "../../features/game-phase/game-phase-definitions";
+import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
+import { ButtonsBetStore } from "../../features/preview-bets/buttons-bet-store";
+import { PreviewBetsHandler } from "../../features/preview-bets/preview-bets-handler";
 import { DURATION_ANIM_IN } from "../helpers/tween-configs";
+import BetItemCustomize from "./bet-item-customize";
+import { BetItems } from "./bet-items";
+import { BetItemsFinal } from "./bet-items-final";
+import { StatusBetsButton } from "./status-bets-button";
 const { ccclass, property } = _decorator;
 
 const { Rounds } = gc;
@@ -33,13 +33,13 @@ export class BetChoicesContainer extends ObserverComponent {
     betChoicesFinal: Node = null;
 
     @property(Node)
-    private chipContainerPrev: Node = null;
+    chipContainerPrev: Node = null;
 
     @property(Node)
-    private chipContainerLive: Node = null;
+    chipContainerLive: Node = null;
 
     @property(Node)
-    private chipContainerFinal: Node = null;
+    chipContainerFinal: Node = null;
 
     @property(Node)
     previewBetsButton: Node = null;
@@ -65,43 +65,20 @@ export class BetChoicesContainer extends ObserverComponent {
     private readonly phaseConfigs = {
         [PhaseId.ShowPrevVideo]: {
             prevDisabled: true,
-            previewBetsEnabled: true,
         },
         [PhaseId.ShowLiveVideo]: {
             prevDisabled: true,
             liveDisabled: true,
-            previewBetsEnabled: true,
         },
         [PhaseId.Halftime]: {
-            previewBetsEnabled: false,
             liveDisabled: false,
         },
         [PhaseId.ShowBetChoicesLive]: {
             liveDisabled: false,
-            previewBetsEnabled: false,
             prevDisabled: true,
         },
         [PhaseId.ShowBetChoicesPrev]: {
-            previewBetsEnabled: false,
             prevDisabled: false,
-        },
-        [PhaseId.Settlement]: {
-            previewBetsEnabled: false,
-            liveDisabled: true,
-        },
-        [PhaseId.MatchWinner]: {
-            previewBetsEnabled: false,
-        },
-        [PhaseId.Tournament]: {
-            previewBetsEnabled: false,
-        },
-        [PhaseId.AutoHidePreviewBetChoicesLive]: {
-            previewBetsEnabled: false,
-            liveDisabled: false,
-            prevDisabled: false,
-        },
-        [PhaseId.AutoHidePreviewBetChoicesPrev]: {
-            previewBetsEnabled: false,
         },
     };
 
@@ -112,8 +89,8 @@ export class BetChoicesContainer extends ObserverComponent {
     };
 
     private initializeBetItems(): void {
-        this.betItemsPrev = this.betChoicesPrev.getComponent(BetItems);
-        this.betItemsLive = this.betChoicesLive.getComponent(BetItems);
+        this.betItemsPrev = this.betChoicesPrev?.getComponent(BetItems);
+        this.betItemsLive = this.betChoicesLive?.getComponent(BetItems);
         this.betItemsFinal = this.betChoicesFinal.getComponent(BetItemsFinal);
         this.betChoicesInMatch = [this.betItemsPrev, this.betItemsLive, this.betItemsFinal];
     }
@@ -121,12 +98,8 @@ export class BetChoicesContainer extends ObserverComponent {
     private setupStatusButtons(): void {
         this.statusBetsButton = this.previewBetsButton?.getComponent(StatusBetsButton);
         this.setEnabledPreviewBets(false);
-        if (sys.isMobile) {
-            this.previewBetsButton.scale = new Vec3(1.5, 1.5, 1.5);
-            this.swapBetsButton.scale = new Vec3(1.5, 1.5, 1.5);
-        }
 
-        this.swapBetsButton.active = false;
+        this.swapBetsButton && (this.swapBetsButton.active = false);
     }
 
     private setupContainers(): void {
@@ -134,7 +107,7 @@ export class BetChoicesContainer extends ObserverComponent {
     }
 
     private setupEventListeners(): void {
-        this.previewBetsButton.on(Button.EventType.CLICK, this.showHideBets, this);
+        this.previewBetsButton?.on(Button.EventType.CLICK, this.showHideBets, this);
     }
 
     onLoad(): void {
@@ -188,14 +161,6 @@ export class BetChoicesContainer extends ObserverComponent {
         this.setEnabledPreviewBets(config.previewBetsEnabled);
     }
 
-    private handleWinnerPhase(phase: GamePhase): void {
-        if (phase.progress === 0) {
-            this.fadeOutBetChoiceNode(this.betChoicesParentContainer, true, DURATION_ANIM_IN);
-        } else {
-            this.fadeOutBetChoiceNode(this.betChoicesParentContainer, true, 0);
-        }
-    }
-
     private handleSettlementPhase(): void {
         this.handleBetState("final", DURATION_ANIM_IN);
     }
@@ -211,18 +176,6 @@ export class BetChoicesContainer extends ObserverComponent {
         this.handleBetState(action, duration);
     }
 
-    private handleAutoHidePreviewPhase(): void {
-        this.setPreviewBets(false);
-        this.setDisableBetChoices();
-        this.resetSwapBets();
-        this.fadeOutBetChoiceNode(this.betChoicesParentContainer, true, DURATION_ANIM_IN);
-    }
-
-    private resetSwapBets(): void {
-        this.swapBetsButton.active = false;
-        this.isSwapBets = false;
-    }
-
     @render(GamePhaseStore, (store) => store.enterPhase)
     renderEnterPhase(phase: GamePhase) {
         if (!phase) {
@@ -232,25 +185,34 @@ export class BetChoicesContainer extends ObserverComponent {
         // Apply phase-specific UI configurations
         this.applyPhaseConfig(phase.id as PhaseId);
 
-        // Handle specific phase behaviors
-        if (phase.id === PhaseId.MatchWinner) {
-            this.handleWinnerPhase(phase);
-            return;
-        }
-
         if (phase.id === PhaseId.Settlement) {
             this.handleSettlementPhase();
             return;
         }
 
-        if (phase.id === PhaseId.ShowBetChoicesPrev || phase.id === PhaseId.ShowBetChoicesLive) {
-            this.handleBetChoicesPhase(phase);
+        if (phase.id === PhaseId.ShowIntroVideo || phase.id === PhaseId.ShowPrevVideo) {
+            this.handleBetState("prev", phase.progress);
             return;
         }
 
-        if (phase.id === PhaseId.AutoHidePreviewBetChoicesLive || phase.id === PhaseId.AutoHidePreviewBetChoicesPrev) {
-            this.handleAutoHidePreviewPhase();
+        if (phase.id === PhaseId.ShowLiveVideo) {
+            this.handleBetState("live", phase.progress);
+            return;
         }
+
+        if (phase.id === PhaseId.ShowBetChoicesPrev || phase.id === PhaseId.ShowBetChoicesLive) {
+            this.handleBetChoicesPhase(phase);
+            phase.id === PhaseId.ShowBetChoicesPrev && this.resetSwapBets();
+            return;
+        }
+
+        if (phase.id === PhaseId.Tournament) {
+            this.betChoicesFinal.active = false;
+        }
+    }
+
+    private resetSwapBets() {
+        this.isSwapBets && (this.isSwapBets = false);
     }
 
     private setDisabledBetChoices(type: "prev" | "live", isDisabled: boolean) {
@@ -262,22 +224,21 @@ export class BetChoicesContainer extends ObserverComponent {
     }
 
     private setEnabledPreviewBets(isEnabled: boolean) {
-        isEnabled && this.statusBetsButton.setVisibilityState(false);
-        this.previewBetsButton && (this.previewBetsButton.active = isEnabled);
+        isEnabled && this.statusBetsButton && this.statusBetsButton?.setVisibilityState(false);
     }
 
     setEnableBetChoices(state: "prev" | "live" | "final") {
         let triggerState = state;
 
-        this.betChoicesPrev.active = state === "prev";
-        this.betChoicesLive.active = state === "live";
-        this.betChoicesFinal.active = state === "final";
-        this.swapBetsButton.active = state === "live";
+        this.betChoicesPrev && (this.betChoicesPrev.active = state === "prev");
+        this.betChoicesLive && (this.betChoicesLive.active = state === "live");
+        this.betChoicesFinal && (this.betChoicesFinal.active = state === "final");
+        this.swapBetsButton && (this.swapBetsButton.active = state === "live");
 
         if (state === "live") {
             triggerState = this.isSwapBets ? "prev" : "live";
-            this.betChoicesPrev.active = this.isSwapBets;
-            this.betChoicesLive.active = !this.isSwapBets;
+            this.betChoicesPrev && (this.betChoicesPrev.active = this.isSwapBets);
+            this.betChoicesLive && (this.betChoicesLive.active = !this.isSwapBets);
         }
 
         this.setEnableChipContainer();
@@ -288,9 +249,9 @@ export class BetChoicesContainer extends ObserverComponent {
     }
 
     private setEnableChipContainer() {
-        this.chipContainerPrev.active = this.betChoicesPrev.active;
-        this.chipContainerLive.active = this.betChoicesLive.active;
-        this.chipContainerFinal.active = this.betChoicesFinal.active;
+        this.chipContainerPrev && (this.chipContainerPrev.active = this.betChoicesPrev.active);
+        this.chipContainerLive && (this.chipContainerLive.active = this.betChoicesLive.active);
+        this.chipContainerFinal && (this.chipContainerFinal.active = this.betChoicesFinal.active);
     }
 
     @handle(PreviewBetsHandler, (handle) => handle.triggerBoundFirstHalfChips())
@@ -299,17 +260,12 @@ export class BetChoicesContainer extends ObserverComponent {
     @handle(PreviewBetsHandler, (handle) => handle.triggerBoundSecondHalfChips())
     triggerBoundSecondHalfChips() {}
 
-    private setDisableBetChoices() {
-        this.betChoicesPrev.active = false;
-        this.betChoicesLive.active = false;
-        this.betChoicesFinal.active = false;
-    }
-
     private handleAfterActiveBetItemsFinal() {
         const finalBetItems = this.betChoicesFinal.getComponent(BetItemsFinal);
-        finalBetItems.bindTotalBets(this._totalBets);
-        finalBetItems.bindOwnBets(this._ownBets);
-        finalBetItems.bindUserBetPercentage(this._userPercentage);
+        finalBetItems?.handleShowFlag(true);
+        finalBetItems?.bindTotalBets(this._totalBets);
+        finalBetItems?.bindOwnBets(this._ownBets);
+        finalBetItems?.bindUserBetPercentage(this._userPercentage);
         this.triggerLoadedChips();
     }
 
@@ -321,16 +277,16 @@ export class BetChoicesContainer extends ObserverComponent {
             return;
         }
         if (!bindFlag) {
-            betItems.renderTotalBets(this._totalBets);
-            betItems.renderOwnBets(this._ownBets);
-            betItems.handleUserBetPercentage(this._userPercentage);
-            betItems.renderOdds(this._odds);
+            betItems?.renderTotalBets(this._totalBets);
+            betItems?.renderOwnBets(this._ownBets);
+            betItems?.handleUserBetPercentage(this._userPercentage);
+            betItems?.renderOdds(this._odds);
         }
         triggerMethod();
     }
 
     private handleAfterActiveBetItemsFirstHalf() {
-        const firstHalfBetItems = this.betChoicesPrev.getComponent(BetItems);
+        const firstHalfBetItems = this.betChoicesPrev?.getComponent(BetItems);
         this.handleAfterActiveBetItems(firstHalfBetItems, this._bindDataFirstHalf, () => {
             this._bindDataFirstHalf = true;
             this.triggerBoundFirstHalfChips();
@@ -338,7 +294,7 @@ export class BetChoicesContainer extends ObserverComponent {
     }
 
     private handleAfterActiveBetItemsSecondHalf() {
-        const secondHalfBetItems = this.betChoicesLive.getComponent(BetItems);
+        const secondHalfBetItems = this.betChoicesLive?.getComponent(BetItems);
         this.handleAfterActiveBetItems(secondHalfBetItems, this._bindDataSecondHalf, () => {
             this._bindDataSecondHalf = true;
             this.triggerBoundSecondHalfChips();
@@ -362,14 +318,14 @@ export class BetChoicesContainer extends ObserverComponent {
 
     async betItemsByChoice() {
         const betItemsByChoice: Record<string, BetItem> = {};
-        const betItemsPrev = this.betChoicesPrev.getComponent(BetItems).getComponentsInChildren(BetItem);
-        const betItemsLive = this.betChoicesLive.getComponent(BetItems).getComponentsInChildren(BetItem);
+        const betItemsPrev = this.betChoicesPrev?.getComponent(BetItems)?.getComponentsInChildren(BetItem);
+        const betItemsLive = this.betChoicesLive?.getComponent(BetItems)?.getComponentsInChildren(BetItem);
 
-        for (const betItem of betItemsLive) {
-            betItemsByChoice[betItem.betChoice] = betItem;
+        for (const betItem of betItemsLive || []) {
+            betItem.betChoice && (betItemsByChoice[betItem.betChoice] = betItem);
         }
-        for (const betItem of betItemsPrev) {
-            betItemsByChoice[betItem.betChoice] = betItem;
+        for (const betItem of betItemsPrev || []) {
+            betItem.betChoice && (betItemsByChoice[betItem.betChoice] = betItem);
         }
         return betItemsByChoice;
     }
@@ -378,7 +334,7 @@ export class BetChoicesContainer extends ObserverComponent {
         const opacity = fadeOut ? 1 : 255;
 
         if (duration === 0) {
-            AnimationUtils.setOpacityNode(node, opacity);
+            ComponentUtils.setOpacityNode(node, opacity);
             return;
         }
 
@@ -396,7 +352,7 @@ export class BetChoicesContainer extends ObserverComponent {
     @handle(gc.Audios.AudioHandler, (handle) => handle.playSFX(gc.Audios.AudioIds.CLICK))
     private showHideBets() {
         this.setIsSwapBets(false);
-        this.setPreviewBets(!this.statusBetsButton.getPreviewStatus());
+        this.setPreviewBets(!this.statusBetsButton?.getPreviewStatus());
     }
 
     @handle(gc.Audios.AudioHandler, (handle) => handle.playSFX(gc.Audios.AudioIds.CLICK))
@@ -412,6 +368,6 @@ export class BetChoicesContainer extends ObserverComponent {
 
     @render(ButtonsBetStore, (store) => store.isPreviewBets, { fireImmediately: false })
     async renderButtonsBet(isPreviewBets: boolean) {
-        this.statusBetsButton.setPreviewStatus(isPreviewBets);
+        this.statusBetsButton?.setPreviewStatus(isPreviewBets);
     }
 }

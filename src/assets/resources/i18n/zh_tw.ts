@@ -41,6 +41,7 @@ export const languages = {
         "hot": "熱",
         "invalid_bet": "無效投注",
         "invalid_deal_hands": "這數量手牌無效",
+        "invalid_free_spin": "無效的免費旋轉",
         "invalid_position": "無效位置",
         "invalid_stake_level": "無效的賭注級別",
         "join_game": "加入遊戲",
@@ -58,7 +59,7 @@ export const languages = {
         "message_account_notexist_place_bet": "%{gameName} 遊戲 (#%{gameRoundId})\n\n下注失敗！發生了錯誤。詳情請聯繫CSD，謝謝。(%{errorCode})",
         "message_account_signout": "該帳戶已被註銷，因為其他人已登錄此帳戶。",
         "message_account_suspended": "%{gameName} 遊戲 (#%{gameRoundId})\n\n下注失敗！帳戶已被暫停。詳情請聯絡您的上線，謝謝。(%{errorCode})",
-        "message_balanced_betting_pool": "平衡的投注池。",
+        "message_balanced_betting_pool": "平衡的投注池",
         "message_bet_limit_change": "您的投注限額剛剛更改。",
         "message_cannot_bet": "暫時不能下注。請等待幾秒鐘。",
         "message_close_account": "帳戶已關閉。您的會話將在 10 秒後過期，詳情請聯繫 CSD。(%{errorCode})",
@@ -204,7 +205,35 @@ export const languages = {
         "under_maintenance_time": "從 %{startTime} 到 %{endTime} (GMT+8)",
         "win": "贏",
         "win_loss": "贏 輸",
-        "you_reach_max_win": "您達到了最大勝利"
+        "you_reach_max_win": "您達到了最大勝利",
+        "game_category_new_releases": "新品發布",
+        "message_invalid_payline": "無效的支付線",
+        "message_invalid_bonus": "無效的獎金遊戲",
+        "message_invalid_jackpot": "無效Jackpo遊戲",
+        "message_opened_jackpot": "無效Jackpo遊戲",
+        "message_opened_bonus": "無效的獎金遊戲",
+        "invalid_payline": "invalid_payline",
+        "invalid_bonus": "invalid_bonus",
+        "opened_bonus": "opened_bonus",
+        "invalid_jackpot": "invalid_jackpot",
+        "opened_jackpot": "opened_jackpot",
+        "invalid_hand_id": "無效的手 ID",
+        "hand_already_splitted": "這隻手已經分牌了。\n",
+        "cant_split_child_hand": "\"分牌\"選項不適用於這手牌",
+        "cant_double_hand": "\"加倍\"選項不適用於這手牌",
+        "cant_hit": "不能抽更多的牌。",
+        "cards_not_equal": "卡牌不等價。",
+        "hand_is_stand": "結束手牌",
+        "cant_split_hand": "“分牌”選項不適用於這手牌",
+        "bet_type": "投注類型",
+        "no_data": "尚無資料",
+        "all": "全部",
+        "sabaplay_tagline": "趣遊無限",
+        "message_loading": "載入中",
+        "pf_header_server_seed_sha256_single": "服務器種子 SHA256",
+        "pf_ header_merge_client_seed_single": "合併客戶種子",
+        "message_error_claim_expired": "獎金已過期，不再有效。 (%{errorCode})",
+        "player": "閒家"
     },
     "MarbleFootball": {
         "1st_half": "上半場",
@@ -302,10 +331,10 @@ export const languages = {
         "glossary_odd": "單",
         "glossary_oddLive": "單（現場）",
         "glossary_over": "大 4.5",
-        "glossary_overLive": "大 4.5（現場）",
+        "glossary_overLive": "大 4.5（現場)",
         "glossary_under": "小 4.5",
         "glossary_underLive": "小 4.5（現場）",
-        "header_betlimit": "投注限额",
+        "header_betlimit": "投注限額（最小-最大）",
         "header_match": "比賽",
         "live": "現場",
         "pre_match": "賽前",
@@ -336,5 +365,5 @@ export const languages = {
 if (!win.languages) {
     win.languages = {};
 }
-                          
+
 win.languages.zh_tw = languages;

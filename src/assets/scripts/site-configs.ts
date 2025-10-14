@@ -3,29 +3,34 @@ import gc from "@sg/game-client-base";
 declare global {
     interface Window {
         envConfig: gc.Configs.SiteConfigs;
+        crossConfig: gc.Configs.SiteConfigs;
     }
 }
 
 const defaultConfig: gc.Configs.SiteConfigs = {
-    isDev: false, // if this property is true, then you should add token=anything into the querytring to sso to the game http://localhost:7456/?token=anything
-    systemType: "SG",
+    isDev: false,
+    systemType: "VG",
     serverDomainMapper: {
         localhost: "lumigame.com",
     },
     ssl: true,
-    subDomain: "l1-proxy1",
-    env: "LOCAL1",
-    subGuideDomain: "l1-guide-1",
-    SGConnectSubDomain: "l1-connectsite1",
-    enableMsgpackParserAllGames: false,
+    subDomain: "l2-proxy",
+    env: "LOCAL0",
+    subGuideDomain: "hd-guide",
     enableMsgpackParserOnNotification: false,
+    enableMsgpackParserAllGames: false,
     websocket: {
         proxyPath: "marblefootball2",
-        route: "soccermarble",
+        route: "marblefootball2",
     },
-    mainObserverNamespace: "MarbleFootball2",
     tolgeeUrl: "",
-    boostedOddsDelayTimeByMinutes: 1,
+    storagePrefixKey: "portrait_marbleFootball2",
+    sentry: {
+        dsn: "https://9c999f9b51e3b4543cb160b946b5bcbe@sentry-k8s.lumigame.com/30",
+        browserUrl: "https://browser.sentry-cdn.com/10.5.0/bundle.min.js",
+        urlHash: "sha384-SAsRvjfAFRX3iwi3MG6ToeZNJVpHcRXKcITfFVLQipWK3uQ8SakuVmHDoSR3YNmJ",
+        ignoreErrors: [],
+    },
 };
 
 let configDev = {
@@ -33,7 +38,6 @@ let configDev = {
     userServiceUrlDev: defaultConfig.userServiceUrlDev,
     serverDomainMapper: defaultConfig.serverDomainMapper,
     notificationServiceUrlDev: defaultConfig.notificationServiceUrlDev,
-    boostedOddsDelayTimeByMinutes: defaultConfig.boostedOddsDelayTimeByMinutes,
 };
 
 if (window.envConfig) {
@@ -42,11 +46,13 @@ if (window.envConfig) {
         userServiceUrlDev: undefined,
         serverDomainMapper: undefined,
         notificationServiceUrlDev: undefined,
-        boostedOddsDelayTimeByMinutes: undefined,
     };
 }
 
 export const siteConfigs: gc.Configs.SiteConfigs =
-    window.envConfig && window.envConfig.isDev ? defaultConfig : { ...defaultConfig, ...configDev, ...window.envConfig };
+    window.envConfig && window.envConfig.isDev
+        ? defaultConfig
+        : { ...defaultConfig, ...configDev, ...window.envConfig, ...window.crossConfig };
 
 window.envConfig = siteConfigs;
+gc.Shared.utils.StorageManager.setPrefixKey(siteConfigs.storagePrefixKey);

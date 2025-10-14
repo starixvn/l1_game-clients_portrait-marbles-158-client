@@ -8,17 +8,14 @@ function setLoadingDisplay() {
 
     cc.director.once(cc.Director.EVENT_AFTER_RENDER, function () {
         gameCanvas.style.display = "block";
-        splash.style.transition = "opacity 0.2s ease-in-out";
+        splash.style.transition = "opacity 0.8s ease-in-out";
         splash.style.opacity = 0;
-        const progressBar = document.getElementById("loading_icon");
+        const progressBar = document.getElementById("progress-bar");
         progressBar.style.display = "none";
-        const waitingMessage = document.getElementById("waiting-message");
-        waitingMessage.style.display = "none";
-        window.randomWaitingMessage?.clearInterval();
-
+        splashManager?.clearInterval();
         setTimeout(() => {
             splash.style.display = "none";
-        }, 200);
+        }, 800);
     });
 }
 

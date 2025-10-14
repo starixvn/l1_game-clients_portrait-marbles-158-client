@@ -5,16 +5,16 @@ const { ccclass, property } = _decorator;
 @ccclass("MiniGame")
 export class MiniGame extends Component {
     @property(sp.Skeleton)
-    private home: sp.Skeleton = null;
+    home: sp.Skeleton = null;
 
     @property(sp.Skeleton)
-    private away: sp.Skeleton = null;
+    away: sp.Skeleton = null;
 
     @property(sp.Skeleton)
-    private statistic: sp.Skeleton = null;
+    statistic: sp.Skeleton = null;
 
     @property(sp.Skeleton)
-    private game: sp.Skeleton = null;
+    game: sp.Skeleton = null;
 
     protected onLoad(): void {
         this.disableAllSkeletonNodes();
@@ -69,18 +69,29 @@ export class MiniGame extends Component {
     }
 
     setWinLoseLabel(isHomeWin: boolean) {
-        this.home!.node.getChildByPath("result/win")!.active = isHomeWin;
-        this.away!.node.getChildByPath("result/lose")!.active = isHomeWin;
+        const homeWin = this.home?.node?.getChildByPath("result/win");
+        const homeLose = this.home?.node?.getChildByPath("result/lose");
+        const awayWin = this.away?.node?.getChildByPath("result/win");
+        const awayLose = this.away?.node?.getChildByPath("result/lose");
 
-        this.home!.node.getChildByPath("result/lose")!.active = !isHomeWin;
-        this.away!.node.getChildByPath("result/win")!.active = !isHomeWin;
+        if (homeWin) {
+            homeWin.active = isHomeWin;
+        }
+
+        if (awayLose) {
+            awayLose.active = isHomeWin;
+        }
+
+        if (homeLose) {
+            homeLose.active = !isHomeWin;
+        }
+
+        if (awayWin) {
+            awayWin.active = !isHomeWin;
+        }
     }
 
-    private playAnimation(
-        main: { spine: sp.Skeleton; animation: string },
-        side: { spine: sp.Skeleton; animation: string }[],
-        at: number = 0
-    ) {
+    private playAnimation(main: { spine: sp.Skeleton; animation: string }, side: { spine: sp.Skeleton; animation: string }[], at = 0) {
         main.spine.node.active = true;
 
         const mainAnimation = main.spine.findAnimation(main.animation);
@@ -127,9 +138,9 @@ export class MiniGame extends Component {
     }
 
     private disableAllSkeletonNodes() {
-        this.home!.node.active = false;
-        this.away!.node.active = false;
-        this.statistic!.node.active = false;
-        this.game!.node.active = false;
+        this.home && (this.home.node.active = false);
+        this.away && (this.away.node.active = false);
+        this.statistic && (this.statistic.node.active = false);
+        this.game && (this.game.node.active = false);
     }
 }

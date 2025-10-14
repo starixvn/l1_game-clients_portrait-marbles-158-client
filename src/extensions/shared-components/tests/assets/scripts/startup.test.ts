@@ -1,16 +1,16 @@
 import {
     App,
     Auth,
+    ChipSetting,
     Configs,
+    ConnectSite,
+    GameConfiguration,
     IContainerOptions,
+    Notification,
     Player,
     buildObserverContainer,
     getContainer,
     sentryLogger,
-    Notification,
-    ConnectSite,
-    ChipSetting,
-    GameConfiguration,
 } from "@sg/game-client-base";
 import mobx from "mobx";
 import { configure } from "observer";
@@ -27,7 +27,12 @@ describe(startGame.name, () => {
         serverDomainMapper: {},
         subDomain: "",
         env: "Test",
-        sentryUrl: "sentryUrl",
+        sentry: {
+            dsn: "sentryUrl",
+            browserUrl: "sentryUrl",
+            urlHash: "sentryUrl",
+            ignoreErrors: [],
+        },
         subGuideDomain: "",
         enableMsgpackParserAllGames: false,
         enableMsgpackParserOnNotification: false,
@@ -35,7 +40,6 @@ describe(startGame.name, () => {
             proxyPath: "",
             route: "",
         },
-        mainObserverNamespace: "",
     };
     describe("when called", () => {
         beforeAll(() => {
@@ -96,7 +100,12 @@ describe(getSharedContainer.name, () => {
         subGuideDomain: "guide",
         systemType: "type",
         websocket: { proxyPath: "/", route: "route" },
-        mainObserverNamespace: "",
+        sentry: {
+            dsn: "sentryUrl",
+            browserUrl: "sentryUrl",
+            urlHash: "sentryUrl",
+            ignoreErrors: [],
+        },
     };
 
     describe("when called", () => {

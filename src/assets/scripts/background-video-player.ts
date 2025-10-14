@@ -1,11 +1,21 @@
 import { _decorator, Component } from "cc";
 import Hls from "hls.js";
+import { SYNC_VIDEO_DIMENSION_EVENT, VideoOffSetContainer } from "../game/scripts/components/video/video-offset-container";
 import { DOMBackgroundVideo } from "./dom-background-video";
 
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
+
+const MAX_HEIGHT_PORTRAIT = 424;
+const MAX_HEIGHT_DIRECT = 466;
 
 @ccclass("BackgroundVideoPlayer")
 export class BackgroundVideoPlayer extends Component {
+    @property(VideoOffSetContainer)
+    videoOffSetContainer: VideoOffSetContainer = null;
+
+    @property
+    isPortrait = false;
+
     private hls: Hls = null;
     private native: HTMLVideoElement = null;
 
@@ -13,6 +23,11 @@ export class BackgroundVideoPlayer extends Component {
     private _videoName = "";
     private liveStreamServer = "";
     private _muted = true;
+    private _videoDimension = {
+        width: 0,
+        height: 0,
+        top: 0,
+    };
 
     private _onPlayStateChanged: (isPlay: boolean) => void = null;
 
@@ -104,6 +119,8 @@ export class BackgroundVideoPlayer extends Component {
     }
 
     onLoad() {
+        this.videoOffSetContainer.node.on(SYNC_VIDEO_DIMENSION_EVENT, this.updateVideoDimension, this);
+
         this.initialize();
     }
 
@@ -121,6 +138,11 @@ export class BackgroundVideoPlayer extends Component {
         }
     }
 
+    private updateVideoDimension(value: { width: number; height: number; top: number }) {
+        this._videoDimension = value;
+        value?.top > 0 && DOMBackgroundVideo.updateVideoDimension(value);
+    }
+
     private syncCurrentTime() {
         this.node.emit("syncNativeCurrentTime", this.native.currentTime);
 
@@ -132,6 +154,7 @@ export class BackgroundVideoPlayer extends Component {
     }
 
     private initialize() {
+        DOMBackgroundVideo.setMaxHeight(this.isPortrait ? MAX_HEIGHT_PORTRAIT : MAX_HEIGHT_DIRECT);
         const video = DOMBackgroundVideo.createOrLoadVideoElement();
 
         if (!Hls.isSupported()) {
@@ -171,5 +194,7 @@ export class BackgroundVideoPlayer extends Component {
 
         this.hls = hls;
         this.native = video;
+
+        this._videoDimension?.top > 0 && DOMBackgroundVideo.updateVideoDimension(this._videoDimension);
     }
 }

@@ -1,10 +1,10 @@
+import gc from "@sg/game-client-base";
 import { _decorator, CCBoolean, Widget } from "cc";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
 import observer from "observer";
-import gc from "@sg/game-client-base";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
-import BetItemCustomize from "./bet-item-customize";
 import { MarbleRoundStore } from "../../features/rounds/marble-round-store";
+import BetItemCustomize from "./bet-item-customize";
 
 const { ccclass, property } = _decorator;
 const { render } = observer;
@@ -64,9 +64,9 @@ export class BetItems extends BetItemsPolygonBase {
 
     @render(gc.Rounds.RoundStore, (store) => store.userBetPercentage)
     handleUserBetPercentage(userBetPercentage: gc.GameServiceMessage.UserBetPercentage) {
-        this.betItemComponents.forEach((betItem) => {
-            const choice = betItem.node.name;
-            betItem.renderUserBetPercentage(userBetPercentage?.[choice] ?? 0);
+        this.betItemComponents?.forEach((betItem) => {
+            const choice = betItem?.node?.name;
+            betItem?.renderUserBetPercentage(userBetPercentage?.[choice] ?? 0);
         });
     }
 }

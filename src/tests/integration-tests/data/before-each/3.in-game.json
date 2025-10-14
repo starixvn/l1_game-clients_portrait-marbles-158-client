@@ -3,14 +3,14 @@
         "name": "In Game",
         "server": {
             "waitForRequest": {
-                "namespace": "/user/colorgame",
+                "namespace": "/user/spaceflight",
                 "event": "inGame",
                 "payload": null
             },
             "response": [
                 {
-                    "namespace": "/user/colorgame",
-                    "event": "ColorGame",
+                    "namespace": "/user/spaceflight",
+                    "event": "Spaceflight",
                     "payload": {
                         "roundId": 2,
                         "gameConfigs": {
@@ -18,35 +18,21 @@
                             "groupId": "61765beed2b6510001f18bd6",
                             "minBet": 1,
                             "maxBet": 2000,
-                            "maxBetPerChoices": {
-                                "yellow": 2000,
-                                "red": 2000,
-                                "pink": 2000,
-                                "white": 2000,
-                                "blue": 2000,
-                                "green": 2000,
-                                "hot": 2000,
-                                "cold": 2000
-                            },
+                            "maxBetPerChoices": {},
                             "chips": ["1", "2", "5", "10", "50", "100", "200", "500", "1000", "2000"],
                             "stakeLevels": [],
-                            "odds": { "single": 2, "double": 3.6, "triple": 6.1, "hot": 1.97, "cold": 1.97 },
-                            "originalOdds": { "single": 2, "double": 3.6, "triple": 6.1, "hot": 1.97, "cold": 1.97 },
+                            "odds": {},
+                            "originalOdds": {},
                             "enableFreeBet": false
                         },
                         "roundHistory": [
                             {
                                 "roundId": 1,
-                                "result": { "dice1": 1, "dice2": 0, "dice3": 4 },
-                                "settlementResult": {
-                                    "yellow": true,
-                                    "red": true,
-                                    "pink": false,
-                                    "white": false,
-                                    "blue": true,
-                                    "green": false,
-                                    "hot": true,
-                                    "cold": false
+                                "result": 2.09,
+                                "md5Result": {
+                                    "hashValue": "5db2d9bb86be26f9870d5e1f9e5ec29d",
+                                    "rawValue": "{2.09}_{#20492716b4713d20ae38de2eec}",
+                                    "roundId": 1
                                 }
                             }
                         ],
@@ -63,9 +49,9 @@
                             "rate": 1
                         },
                         "resultHash": {
-                            "hashValue": "85c0bdc6ee9c1e742dc0963c6ce3dc1d"
+                            "hashValue": "f8950e1ca004470099cafc33e8a439b9"
                         },
-                        "remainingTime": 7,
+                        "remainingTime": 6,
                         "players": {},
                         "chips": {}
                     }
@@ -74,7 +60,7 @@
         },
         "client": {
             "waitUntilMetExpectation": true,
-            "waitExpectationTimeout": 60000,
+            "waitExpectationTimeout": 120000,
             "actual": "Integration.label('balance')",
             "expected": "2,000"
         }

@@ -12,75 +12,51 @@
       "startScene": "cdeb5c24-9ba8-4cab-a306-8a562fd04b39",
       "scenes": [
         {
-          "url": "db://assets/game/game.scene",
-          "uuid": "1d66fe24-7c49-4def-aad0-8da6fcdc7605"
+          "url": "db://assets/game/direct-game.scene",
+          "uuid": "4229fd91-1ded-407f-b130-7b678b820c27",
+          "inBundle": false
         },
         {
           "url": "db://assets/game/splash/splash.scene",
-          "uuid": "cdeb5c24-9ba8-4cab-a306-8a562fd04b39"
+          "uuid": "cdeb5c24-9ba8-4cab-a306-8a562fd04b39",
+          "inBundle": false
         },
         {
           "url": "db://shared-components/session-timeout/session-timeout.scene",
-          "uuid": "1b4ca76d-3ce5-41e6-a47c-0fb1f85bb3f4"
+          "uuid": "1b4ca76d-3ce5-41e6-a47c-0fb1f85bb3f4",
+          "inBundle": false
         },
         {
           "url": "db://shared-components/under-maintenance/under-maintenance.scene",
-          "uuid": "3640a00f-a2ed-4aec-b369-779ede63f5df"
+          "uuid": "3640a00f-a2ed-4aec-b369-779ede63f5df",
+          "inBundle": false
         },
         {
-          "url": "db://shared-components/shared/shared-bundle/fonts/test-font.scene",
-          "uuid": "ef8d96c0-1d8b-4754-bba7-025d93dbdba1",
-          "bundle": "db://shared-components/shared/shared-bundle"
+          "url": "db://assets/game/portrait-game.scene",
+          "uuid": "4a235c28-3b16-4dc4-8ba8-53379c27be8f"
         }
       ],
       "polyfills": {
         "asyncFunctions": true
       },
       "md5Cache": false,
-      "bundleConfigs": [
-        {
-          "name": "main",
-          "root": "",
-          "output": true
-        },
-        {
-          "name": "internal",
-          "root": "",
-          "output": true
-        },
-        {
-          "name": "start-scene",
-          "root": "",
-          "output": true
-        },
-        {
-          "root": "db://shared-components/shared/shared-bundle",
-          "name": "shared-bundle",
-          "output": true
-        },
-        {
-          "root": "db://assets/resources",
-          "name": "resources",
-          "output": true
-        }
-      ],
       "overwriteProjectSettings": {
         "macroConfig": {
           "cleanupImageCache": "off"
         }
-      },
-      "experimentalEraseModules": false
+      }
     },
     "options": {
       "web-mobile": {
-        "orientation": "landscape",
+        "orientation": "portrait",
         "embedWebDebugger": false,
-        "__version__": "1.0.1"
+        "__version__": "1.0.1",
+        "cullEngineAsmJsModule": false
       }
     },
     "taskOptionsMap": {
       "1681353552761": {
-        "orientation": "landscape",
+        "orientation": "portrait",
         "embedWebDebugger": false,
         "__version__": "1.0.1",
         "cullEngineAsmJsModule": false,

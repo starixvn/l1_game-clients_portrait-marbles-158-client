@@ -2,20 +2,21 @@ import { _decorator, assetManager, ImageAsset, log, Node } from "cc";
 import { startGame } from "db://shared-components/shared/scripts/startup";
 import Observer from "observer";
 
+import gc from "@sg/game-client-base";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
-import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
+import { AnimationUtils } from "db://shared-components/shared/utils";
 import "../../../resources/i18n";
+import { BackgroundVideoPlayer } from "../../../scripts/background-video-player";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { GamePhase, PhaseId, TimePointTournament } from "../features/game-phase/game-phase-definitions";
 import { GamePhaseStore } from "../features/game-phase/game-phase-store";
+import { MarbleRoundStore } from "../features/rounds/marble-round-store";
 import { settings } from "../game-settings";
+import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
 import { ChipFlying } from "./chip-flying";
 import { MatchResult } from "./match-result";
 import { NetworkStatus, SystemIndicator } from "./system-indicator";
-import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
-import gc from "@sg/game-client-base";
-import { MarbleRoundStore } from "../features/rounds/marble-round-store";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 
@@ -39,8 +40,14 @@ export default class Game extends GameComponent {
     @property(Node)
     betResultNode: Node = null;
 
+    @property(BackgroundVideoPlayer)
+    backgroundVideoPlayer: BackgroundVideoPlayer = null;
+
     @property(Node)
-    private nodeSystemIndicator: Node = null;
+    nodeSystemIndicator: Node = null;
+
+    @property
+    isPortrait = false;
 
     private currentFinish: gc.GameServiceMessage.Finish = null;
     enableFixHandleFinish = true;
@@ -65,9 +72,14 @@ export default class Game extends GameComponent {
         return this._chipFlying;
     }
 
+    override onHideGame() {
+        this.backgroundVideoPlayer.stop();
+    }
+
     override renderRoundId(roundId: number) {}
 
     protected onEnable(): void {
+        this.initBackgroundImage();
     }
 
     @handle(gc.Rounds.RoundRunningHandlers, (handle) => handle.stopRunner())
@@ -80,6 +92,7 @@ export default class Game extends GameComponent {
             this.systemIndicator.networkStatus = NetworkStatus.DISCONNECTED;
             this.scheduleOnce(() => {
                 this.stopRoundTimeRunner();
+                this.backgroundVideoPlayer.pause();
             }, 3);
         }
     }
@@ -114,8 +127,8 @@ export default class Game extends GameComponent {
 
     initBackgroundImage() {
         const { origin, pathname } = window.location;
-        const imagePath = `${origin}${pathname}splash-resources/background.webp?v=1`;
-
+        const name = this.isPortrait ? "background-portrait.webp" : "background.webp";
+        const imagePath = `${origin}${pathname}splash-resources/${name}?v=7`;
         assetManager.loadRemote<ImageAsset>(imagePath, (err, imageAsset) => {
             if (err) {
                 sentryLogger?.logError(`Failed to load image asset ${imagePath} with error ${err}`);
@@ -136,14 +149,14 @@ export default class Game extends GameComponent {
         try {
             let matchResult = this.betResultNode.getComponentInChildren(MatchResult);
             while (!matchResult) {
-                await FunctionUtils.delay(100);
+                await AnimationUtils.delayTime(100/1000);
                 matchResult = this.betResultNode.getComponentInChildren(MatchResult);
             }
             if (hasAnimation) {
                 await AnimationUtils.delayTime(settings.durations.outro);
-                // await matchResult.show(hasAnimation);
+                await matchResult.show(hasAnimation);
             } else {
-                // matchResult.show(false);
+                matchResult.show(false);
             }
         } catch (e) {
             log("showResult error", e);
@@ -182,7 +195,7 @@ export default class Game extends GameComponent {
             const { result, settlementResult } = lastRound;
             if (firstJoinGameHistory.animationHighlight) {
                 if (roundTime === 0) {
-                    await FunctionUtils.delay(1000);
+                    await AnimationUtils.delayTime(1);
                     if (this.currentFinish) {
                         return;
                     }

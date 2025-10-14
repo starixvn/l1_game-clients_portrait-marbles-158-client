@@ -1,8 +1,9 @@
-import { AudioClip } from "cc";
+import gc from "@sg/game-client-base";
+import { AudioClip, find } from "cc";
+import { AudioObserver } from "db://shared-components/shared/common-components/audio-observer";
 import { bundleManager } from "../../../shared/common-components/bundle-manager/bundle-manager";
 import { audioManager } from "../scripts/audio-manager";
 import { TAudioValue } from "../scripts/component/audio-container";
-import gc from "@sg/game-client-base";
 
 interface AudioInfo {
     bundle: string;
@@ -22,24 +23,12 @@ export const getAudioInfo = (audioValue: TAudioValue, key: string): AudioInfo =>
     return { bundle, path };
 };
 
-export const getAudioClip = async (bundle: string, path: string): Promise<AudioClip | null> => {
-    try {
-        const loadedClip = await bundleManager.loadAssetsFromBundle(bundle, path, AudioClip, null);
-        return loadedClip as AudioClip;
-    } catch (error) {
-        console.error(`Failed to load audio clip from bundle: ${error}`);
-        return null;
-    }
+export const getAudioClip = (bundle: string, path: string): Promise<AudioClip | null> => {
+    return bundleManager.loadAssetsFromBundle<AudioClip>(bundle, path, AudioClip, null);
 };
 
-export const getRemoteAudioClip = async (url: string): Promise<AudioClip | null> => {
-    try {
-        const loadedClip = await bundleManager.getRemoteAsset<AudioClip>(url);
-        return loadedClip;
-    } catch (error) {
-        console.error(`Failed to load audio clip from bundle: ${error}`);
-        return null;
-    }
+export const getRemoteAudioClip = (url: string): Promise<AudioClip | null> => {
+    return bundleManager.getRemoteAsset<AudioClip>(url);
 };
 
 export const getGameAudioUrl = (audioValue: TAudioValue, soundId: string): string => {
@@ -120,4 +109,29 @@ const loadAudioClip = async (soundId: string, audioValue: any): Promise<AudioCli
     }
 
     return null;
+};
+
+export const getAudioObserver = () => {
+    const audioObserver = find("Canvas").getComponentsInChildren(AudioObserver);
+    return audioObserver[0];
+};
+
+export const playClick = () => {
+    const audioObserver = getAudioObserver();
+    audioObserver?.playClick();
+};
+
+export const playSFX = (soundId: string) => {
+    const audioObserver = getAudioObserver();
+    audioObserver?.playSFX(soundId);
+};
+
+export const playStoppableSFX = (soundId: string, loop: boolean) => {
+    const audioObserver = getAudioObserver();
+    audioObserver?.playStoppableSFX(soundId, loop);
+};
+
+export const stopStoppableSFX = (soundId: string) => {
+    const audioObserver = getAudioObserver();
+    audioObserver?.stopStoppableSFX(soundId);
 };

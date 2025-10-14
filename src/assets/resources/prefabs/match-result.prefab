@@ -40,7 +40,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 48.00000000000006,
+      "y": -63.5,
       "z": 0
     },
     "_lrot": {
@@ -163,7 +163,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -4,
       "z": 0
     },
     "_lrot": {
@@ -216,7 +216,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -300,
+      "x": -272,
       "y": 0,
       "z": 0
     },
@@ -272,8 +272,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 5,
+      "y": 6,
       "z": 0
     },
     "_lrot": {
@@ -285,8 +285,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.55,
-      "y": 0.55,
+      "x": 0.95,
+      "y": 0.95,
       "z": 1
     },
     "_mobility": 0,
@@ -603,7 +603,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -95,
+      "y": -104,
       "z": 0
     },
     "_lrot": {
@@ -644,7 +644,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 210.08203125,
-      "height": 44.1
+      "height": 32.76
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -681,12 +681,12 @@
     },
     "_string": "Dynamite Zagreb",
     "_horizontalAlign": 1,
-    "_verticalAlign": 1,
+    "_verticalAlign": 0,
     "_actualFontSize": 24,
     "_fontSize": 24,
     "_fontFamily": "Arial",
-    "_lineHeight": 35,
-    "_overflow": 0,
+    "_lineHeight": 26,
+    "_overflow": 3,
     "_enableWrapText": true,
     "_font": {
       "__uuid__": "41a12541-a4db-4259-b803-4c477054c858",
@@ -834,7 +834,7 @@
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
-    "defaultAnimation": "penalty on show",
+    "defaultAnimation": "<None>",
     "_premultipliedAlpha": true,
     "_timeScale": 1,
     "_preCacheMode": 0,
@@ -926,7 +926,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 105,
+      "y": 103,
       "z": 0
     },
     "_lrot": {
@@ -3191,13 +3191,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 605.530029296875,
-      "height": 230.41000366210938
+      "width": 603.530029296875,
+      "height": 231.67999267578125
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5045166799650519,
-      "y": 0.5993229206332388
+      "x": 0.5045316475051769,
+      "y": 0.6015193586671742
     },
     "_id": ""
   },
@@ -3303,7 +3303,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 300,
+      "x": 272,
       "y": 0,
       "z": 0
     },
@@ -3372,8 +3372,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.55,
-      "y": 0.55,
+      "x": 0.95,
+      "y": 0.95,
       "z": 1
     },
     "_mobility": 0,
@@ -3690,7 +3690,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -95,
+      "y": -104,
       "z": 0
     },
     "_lrot": {
@@ -3731,7 +3731,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 210.08203125,
-      "height": 44.1
+      "height": 32.76
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3768,12 +3768,12 @@
     },
     "_string": "Dynamite Zagreb",
     "_horizontalAlign": 1,
-    "_verticalAlign": 1,
+    "_verticalAlign": 0,
     "_actualFontSize": 24,
     "_fontSize": 24,
     "_fontFamily": "Arial",
-    "_lineHeight": 35,
-    "_overflow": 0,
+    "_lineHeight": 26,
+    "_overflow": 3,
     "_enableWrapText": true,
     "_font": {
       "__uuid__": "41a12541-a4db-4259-b803-4c477054c858",
@@ -4163,7 +4163,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 345,
+    "_top": 493.5,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -4230,7 +4230,6 @@
       "__id__": 0
     },
     "fileId": "56obReeEZFQaFXnLu8oTFc",
-    "instance": null,
     "targetOverrides": null
   }
 ]

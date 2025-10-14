@@ -41,6 +41,7 @@ export const languages = {
         "hot": "Hot",
         "invalid_bet": "Cược không hợp lệ",
         "invalid_deal_hands": "Số lượng tay bài không hợp lệ.",
+        "invalid_free_spin": "Lượt quay Free Spin không hợp lệ.",
         "invalid_position": "Vị trí tay bài không đúng",
         "invalid_stake_level": "Mức cược không hợp lệ.",
         "join_game": "Vào Bàn",
@@ -58,7 +59,7 @@ export const languages = {
         "message_account_notexist_place_bet": "Game %{gameName} (#%{gameRoundId})\n\nĐã xảy ra lỗi. Vui lòng liên hệ bộ phận CSKH để biết chi tiết, cảm ơn bạn. Đặt cược thất bại! (%{errorCode})",
         "message_account_signout": "Tài khoản bị đăng xuất do có người khác đăng nhập vào tài khoản này.",
         "message_account_suspended": "Game %{gameName} (#%{gameRoundId})\n\nTài khoản đã bị treo. Vui lòng liên hệ với cấp trên để biết chi tiết, cảm ơn bạn. Đặt cược thất bại! (%{errorCode})",
-        "message_balanced_betting_pool": "Nhà Cái Cân Cửa.",
+        "message_balanced_betting_pool": "Nhà Cái Cân Cửa",
         "message_bet_limit_change": "Hạn mức cược của bạn vừa được cập nhật.",
         "message_cannot_bet": "Không thể đặt cược vào lúc này.",
         "message_close_account": "Tài khoản đã bị đóng. Phiên đăng nhập sẽ hết hạn sau 10 giây. Vui lòng liên hệ với cấp trên để biết thêm chi tiết. (%{errorCode})",
@@ -204,7 +205,35 @@ export const languages = {
         "under_maintenance_time": "Thời gian bảo trì từ %{startTime} đến %{endTime} (GMT+8).",
         "win": "Thắng",
         "win_loss": "Thắng Thua",
-        "you_reach_max_win": "Bạn Đã Đạt Mức Tiền Thắng Tối Đa"
+        "you_reach_max_win": "Bạn Đã Đạt Mức Tiền Thắng Tối Đa",
+        "game_category_new_releases": "Mới Ra Mắt",
+        "message_invalid_payline": "Dòng cược không hợp lệ.",
+        "message_invalid_bonus": "Lượt chơi Bonus không hợp lệ.",
+        "message_invalid_jackpot": "Lượt chơi Jackpot không hợp lệ.",
+        "message_opened_jackpot": "Jackpot thưởng không hợp lệ.",
+        "message_opened_bonus": "Bonus thưởng không hợp lệ.",
+        "invalid_payline": "invalid_payline",
+        "invalid_bonus": "invalid_bonus",
+        "opened_bonus": "opened_bonus",
+        "invalid_jackpot": "invalid_jackpot",
+        "opened_jackpot": "opened_jackpot",
+        "invalid_hand_id": "ID của tay bài này không đúng.",
+        "hand_already_splitted": "Tay bài này đã được tách bài.",
+        "cant_split_child_hand": " Không thể tách bài ở tụ con.",
+        "cant_double_hand": "Không thể gấp đôi tiền cược.",
+        "cant_hit": "Không thể rút thêm bài.",
+        "cards_not_equal": "Hai lá bài không cùng giá trị.",
+        "hand_is_stand": "Tay bài đã dừng",
+        "cant_split_hand": "Không thể tách bài ở tụ con.",
+        "bet_type": "Loại Cược",
+        "no_data": null,
+        "all": null,
+        "sabaplay_tagline": "Nâng Tầm Cuộc Chơi",
+        "message_loading": "Loading",
+        "pf_header_server_seed_sha256_single": "Server Seed SHA256",
+        "pf_ header_merge_client_seed_single": "Kết hợp Client Seed ",
+        "message_error_claim_expired": "Thời gian nhận thưởng đã hết. (%{errorCode}) ",
+        "player": "Người Chơi"
     },
     "MarbleFootball": {
         "1st_half": "Hiệp 1",
@@ -305,7 +334,7 @@ export const languages = {
         "glossary_overLive": "Tài 4.5 (Live)",
         "glossary_under": "Xỉu 4.5",
         "glossary_underLive": "Xỉu 4.5 (Live)",
-        "header_betlimit": "Hạn mức cược",
+        "header_betlimit": "Giới Hạn Cược (Min-Max)",
         "header_match": "Trận",
         "live": "Live",
         "pre_match": "Trước trận",
@@ -336,5 +365,5 @@ export const languages = {
 if (!win.languages) {
     win.languages = {};
 }
-                          
+
 win.languages.vi = languages;

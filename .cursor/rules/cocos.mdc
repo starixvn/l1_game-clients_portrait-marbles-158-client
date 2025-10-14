@@ -1,0 +1,177 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# 🎮 Cocos Creator TypeScript Game Development Rules
+
+**Language:** TypeScript  
+**Engine:** Cocos Creator (v3.x+)  
+**Tags:** `cocos-creator`, `game-dev`, `typescript`
+
+---
+
+## 📁 Project Structure
+
+Organize your code under the `assets/scripts` folder:
+
+```
+assets/
+├── scripts/
+│   ├── managers/         # Game managers (e.g., AudioManager, GameManager)
+│   ├── components/       # Custom UI/game components
+│   ├── models/           # Data models and configs
+│   ├── scenes/           # Scene-specific logic
+│   ├── utils/            # Utility functions
+│   └── constants/        # Static data and enums
+resources/                # Audio, images, prefabs, etc.
+```
+
+---
+
+## 💡 General Principles
+
+- Use **TypeScript** exclusively.
+- One class per file; file name using lowercase and separator by "-", don't use ".".
+- Prefer **composition over inheritance** using components.
+- Use **PascalCase** for class names and **camelCase** for variables.
+- Avoid `update()` if not necessary — use events or tweens.
+- Separate UI logic from core game logic.
+
+---
+
+## ⚙️ Components
+
+- Decorate properties with `@property` to expose them in the editor.
+- Keep each component focused on a single role.
+- Prefer `start()` over `onLoad()` for logic that depends on node hierarchy being initialized.
+- Use `@executionOrder` to control component execution timing if needed.
+
+---
+
+## 🧠 Managers
+
+- Place singleton managers in `managers/`. Examples: AudioManager, UIManager, PoolManager.
+- Use static `instance` pattern or ServiceLocator for cleaner access.
+- Keep managers lightweight and modular.
+
+```ts
+@ccclass('AudioManager')
+export class AudioManager extends Component {
+  static instance: AudioManager;
+
+  onLoad() {
+    AudioManager.instance = this;
+  }
+}
+```
+
+---
+
+## 📦 Resources and Prefabs
+
+- Use `resources/` folder for any dynamic assets.
+- Use `@property({ type: Prefab })` for drag-and-drop assignment.
+- For dynamic loading: use `resources.load()` and handle caching manually.
+
+---
+
+## 🛠️ Coding Style
+
+- Avoid `any`; always use interfaces and types.
+- Mark non-editable fields as `private` or `protected`.
+- Use enums for game states, object types, directions, etc.
+
+```ts
+enum GameState {
+  Init,
+  Playing,
+  GameOver,
+}
+```
+
+- Use utility functions in `utils/` to avoid repetition.
+
+---
+
+## 🧪 Testing and Debugging
+
+- Wrap debug-only code with `if (DEBUG)` or use a global `isDebug` flag.
+- Create a debug overlay with toggles and info panels.
+- Use test prefabs and isolated scenes for feature testing.
+
+---
+
+## 🧼 Miscellaneous
+
+- Use `node.active = false` to hide nodes, not `opacity = 0`.
+- Reset tween/animation state before reusing a node.
+- Use object pools for frequently reused nodes (e.g., bullets, effects).
+
+---
+
+## 🚀 Performance Tips
+
+- Avoid deep node trees; flatten when possible.
+- Use `instantiateAsync()` for smoother prefab loading.
+- Avoid memory leaks by cleaning up listeners in `onDisable()` or `onDestroy()`.
+- Reuse objects via object pools (PoolManager).
+
+---
+
+## 🎮 Input Handling
+
+- Centralize input via `InputManager`.
+- Avoid attaching touch listeners directly in many components.
+- Support both desktop and mobile input.
+
+---
+
+## 📐 UI Layout & Resolution
+
+- Use `Widget` and `Layout` for responsive UI.
+- Test game on multiple resolutions in Cocos Preview.
+- Use fixed design resolution (e.g., 1280x720) and scale appropriately.
+
+---
+
+## 🧩 Scene & Node Naming
+
+- Use clear, consistent naming: `btnPlay`, `lblScore`, `panelSettings`.
+- Avoid default names like `New Node`, `Sprite`.
+- Group nodes logically in hierarchy: UI, Gameplay, FX, etc.
+
+---
+
+## 🔗 Communication Between Components
+
+- Prefer the event system (`Node.emit`, `EventTarget`) over direct method calls.
+- Use custom events to decouple systems.
+- Avoid tight coupling between scripts.
+
+---
+
+## 👥 Team Collaboration
+
+- Lock and version scenes/prefabs carefully — only one person edits a prefab at a time.
+- Use `git-lfs` for large binary assets (audio, textures).
+- Use code reviews to enforce consistent architecture and standards.
+
+---
+
+## 🧭 Version Control
+
+- Always commit `.meta` files and `settings/`.
+- Exclude `library/`, `temp/`, and `local/` from Git.
+- Write clear commit messages (e.g., `feat: add pooling system`).
+
+---
+
+## Mobx 
+- Using Mobx for creating store class.
+- Import mobx MUST import by: import * as mobx from "mobx";
+- Stores and handlers must using inject and injectable from inversify, MUST import by: import inversify from "inversify";
+- Components use @render and @handle from Observer, import Observer from "observer".
+- If need to use game client base, then : import gc from "@sg/game-client-base".
+

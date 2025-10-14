@@ -74,18 +74,33 @@ export namespace ComponentUtils {
         anchorY?: number;
     };
     export const setNodeTransform = (node: Node, tranformData: TransformData) => {
+        if (!node || !node.isValid) {
+            return;
+        }
         const uiTransform = node.getComponent(UITransform);
-        if (uiTransform) {
+        if (uiTransform && uiTransform.isValid) {
             Object.keys(tranformData).forEach((key) => {
                 uiTransform[key] = tranformData[key];
             });
         }
     };
 
-    export const setNodeColor = (node: Node, color: string) => {
+    export const setNodeColor = (node: Node, color: string | Color) => {
         const renderer = node.getComponent(UIRenderer);
         if (renderer) {
-            renderer.color = new Color(color);
+            renderer.color = color instanceof Color ? color : new Color(color);
         }
+    };
+
+    export const getUiOpacity = (node: Node) => {
+        let uiOpacity = node.getComponent(UIOpacity);
+        if (!uiOpacity) {
+            uiOpacity = node.addComponent(UIOpacity);
+        }
+        return uiOpacity;
+    };
+
+    export const setOpacityNode = (node: Node, opacity: number) => {
+        getUiOpacity(node).opacity = Math.max(1, opacity);
     };
 }

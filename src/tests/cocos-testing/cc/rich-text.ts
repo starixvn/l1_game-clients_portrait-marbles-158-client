@@ -5,4 +5,5 @@ export class RichText extends Component {
     fontSize = 0;
     lineHeight = 0;
     maxWidth = 0;
+    fontColor: any;
 }

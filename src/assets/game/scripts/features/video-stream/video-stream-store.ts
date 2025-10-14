@@ -8,6 +8,7 @@ const { injectable } = inversify;
 export type StreamingVideo = {
     videoName: string;
     time: number;
+    isFirstHalf: boolean;
 };
 
 type VideoData = {
@@ -80,10 +81,13 @@ export class VideoStreamStore {
             return;
         }
 
-        this._currentVideo = {
-            videoName: videoData.videoName,
-            time: currentVideoTime,
-        };
+        if (this._currentVideo.videoName !== videoData.videoName || this._currentVideo.isFirstHalf !== this.isFirstHalf) {
+            this._currentVideo = {
+                videoName: videoData.videoName,
+                time: currentVideoTime,
+                isFirstHalf: this._isFirstHalf,
+            };
+        }
 
         this.updateCurrentScores(videoData, currentVideoTime);
     }
@@ -95,14 +99,14 @@ export class VideoStreamStore {
         let time = currentMatchTime;
 
         if (time >= settings.durations.halfDuration) {
-            homeScore = this._videoResult.video?.split("H").length - 1;
-            awayScore = this._videoResult.video?.split("A").length - 1;
+            homeScore = this._videoResult.firstHalf?.split("H").length - 1;
+            awayScore = this._videoResult.firstHalf?.split("A").length - 1;
             time -= settings.durations.halfDuration;
         }
 
         if (time >= settings.durations.halfDuration) {
-            homeScore += this._videoResult.video?.split("H").length - 1;
-            awayScore += this._videoResult.video?.split("A").length - 1;
+            homeScore += this._videoResult.secondHalf?.split("H").length - 1;
+            awayScore += this._videoResult.secondHalf?.split("A").length - 1;
             time -= settings.durations.halfDuration;
         }
 
@@ -139,9 +143,11 @@ export class VideoStreamStore {
     }
 
     private getVideoData(): VideoData {
-        const videoName = this._videoResult.video;
-        const videoTimeline = this._videoResult.timeline;
-        const videoResult = this._videoResult.result;
+        const isSecondHalf = this._isSecondHalf;
+
+        const videoName = isSecondHalf ? this._videoResult.secondHalfVideo : this._videoResult.firstHalfVideo;
+        const videoTimeline = isSecondHalf ? this._videoResult.secondHalfTimeline : this._videoResult.firstHalfTimeline;
+        const videoResult = isSecondHalf ? this._videoResult.secondHalf : this._videoResult.firstHalf;
 
         if (!videoTimeline || !videoResult) {
             return null;
@@ -164,7 +170,8 @@ export class VideoStreamStore {
             return videoTime <= settings.durations.videoDuration ? videoTime : -1;
         }
 
-        const streamingSecondHalfVideoTime = settings.points.streamingSecondHalfVideo;
+        const streamingSecondHalfVideoTime =
+            settings.points.streamingFirstHalfVideo - settings.durations.videoDuration - settings.durations.breakTime;
 
         if (roundTime <= streamingSecondHalfVideoTime && roundTime >= 0) {
             return streamingSecondHalfVideoTime - roundTime;
@@ -187,12 +194,9 @@ export class VideoStreamStore {
 
         if (roundTime <= settings.points.streamingSecondHalfVideo && roundTime >= 0) {
             const secondHalfTime = settings.points.streamingSecondHalfVideo - roundTime;
-            const matchTime =
-                secondHalfTime < settings.durations.halfDuration
-                    ? secondHalfTime + settings.durations.halfDuration
-                    : settings.durations.halfDuration * 2;
-
-            return matchTime;
+            return secondHalfTime < settings.durations.halfDuration
+                ? secondHalfTime + settings.durations.halfDuration
+                : settings.durations.halfDuration * 2;
         }
 
         return 0;

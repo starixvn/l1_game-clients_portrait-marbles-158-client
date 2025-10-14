@@ -5,18 +5,20 @@ window.envConfig = {
         localhost: "lumigame.com",
     },
     ssl: true,
-    subDomain: "l1-proxy3",
+    subDomain: "l1-proxy1",
     env: "LOCAL",
-    subGuideDomain: "l1-guide-3",
+    subGuideDomain: "l1-guide-1",
     SGConnectSubDomain: "connectsite",
     enableMsgpackParserAllGames: false,
     enableMsgpackParserOnNotification: false,
     websocket: {
-        proxyPath: "rocketx",
-        route: "rocketx",
+        proxyPath: "sedie",
+        route: "sedie",
     },
+    mainObserverNamespace: "SeDie",
     tolgeeUrl: "",
-    backgroundLocalized: true,
+    storagePrefixKey: "Sedie",
+    backgroundNoTranslate: true,
 };
 
 console.error("Wrong mapping config, please check your deployment");
