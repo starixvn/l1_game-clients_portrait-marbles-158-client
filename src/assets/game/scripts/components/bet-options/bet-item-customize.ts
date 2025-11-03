@@ -3,8 +3,7 @@ import BetItem from "db://shared-components/game/bets/scripts/components/bet-ite
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
-import { GamePhase, PhaseId } from "../../features/game-phase/game-phase-definitions";
-import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
+import { MarbleBetStore } from "../../features/bet/bet-store";
 
 const { property, ccclass } = _decorator;
 const { render } = Observer;
@@ -24,30 +23,27 @@ export default class BetItemCustomize extends BetItem {
     blockIcon: Node = null;
 
     onLoad(): void {
-        this.setBlockIconVisibility(false);
+        this.updateStatusLabelOdds(true);
         this.hideOddsIndicators();
         super.onLoad();
+    }
+
+    @render(MarbleBetStore, (store) => store.allowBet)
+    renderAllowBet(allowBet: boolean) {
+        this.toggleBetOption(allowBet);
     }
 
     @render(OddsStore, (store) => store.oddsWithConfig)
     renderIncreaseOdds(oddsWithConfig: OddsWithConfig) {
         const betChoice = this.betChoice;
-        if (!this.isLiveBet(betChoice)) {
-            this.hideOddsIndicators();
-            return;
-        }
 
         const { odds, deltaOdds } = oddsWithConfig;
-        if (+odds[betChoice] <= 0) {
+        if (odds[betChoice] <= 0) {
             return;
         }
 
-        const deltaOdd = deltaOdds[betChoice] || 0;
+        const deltaOdd = deltaOdds[betChoice] ?? 0;
         this.updateOddsIndicators(deltaOdd);
-    }
-
-    private isLiveBet(betChoice: string): boolean {
-        return betChoice.includes("Live");
     }
 
     private hideOddsIndicators(): void {
@@ -56,6 +52,11 @@ export default class BetItemCustomize extends BetItem {
     }
 
     private updateOddsIndicators(deltaOdd: number): void {
+        if (deltaOdd === 0) {
+            ComponentUtils.setOpacityNode(this.increaseOdd, 1);
+            ComponentUtils.setOpacityNode(this.decreaseOdd, 1);
+            return;
+        }
         const isIncrease = deltaOdd > 0;
         ComponentUtils.setOpacityNode(this.increaseOdd, isIncrease ? 255 : 1);
         ComponentUtils.setOpacityNode(this.decreaseOdd, isIncrease ? 1 : 255);
@@ -69,18 +70,6 @@ export default class BetItemCustomize extends BetItem {
         this.blockIcon && (this.blockIcon.active = status);
     }
 
-    @render(GamePhaseStore, (store) => store.enterPhase)
-    renderExitPhase(phase: GamePhase) {
-        if (!phase) {
-            return;
-        }
-
-        if (phase.id === PhaseId.Halftime || phase.id === PhaseId.Tournament) {
-            this.setBlockIconVisibility(false);
-            this.updateStatusLabelOdds(true);
-        }
-    }
-
     blockBetOption() {
         this.setBlockIconVisibility(true);
         this.setDisabledVisibility(true);
@@ -90,5 +79,10 @@ export default class BetItemCustomize extends BetItem {
 
     updateStatusLabelOdds(status: boolean) {
         this.lblOdds.node.active = status;
+    }
+
+    private toggleBetOption(allowBet: boolean) {
+        this.setDisabledVisibility(!allowBet);
+        this.setBlockIconVisibility(!allowBet);
     }
 }

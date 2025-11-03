@@ -9,24 +9,24 @@ declare global {
 
 const defaultConfig: gc.Configs.SiteConfigs = {
     isDev: false,
-    systemType: "VG",
+    systemType: "SG",
     serverDomainMapper: {
         localhost: "lumigame.com",
     },
     ssl: true,
-    subDomain: "l2-proxy",
-    env: "LOCAL0",
-    subGuideDomain: "hd-guide",
+    subDomain: "l1-proxy3",
+    env: "DEV",
+    subGuideDomain: "l1-guide-3",
     enableMsgpackParserOnNotification: false,
     enableMsgpackParserAllGames: false,
     websocket: {
-        proxyPath: "marblefootball2",
-        route: "marblefootball2",
+        proxyPath: "soccermarble",
+        route: "soccermarble",
     },
     tolgeeUrl: "",
-    storagePrefixKey: "portrait_marbleFootball2",
+    storagePrefixKey: "portrait_soccerMarble",
     sentry: {
-        dsn: "https://9c999f9b51e3b4543cb160b946b5bcbe@sentry-k8s.lumigame.com/30",
+        dsn: "https://289e71b8cf3992d7e184e21f63aed0b5@sentry-k8s.lumigame.com/29",
         browserUrl: "https://browser.sentry-cdn.com/10.5.0/bundle.min.js",
         urlHash: "sha384-SAsRvjfAFRX3iwi3MG6ToeZNJVpHcRXKcITfFVLQipWK3uQ8SakuVmHDoSR3YNmJ",
         ignoreErrors: [],

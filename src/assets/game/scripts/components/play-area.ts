@@ -49,11 +49,10 @@ export class PlayArea extends ObserverComponent {
         this.setupStaticTargets();
         super.onLoad();
 
-        this.betChoicesContainer.swapBetsButton.on(Button.EventType.CLICK, this.swapBets, this);
     }
 
     private initBetChoicesContainer() {
-        this.betChoicesParentContainer = this.betChoicesContainer?.betChoicesPrev?.parent;
+        this.betChoicesParentContainer = this.betChoicesContainer?.betChoices?.parent;
     }
 
     protected setupStaticTargets() {
@@ -111,13 +110,12 @@ export class PlayArea extends ObserverComponent {
 
     protected getShowBetChoicesAnimConfig(): { nodes: Node[]; configs: any[] } {
         return {
-            nodes: [this.scoreBoard, this.chips, this.hiddenPlayersNode, this.teamScore, this.betChoicesContainer.swapBetsButton],
+            nodes: [this.scoreBoard, this.chips, this.hiddenPlayersNode, this.teamScore],
             configs: [
                 this.tweenConfigs.fadeInOut.in,
                 this.tweenConfigs.fadeInOut.in,
                 this.tweenConfigs.hiddenPlayersFlyUpBet.in,
                 this.tweenConfigs.fadeInOut.in,
-                this.tweenConfigs.swapButtonWhenBet.in,
             ],
         };
     }
@@ -132,13 +130,12 @@ export class PlayArea extends ObserverComponent {
 
     protected getShowVideoAnimConfig(): { nodes: Node[]; configs: any[] } {
         return {
-            nodes: [this.teamScore, this.scoreBoard, this.chips, this.hiddenPlayersNode, this.betChoicesContainer.swapBetsButton],
+            nodes: [this.teamScore, this.scoreBoard, this.chips, this.hiddenPlayersNode],
             configs: [
                 this.tweenConfigs.fadeInOut.in,
                 this.tweenConfigs.fadeInOut.out,
                 this.tweenConfigs.fadeInOut.out,
                 this.tweenConfigs.fadeInOut.out,
-                this.tweenConfigs.swapButtonWhenLive.in,
             ],
         };
     }
@@ -199,14 +196,5 @@ export class PlayArea extends ObserverComponent {
 
         const target = { target: this.betChoicesParentContainer, key: "betChoiceZoomInOut" as TweenKey };
         AnimationHelper.setStaticTarget(target.target, this.tweenConfigs[target.key][direction]);
-    }
-
-    @handle(gc.Audios.AudioHandler, (handle) => handle.playSFX(gc.Audios.AudioIds.CLICK))
-    swapBets() {
-        if (this.phaseShowBetChoices === "live" || this.phasePreviewBets === "live") {
-            const isSwapBets = this.betChoicesContainer.getIsSwapBets();
-            this.betChoicesContainer.setIsSwapBets(!isSwapBets);
-            this.betChoicesContainer.setEnableBetChoices("live");
-        }
     }
 }

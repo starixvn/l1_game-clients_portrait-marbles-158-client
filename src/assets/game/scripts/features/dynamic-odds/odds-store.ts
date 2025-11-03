@@ -17,7 +17,7 @@ export class OddsStore {
     constructor() {
         mobx.makeAutoObservable(this);
     }
-
+    private _oldOdds = {};
     private _odds = {};
 
     get odds() {
@@ -25,14 +25,12 @@ export class OddsStore {
     }
 
     set odds(odds: Record<string, number>) {
-        this._odds = {
-            ...this._odds,
-            ...odds,
-        };
+        this._oldOdds = this._odds ?? odds;
+        this._odds = odds;
     }
 
     get oddsWithConfig(): OddsWithConfig {
-        const deltaOdds = this.deltaForAllBetOptions(this._odds);
+        const deltaOdds = this.deltaForAllBetOptions(this._oldOdds, this._odds);
 
         return {
             odds: this._odds,
@@ -41,11 +39,10 @@ export class OddsStore {
         };
     }
 
-    deltaForAllBetOptions(odds: Record<string, number>) {
-        const betOptionNames = ["away", "draw", "home", "draw4", "even", "odd", "over", "under"];
+    deltaForAllBetOptions(odds: Record<string, number>, oldOdds: Record<string, number>) {
         const deltaOdds = {};
-        for (const betOptionName of betOptionNames) {
-            deltaOdds[`${betOptionName}Live`] = this.deltaOdds(odds[`${betOptionName}`] || 0, odds[`${betOptionName}Live`] || 0);
+        for (const betOptionName of Object.keys(odds)) {
+            deltaOdds[`${betOptionName}`] = this.deltaOdds(odds[`${betOptionName}`] || 0, oldOdds[`${betOptionName}`] || 0);
         }
         return deltaOdds;
     }

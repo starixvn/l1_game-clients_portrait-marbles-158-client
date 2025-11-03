@@ -11,6 +11,7 @@ import { GamePhaseStore } from "../features/game-phase/game-phase-store";
 import { ChipsPreviewStore } from "../features/preview-bets/chips-preview-store";
 import { BetChoicesContainer } from "./bet-options/bet-choices-container";
 import { BetItemsFinal } from "./bet-options/bet-items-final";
+import { BetItems } from "./bet-options/bet-items";
 
 const { ccclass, property } = _decorator;
 const { handle, render } = Observer;
@@ -28,27 +29,18 @@ export class ChipFlying extends ChipFlyingShared {
     betChoicesContainer: BetChoicesContainer = null;
 
     @property(Node)
-    chipContainerPrev: Node = null;
+    chipContainer: Node = null;
 
-    @property(Node)
-    chipContainerLive: Node = null;
-
-    @property(Node)
-    chipContainerFinal: Node = null;
-
-    chipContainers: Node[] = [];
     protected delayGetChips = 0.5;
 
     chipByChipComponents: Record<string, Node> = {};
 
     onLoad(): void {
-        this.chipContainers = [this.chipContainerPrev, this.chipContainerLive, this.chipContainerFinal];
-
         super.onLoad();
     }
 
     protected start(): void {
-        this.chipContainers.forEach((container) => (container.active = false));
+        this.chipContainer.active = true;
     }
 
     actionPayChips(animated: boolean) {
@@ -179,19 +171,6 @@ export class ChipFlying extends ChipFlyingShared {
         return id;
     }
 
-    moveChipsToFinalContainer(chipContainer: Node) {
-        if (!chipContainer) {
-            return;
-        }
-
-        const children = [...chipContainer.children];
-        chipContainer.setPosition(0, 0, 0);
-        for (const child of children) {
-            this.chipContainerFinal.addChild(child);
-            chipContainer.removeChild(child);
-        }
-    }
-
     payChipsWhenReceivingSettlementResult(settlementResult: gc.GameServiceMessage.TSettlementResult) {}
 
     @render(
@@ -215,18 +194,7 @@ export class ChipFlying extends ChipFlyingShared {
         if (this.node.activeInHierarchy) {
             this.startShowResultAnimation = true;
         }
-        const { settlementResult, boundChipsFirstHalf, boundChipsSecondHalf } = chipsSettlement;
-
-        if (boundChipsFirstHalf) {
-            this.moveChipsToFinalContainer(this.chipContainerPrev);
-        }
-        if (boundChipsSecondHalf) {
-            this.moveChipsToFinalContainer(this.chipContainerLive);
-        }
-
-        if (boundChipsFirstHalf && boundChipsSecondHalf) {
-            return;
-        }
+        const { settlementResult } = chipsSettlement;
 
         this.payChips(settlementResult);
     }
@@ -236,8 +204,8 @@ export class ChipFlying extends ChipFlyingShared {
             return;
         }
 
-        const betItemsFinal = this.betChoicesContainer.betChoicesFinal.getComponent(BetItemsFinal);
-        this.updateBetState(this.chipContainerFinal, betItemsFinal);
+        const betItems = this.betChoicesContainer.getComponent(BetItems);
+        this.updateBetState(this.chipContainer, betItems);
         this.betItems?.updateSettlementResult(settlementResult);
         if (!this.node.activeInHierarchy) {
             this.actionPayChips(false);
@@ -251,27 +219,6 @@ export class ChipFlying extends ChipFlyingShared {
         }
     }
 
-    @render(GamePhaseStore, (store) => store.enterPhase)
-    renderEnterPhase(phase: GamePhase) {
-        if (!phase) {
-            return;
-        }
-
-        if (phase.id === PhaseId.Settlement) {
-            this.updateBetState(this.chipContainerFinal, this.betChoicesContainer.getBetItemsFinal());
-            return;
-        }
-
-        if (phase.id === PhaseId.ShowBetChoicesPrev) {
-            this.updateBetState(this.chipContainerPrev, this.betChoicesContainer.getBetItemsPrevMath());
-            return;
-        }
-
-        if (phase.id === PhaseId.ShowBetChoicesLive) {
-            this.updateBetState(this.chipContainerLive, this.betChoicesContainer.getBetItemsLive());
-        }
-    }
-
     private updateBetState(container: any, betItems: any = []) {
         this.betItems = betItems;
         this.inActiveAllChipContainers();
@@ -282,28 +229,14 @@ export class ChipFlying extends ChipFlyingShared {
     @render(Chips.ChipStore, (store) => store.clearAllChips, { fireImmediately: false })
     clearChipsForAllBetItems() {
         this.chipStorage = {};
-        this.chipContainers.forEach((container) => {
-            container.destroyAllChildren();
-        });
+        this.chipContainer.destroyAllChildren();
     }
 
     protected inActiveAllChipContainers() {
-        this.chipContainers?.forEach((container) => {
-            container && (container.active = false);
-        });
+        this.chipContainer && (this.chipContainer.active = false);
     }
 
     override async flyChipsWhenJoinGame(chipsByMainPlayerRate: Record<string, any>) {}
-
-    @render(ChipsPreviewStore, (store) => store.firstHalfChips)
-    bindChipsFirstHalf(chipsByMainPlayerRate: Record<string, any>) {
-        this.bindChipsWhenJoinGame(chipsByMainPlayerRate, this.chipContainerPrev);
-    }
-
-    @render(ChipsPreviewStore, (store) => store.secondHalfChips)
-    bindChipsSecondHalf(chipsByMainPlayerRate: Record<string, any>) {
-        this.bindChipsWhenJoinGame(chipsByMainPlayerRate, this.chipContainerLive);
-    }
 
     async bindChipsWhenJoinGame(chipsByMainPlayerRate: Record<string, any>, chipContainer: Node) {
         if (Object.keys(chipsByMainPlayerRate).length === 0) {
@@ -323,43 +256,10 @@ export class ChipFlying extends ChipFlyingShared {
         }
     }
 
-    @render(ChipsPreviewStore, (store) => store.finalChips)
-    protected async handleAddChipsWhenJoinFinal(chipsByMainPlayerRate: Record<string, any>) {
-        if (
-            !this ||
-            Object.keys(chipsByMainPlayerRate).length === 0 ||
-            Object.keys(chipsByMainPlayerRate.chips).length === 0 ||
-            !this.startShowResultAnimation
-        ) {
-            return;
-        }
-
-        const betItemsFinal = this.betChoicesContainer.betChoicesFinal.getComponent(BetItemsFinal);
-        while (!betItemsFinal) {
-            await AnimationUtils.delayTime(100/1000);
-        }
-        const betItemsByChoice = betItemsFinal.betItemComponents.reduce((acc, item) => {
-            acc[item.betChoice] = item;
-            return acc;
-        }, {});
-
-        for (const [key, value] of Object.entries(chipsByMainPlayerRate.chips)) {
-            const chipGroup: Record<string, any> = value;
-            const choice = key.replace("Live", "");
-            const chipBox = betItemsByChoice[choice].chipBox;
-            if (chipGroup && chipBox) {
-                const nodes = addChipsToChipBoxWhenJoinRoom(this.chipContainerFinal, chipBox, chipGroup, this.slidingChip);
-                this.addChipsToBoxWithChoice(nodes, key);
-            }
-        }
-        this.payChips(chipsByMainPlayerRate.settlementResult);
-    }
-
     private mergeWinningByChoices(winningByChoices: Record<string, number> | null | undefined): Record<string, number> {
-        const baseKeys = ["home", "away", "draw", "over", "under", "odd", "even"];
         const choices = winningByChoices ?? {};
 
-        return Object.fromEntries(baseKeys.map((key) => [key, (choices[key] || 0) + (choices[`${key}Live`] || 0)]));
+        return Object.fromEntries(Object.keys(choices).map((key) => [key, (choices[key] || 0) || 0]));
     }
 
     protected getSettlementStatus(settlementStatus: gc.GameServiceMessage.Status) {

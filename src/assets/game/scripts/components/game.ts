@@ -60,7 +60,6 @@ export default class Game extends GameComponent {
         return this._systemIndicator;
     }
 
-    private cacheRoundId = 0;
     private isPhaseWinner = false;
 
     private _chipFlying: ChipFlying = null;
@@ -114,17 +113,7 @@ export default class Game extends GameComponent {
             this.isPhaseWinner = false;
         }
     }
-
-    @render(MarbleRoundStore, (store) => store.clientRoundId)
-    renderClientRoundId(clientRoundId: number) {
-        this.cacheRoundId = clientRoundId;
-    }
-
-    update() {
-        const roundId = this.isPhaseWinner ? this.cacheRoundId - 1 : this.cacheRoundId;
-        this.lblRoundId.string = `#${roundId}`;
-    }
-
+    
     initBackgroundImage() {
         const { origin, pathname } = window.location;
         const name = this.isPortrait ? "background-portrait.webp" : "background.webp";
