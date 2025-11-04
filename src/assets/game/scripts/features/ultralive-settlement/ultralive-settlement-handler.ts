@@ -4,13 +4,13 @@ import gc from "@sg/game-client-base";
 const { injectable, inject } = inversify;
 
 type UltraliveFinishMessage = {
-    result: gc.GameServiceMessage.TResult;
-    settlementResult: Array<gc.GameServiceMessage.TSettlementResult>;
+    result: Record<number, gc.GameServiceMessage.TResult>;
+    settlementResult: Record<number, gc.GameServiceMessage.TSettlementResult>;
     roundId: number;
 } & gc.GameServiceMessage.Finish;
 
 @injectable()
-export class SettlementHandlers extends gc.Settlements.SettlementHandlers {
+export class UltraliveSettlementHandlers extends gc.Settlements.SettlementHandlers {
     constructor(
         @inject(gc.Settlements.SettlementStore) protected readonly settlementStore: gc.Settlements.SettlementStore,
         @inject(gc.Settlements.SettlementStatusStore) protected readonly statusStore: gc.Settlements.SettlementStatusStore,
@@ -19,28 +19,19 @@ export class SettlementHandlers extends gc.Settlements.SettlementHandlers {
         super(settlementStore, statusStore, noticeStore);
     }
 
-    handleFinish(finish: UltraliveFinishMessage) {
-        const settlementResult = finish.settlementResult[finish.settlementResult.length - 1];
-
-        this.settlementStore.setSettlementStore({
+    override handleFinish(finish: UltraliveFinishMessage) {
+        const lastIndex = Number(Object.keys(finish.settlementResult).pop());
+        const lastIndexSettlementResult = finish.settlementResult[lastIndex];
+        const finishResult = {
             ...finish,
-            settlementResult: settlementResult,
-        });
+            settlementResult: lastIndexSettlementResult,
+        }
+
+        
+        this.settlementStore.setSettlementStore(finishResult);
     }
 
-    handleStatus(status: gc.GameServiceMessage.Status) {
-        this.statusStore.setStatusStore(status);
-    }
-
-    handleWinners(winners: gc.GameServiceMessage.Winners) {
-        this.settlementStore.winningPlayers = winners.winningPlayers;
-    }
-
-    handleReachMaxWin() {
-        this.noticeStore.addWarning(gc.Translator.commonTranslate("you_reach_max_win"));
-    }
-
-    eventHandleList = [
+    override eventHandleList = [
         {
             name: gc.GameServiceMessage.Finish.eventName,
             handle: this.handleFinish,

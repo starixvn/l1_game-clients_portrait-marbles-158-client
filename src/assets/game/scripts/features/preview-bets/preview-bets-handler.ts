@@ -60,7 +60,7 @@ export class PreviewBetsHandler {
         }
 
         if (Object.keys(chipsNeedBind).length > 0) {
-            this.chipsPreviewStore.finalChips = {
+            this.chipsPreviewStore.chips = {
                 chips: chipsNeedBind,
                 settlementResult: this.settlementStore.settlementResult,
             };

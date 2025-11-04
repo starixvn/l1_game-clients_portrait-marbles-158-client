@@ -17,14 +17,16 @@ export class BetItems extends BetItemsPolygonBase {
     @render(OddsStore, (store) => store.oddsWithConfig)
     renderOdds(oddsWithConfig: OddsWithConfig) {
         const { odds, fractional } = oddsWithConfig;
+        console.log("renderOdds", JSON.stringify(odds));
 
         Object.keys(odds || {}).forEach((choice) => {
             const betItem = this.filterBetItem(choice) as BetItemCustomize;
             if (!betItem) {
                 return;
             }
-
-            const odd = +odds[choice];
+            
+            const odd = odds[choice];
+            console.log("odd ", choice, odd);
             if (odd <= 0) {
                 betItem.blockBetOption();
                 return;

@@ -11,12 +11,11 @@ import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { GamePhase, PhaseId, TimePointTournament } from "../features/game-phase/game-phase-definitions";
 import { GamePhaseStore } from "../features/game-phase/game-phase-store";
-import { MarbleRoundStore } from "../features/rounds/marble-round-store";
 import { settings } from "../game-settings";
 import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
-import { ChipFlying } from "./chip-flying";
 import { MatchResult } from "./match-result";
 import { NetworkStatus, SystemIndicator } from "./system-indicator";
+import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 
@@ -96,16 +95,6 @@ export default class Game extends GameComponent {
         }
     }
 
-    @render(GamePhaseStore, (store) => store.enterPhase)
-    renderEnterPhase(phase: GamePhase) {
-        if (!phase) {
-            return;
-        }
-
-        if (phase?.id === PhaseId.MatchWinner) {
-            this.isPhaseWinner = true;
-        }
-    }
 
     @render(gc.Rounds.RoundTimeStore, (store) => store.roundTime)
     renderRoundTime(roundTime: number) {
@@ -162,7 +151,6 @@ export default class Game extends GameComponent {
         if (!this.isValidResult(result, settlementResult)) {
             return;
         }
-        log("renderCurrentFinish", JSON.parse(JSON.stringify(currentFinish)));
         this.showResult(result, true, settlementResult).then(() => {
             this.finishShowResult(result, settlementResult);
             this.chipFlying.callActionPayChips();

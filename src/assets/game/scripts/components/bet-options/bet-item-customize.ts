@@ -71,6 +71,7 @@ export default class BetItemCustomize extends BetItem {
     }
 
     blockBetOption() {
+        console.log("block bet option ", this.node.name)
         this.setBlockIconVisibility(true);
         this.setDisabledVisibility(true);
         this.hideOddsIndicators();
@@ -78,11 +79,14 @@ export default class BetItemCustomize extends BetItem {
     }
 
     updateStatusLabelOdds(status: boolean) {
-        this.lblOdds.node.active = status;
+        this.lblOdds && (this.lblOdds.node.active = status);
     }
 
     private toggleBetOption(allowBet: boolean) {
         this.setDisabledVisibility(!allowBet);
         this.setBlockIconVisibility(!allowBet);
+        if (allowBet) {
+            this.updateStatusLabelOdds(true);
+        }
     }
 }
