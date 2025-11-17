@@ -9,8 +9,6 @@ import "../../../resources/i18n";
 import { BackgroundVideoPlayer } from "../../../scripts/background-video-player";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
-import { GamePhase, PhaseId, TimePointTournament } from "../features/game-phase/game-phase-definitions";
-import { GamePhaseStore } from "../features/game-phase/game-phase-store";
 import { settings } from "../game-settings";
 import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
 import { MatchResult } from "./match-result";
@@ -37,12 +35,6 @@ export default class Game extends GameComponent {
     nodeChipFlying: Node = null;
 
     @property(Node)
-    betResultNode: Node = null;
-
-    @property(BackgroundVideoPlayer)
-    backgroundVideoPlayer: BackgroundVideoPlayer = null;
-
-    @property(Node)
     nodeSystemIndicator: Node = null;
 
     @property
@@ -59,7 +51,6 @@ export default class Game extends GameComponent {
         return this._systemIndicator;
     }
 
-    private isPhaseWinner = false;
 
     private _chipFlying: ChipFlying = null;
 
@@ -68,10 +59,6 @@ export default class Game extends GameComponent {
             this._chipFlying = this.nodeChipFlying.getComponentInChildren(ChipFlying);
         }
         return this._chipFlying;
-    }
-
-    override onHideGame() {
-        this.backgroundVideoPlayer.stop();
     }
 
     override renderRoundId(roundId: number) {}
@@ -83,25 +70,6 @@ export default class Game extends GameComponent {
     @handle(gc.Rounds.RoundRunningHandlers, (handle) => handle.stopRunner())
     stopRoundTimeRunner() {}
 
-    @render(gc.Connection.ConnectionStore, (store) => store.isConnectFailed)
-    handleConnectFailed(isConnectFailed: boolean) {
-        if (isConnectFailed) {
-            log("Connection failed");
-            this.systemIndicator.networkStatus = NetworkStatus.DISCONNECTED;
-            this.scheduleOnce(() => {
-                this.stopRoundTimeRunner();
-                this.backgroundVideoPlayer.pause();
-            }, 3);
-        }
-    }
-
-
-    @render(gc.Rounds.RoundTimeStore, (store) => store.roundTime)
-    renderRoundTime(roundTime: number) {
-        if (this.isPhaseWinner && roundTime <= TimePointTournament) {
-            this.isPhaseWinner = false;
-        }
-    }
     
     initBackgroundImage() {
         const { origin, pathname } = window.location;
@@ -117,28 +85,6 @@ export default class Game extends GameComponent {
 
             DOMBackgroundImage.createBackgroundImageElement(nativeUrl);
         });
-    }
-
-    async showResult(
-        result: gc.GameServiceMessage.TResult,
-        hasAnimation: boolean,
-        settlementResult: gc.GameServiceMessage.TSettlementResult
-    ) {
-        try {
-            let matchResult = this.betResultNode.getComponentInChildren(MatchResult);
-            while (!matchResult) {
-                await AnimationUtils.delayTime(100/1000);
-                matchResult = this.betResultNode.getComponentInChildren(MatchResult);
-            }
-            if (hasAnimation) {
-                await AnimationUtils.delayTime(settings.durations.outro);
-                await matchResult.show(hasAnimation);
-            } else {
-                matchResult.show(false);
-            }
-        } catch (e) {
-            log("showResult error", e);
-        }
     }
 
     renderCurrentFinish(currentFinish: gc.GameServiceMessage.Finish) {

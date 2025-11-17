@@ -18463,7 +18463,7 @@
     "_id": "6fi1EBEuhJiLiGv8qFe76i"
   },
   {
-    "__type__": "ec48c3t/EtOu5CwzUk+vObu",
+    "__type__": "9ecfb+k2w1MxbSTiSgtdhCs",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -18492,7 +18492,7 @@
     "usingDelayPayChips": false,
     "delayAnimPayChips": 1.25,
     "supportChoices": "ft_1x2_home,ft_1x2_away,ft_1x2_draw,ft_oe_odd,ft_oe_even,ft_ou_over,ft_ou_under",
-    "_id": "a6yzBRpVVMz5vwzqhnU5mU"
+    "_id": "0a/U+PICFG5LyfcCogs8tG"
   },
   {
     "__type__": "cc.Node",
@@ -24845,8 +24845,6 @@
     "nodeChipFlying": {
       "__id__": 869
     },
-    "betResultNode": null,
-    "backgroundVideoPlayer": null,
     "nodeSystemIndicator": null,
     "isPortrait": true,
     "_id": "ca3GOcyZxDR6hXrrB6WLGG"
