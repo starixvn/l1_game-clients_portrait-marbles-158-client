@@ -2,7 +2,6 @@ import gc from "@sg/game-client-base";
 import { _decorator } from "cc";
 import { PromptMessageContainer } from "db://shared-components/game/prompt-message/scripts/prompt-message-container";
 import Observer from "observer";
-import { settings } from "../game-settings";
 import { MatchPromptMessage } from "./match-promt-message";
 
 const { ccclass } = _decorator;
@@ -21,6 +20,7 @@ export class MatchPromptMessageContainer extends PromptMessageContainer {
 
     @render(Rounds.RoundTimeStore, (store) => store.roundTime)
     async showMatchMessage(time: number) {
+        // TODO: update this to use the new prompt message component
         if (time === 0) {
             this.scheduleOnce(() => this.getComponent().showTimeUpMessage(), 0.5);
         }

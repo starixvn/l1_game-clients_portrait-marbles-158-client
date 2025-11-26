@@ -4,7 +4,7 @@ import BetItem from "db://shared-components/game/bets/scripts/components/bet-ite
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
-import { Teams } from "../teams";
+import { Teams } from "../team/teams";
 const { ccclass } = _decorator;
 const { render } = Observer;
 const { Rounds } = gc;

@@ -1,6 +1,6 @@
 import { _decorator, Label } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { Flag } from "./flag";
+import { Flag } from "../flag/flag";
 import { TeamName } from "./team-name";
 
 const { ccclass, property } = _decorator;

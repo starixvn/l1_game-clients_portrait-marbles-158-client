@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, sp } from "cc";
-import { Flag } from "./flag";
-import { TeamName } from "./team-name";
+import { Flag } from "./flag/flag";
+import { TeamName } from "./team/team-name";
 
 const { ccclass, property } = _decorator;
 
