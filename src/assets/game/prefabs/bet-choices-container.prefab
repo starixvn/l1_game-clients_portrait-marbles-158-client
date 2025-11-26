@@ -255,7 +255,7 @@
   },
   {
     "__type__": "cc.PrefabInstance",
-    "fileId": "1dg/pPGHFGbqwY6R6l5hZy",
+    "fileId": "9b3s8Nvs9CVoYN4p8cbixT",
     "prefabRootNode": {
       "__id__": 1
     },
@@ -15967,6 +15967,7 @@
     },
     "fileId": "5f28yMFEtEmrFdYibLNQOz",
     "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": [
       {
         "__id__": 7
