@@ -57,7 +57,7 @@
     "_id": ""
   },
   {
-    "__type__": "b2b58rQJZVLaLgStadctgMh",
+    "__type__": "475b6KTmxhL+IlbniFiI29k",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -68,16 +68,12 @@
     "__prefab": {
       "__id__": 3
     },
-    "prefab": {
-      "__uuid__": "36eb155d-b69a-4e7f-b143-861ab2fdd949",
-      "__expectedType__": "cc.Prefab"
-    },
-    "shortLockingDuration": true,
+    "resultText": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "e4IZRTbX5Ll6ck5GGckd6c"
+    "fileId": "c0nD2556ZCqJA84GXfjb7c"
   },
   {
     "__type__": "cc.PrefabInfo",
