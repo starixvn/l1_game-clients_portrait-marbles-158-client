@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "portrait-game",
+    "_name": "game",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -56,7 +56,7 @@
     "_globals": {
       "__id__": 1247
     },
-    "_id": "1c8c7ad3-c88b-4fd4-9d90-f316f7b38922"
+    "_id": "63d17187-0900-408c-b574-8f280c1debc9"
   },
   {
     "__type__": "cc.Node",
