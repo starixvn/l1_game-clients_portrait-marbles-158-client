@@ -4,7 +4,6 @@ import { FunctionUtils } from "db://shared-components/shared/utils";
 import inversify from "inversify";
 import mobx from "mobx";
 import { MarbleRoundTimeStore } from "../rounds/marble-round-time-store";
-import { VideoStreamStore } from "../video-stream/video-stream-store";
 
 const { injectable, inject } = inversify;
 
@@ -25,7 +24,6 @@ interface ILoadedSound {
 
 @injectable()
 export class CommentatorsVoicesStore {
-    @inject(VideoStreamStore) protected readonly videoStreamStore: VideoStreamStore;
     @inject(MarbleRoundTimeStore) protected readonly marbleRoundTimeStore: MarbleRoundTimeStore;
 
     private _loadedSounds: Record<string, ILoadedSound> = {};
@@ -44,7 +42,8 @@ export class CommentatorsVoicesStore {
 
     set voices(voices: IVoices) {
         this._voices = voices;
-        !this.videoStreamStore.isPlayVideo && this.loadVoices();
+        // TODO: Update this after video stream is implemented
+        !true && this.loadVoices();
     }
 
     async loadVoices() {
@@ -107,7 +106,8 @@ export class CommentatorsVoicesStore {
     }
 
     private readonly checkAndGetSound = () => {
-        const currentTime = Math.ceil(this.videoStreamStore.currentVideoTime);
+        // TODO: Update this after video stream is implemented
+        const currentTime = 0;
         const index = this.findMatchingVoiceIndex(currentTime);
         const soundId = this.getSoundIdByIndex(index);
 

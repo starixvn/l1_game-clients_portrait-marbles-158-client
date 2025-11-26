@@ -3,14 +3,14 @@ import gc from "@sg/game-client-base";
 
 const { injectable, inject } = inversify;
 
-type UltraliveFinishMessage = {
+type UltraLiveFinishMessage = {
     result: Record<number, gc.GameServiceMessage.TResult>;
     settlementResult: Record<number, gc.GameServiceMessage.TSettlementResult>;
     roundId: number;
 } & gc.GameServiceMessage.Finish;
 
 @injectable()
-export class UltraliveSettlementHandlers extends gc.Settlements.SettlementHandlers {
+export class UltraLiveSettlementHandlers extends gc.Settlements.SettlementHandlers {
     constructor(
         @inject(gc.Settlements.SettlementStore) protected readonly settlementStore: gc.Settlements.SettlementStore,
         @inject(gc.Settlements.SettlementStatusStore) protected readonly statusStore: gc.Settlements.SettlementStatusStore,
@@ -19,15 +19,14 @@ export class UltraliveSettlementHandlers extends gc.Settlements.SettlementHandle
         super(settlementStore, statusStore, noticeStore);
     }
 
-    override handleFinish(finish: UltraliveFinishMessage) {
+    override handleFinish(finish: UltraLiveFinishMessage) {
         const lastIndex = Number(Object.keys(finish.settlementResult).pop());
         const lastIndexSettlementResult = finish.settlementResult[lastIndex];
         const finishResult = {
             ...finish,
             settlementResult: lastIndexSettlementResult,
-        }
+        };
 
-        
         this.settlementStore.setSettlementStore(finishResult);
     }
 

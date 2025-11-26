@@ -2,16 +2,12 @@ import gc from "@sg/game-client-base";
 import { _decorator } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
-import { AnimationUtils, ComponentUtils } from "db://shared-components/shared/utils";
+import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
-import { GamePhase, PhaseId } from "../../features/game-phase/game-phase-definitions";
-import { GamePhaseStore } from "../../features/game-phase/game-phase-store";
 import { Teams } from "../teams";
 const { ccclass } = _decorator;
 const { render } = Observer;
 const { Rounds } = gc;
-
-const SHOW_WINNER_DELAY_SECONDS = 1;
 
 @ccclass("BetItemsFinal")
 export class BetItemsFinal extends BetItemsPolygonBase {
@@ -83,25 +79,6 @@ export class BetItemsFinal extends BetItemsPolygonBase {
         return this.betItemComponents?.filter(
             (item: BetItem) => this.settlementResult?.[item.betChoice] || this.settlementResult?.[`${item.betChoice}Live`]
         );
-    }
-
-    @render(GamePhaseStore, (store) => store.enterPhase)
-    async renderEnterPhase(phase: GamePhase) {
-        if (!phase) {
-            return;
-        }
-
-        if (phase.id === PhaseId.MatchWinner) {
-            if (phase.progress === 0) {
-                await AnimationUtils.delayTime(SHOW_WINNER_DELAY_SECONDS);
-            }
-
-            this.clearHighlights();
-            this.clearTotalBet();
-            this.clearOwnBet();
-            this.clearPercentBet();
-            this.handleShowFlag(false);
-        }
     }
 
     private clearHighlights() {

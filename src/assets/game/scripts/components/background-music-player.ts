@@ -1,7 +1,6 @@
 import { _decorator, AudioSource, tween } from "cc";
 import MusicPlayer from "db://shared-components/game/audios/scripts/component/music-player";
 import Observer from "observer";
-import { VideoStreamSoundStore } from "../features/video-stream/video-stream-sound-store";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
@@ -24,7 +23,6 @@ export class BackgroundMusicPlayer extends MusicPlayer {
         }
     }
 
-    @render(VideoStreamSoundStore, (store) => store.isPlayBackgroundMusic)
     playMusic(playBackgroundMusic: boolean) {
         this._stopBackgroundMusic = !playBackgroundMusic;
         if (playBackgroundMusic) {

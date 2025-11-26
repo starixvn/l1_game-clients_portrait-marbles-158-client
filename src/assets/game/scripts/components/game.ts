@@ -1,4 +1,4 @@
-import { _decorator, assetManager, ImageAsset, log, Node } from "cc";
+import { _decorator, assetManager, ImageAsset, Node } from "cc";
 import { startGame } from "db://shared-components/shared/scripts/startup";
 import Observer from "observer";
 
@@ -6,13 +6,11 @@ import gc from "@sg/game-client-base";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import "../../../resources/i18n";
-import { BackgroundVideoPlayer } from "../../../scripts/background-video-player";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { settings } from "../game-settings";
 import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
-import { MatchResult } from "./match-result";
-import { NetworkStatus, SystemIndicator } from "./system-indicator";
+import { SystemIndicator } from "./system-indicator";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
@@ -51,7 +49,6 @@ export default class Game extends GameComponent {
         return this._systemIndicator;
     }
 
-
     private _chipFlying: ChipFlying = null;
 
     get chipFlying() {
@@ -70,7 +67,6 @@ export default class Game extends GameComponent {
     @handle(gc.Rounds.RoundRunningHandlers, (handle) => handle.stopRunner())
     stopRoundTimeRunner() {}
 
-    
     initBackgroundImage() {
         const { origin, pathname } = window.location;
         const name = this.isPortrait ? "background-portrait.webp" : "background.webp";

@@ -1,7 +1,6 @@
 import inversify from "inversify";
 import gc from "@sg/game-client-base";
 import { MarbleRoundTimeStore } from "./marble-round-time-store";
-import { MarbleRoundStore } from "./marble-round-store";
 
 export enum GameFlow {
     Start = "Start",
@@ -10,7 +9,7 @@ export enum GameFlow {
 
 export type MarbleRoundHandlerInput = {
     gameFlow: GameFlow;
-}
+};
 
 const { injectable, inject } = inversify;
 @injectable()
@@ -23,7 +22,7 @@ export class MarbleGameFlowHandler implements gc.Shared.IHandler<any> {
     handle(input: GameFlow) {
         switch (input) {
             case GameFlow.Start:
-                this.roundTimeStore.startNewRound = true
+                this.roundTimeStore.startNewRound = true;
                 this.roundStore.resetRoundStore();
                 break;
             case GameFlow.Result:

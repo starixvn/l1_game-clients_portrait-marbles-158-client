@@ -1,6 +1,3 @@
-export * from "./game-phase/game-phase-handler";
-export * from "./match-result/match-result-handler";
-export * from "./video-stream/video-stream-handlers";
 export * from "./dynamic-odds/odds-handler";
 export * from "./commentators-voices/commentators-voices-handler";
 export * from "./bet/place-bet-handler";

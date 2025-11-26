@@ -21,7 +21,7 @@ export class MatchPromptMessageContainer extends PromptMessageContainer {
 
     @render(Rounds.RoundTimeStore, (store) => store.roundTime)
     async showMatchMessage(time: number) {
-        if (time === settings.points.timeUp) {
+        if (time === 0) {
             this.scheduleOnce(() => this.getComponent().showTimeUpMessage(), 0.5);
         }
     }

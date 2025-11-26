@@ -6,7 +6,7 @@ import { settings } from "./game-settings";
 import { MarbleRoundTimeStore } from "./features/rounds/marble-round-time-store";
 import { BetHandler } from "./features/bet/bet-handler";
 import { MarbleBetStore } from "./features/bet/bet-store";
-import { UltraliveSettlementHandlers } from "./features/ultralive-settlement/ultralive-settlement-handler";
+import { UltraLiveSettlementHandlers } from "./features/ultra-live-settlement/ultra-live-settlement-handler";
 
 export const containerOptions: gc.IContainerOptions = {
     globalContainer: sharedContainer,
@@ -17,8 +17,7 @@ export const containerOptions: gc.IContainerOptions = {
         container.bind(gc.Rounds.RoundTimeStore).toService(MarbleRoundTimeStore as any);
         container.bind(MarbleBetStore).to(MarbleBetStore);
         container.bind(gc.Bet.BetHandler).toService(BetHandler as any);
-        container.bind(gc.Settlements.SettlementHandlers).toService(UltraliveSettlementHandlers);
-        
+        container.bind(gc.Settlements.SettlementHandlers).toService(UltraLiveSettlementHandlers);
     },
     disabledFeatures: ["odds"],
     features: [MarbleFootball, gc.BetDetailsNew, ...gc.defaultFeatures],
