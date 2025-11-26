@@ -15,7 +15,6 @@ export interface GamePhaseConfig {
 export enum PhaseId {
     MatchWinner = "match-winner",
     MatchStatistics = "match-statistics",
-    Tournament = "tournament",
     Halftime = "halftime",
     Settlement = "settlement",
     ShowIntroVideo = "show-intro-video",
@@ -23,12 +22,10 @@ export enum PhaseId {
     ShowLiveVideo = "show-live-video",
     ShowBetChoicesLive = "show-bet-choices-live",
     ShowBetChoicesPrev = "show-bet-choices-prev",
-    ShowWinnerAndTournament = "show-winner-and-tournament",
     showGameBackground = "show-game-background",
     AutoHidePreviewBetChoicesLive = "auto-hide-preview-bet-choices-live",
     AutoHidePreviewBetChoicesPrev = "auto-hide-preview-bet-choices-prev",
 }
 
-export const TimePointTournament = settings.points.placingBetPreMatch + settings.durations.tournament;
-export const TimePointShowMatchWinner = TimePointTournament + settings.durations.matchWinner;
+export const TimePointShowMatchWinner = settings.durations.matchWinner;
 export const TimePointHalftime = settings.points.streamingFirstHalfVideo - settings.durations.videoDuration;

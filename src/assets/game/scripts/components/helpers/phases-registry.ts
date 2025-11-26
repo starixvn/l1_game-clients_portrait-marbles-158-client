@@ -1,7 +1,7 @@
 import { _decorator } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
-import { GamePhaseConfig, PhaseId, TimePointShowMatchWinner, TimePointTournament } from "../../features/game-phase/game-phase-definitions";
+import { GamePhaseConfig, PhaseId, TimePointShowMatchWinner } from "../../features/game-phase/game-phase-definitions";
 import { GamePhaseHandler } from "../../features/game-phase/game-phase-handler";
 import { settings } from "../../game-settings";
 const { ccclass } = _decorator;
@@ -10,8 +10,6 @@ const { handle } = Observer;
 
 @ccclass
 export class PhasesRegistry extends ObserverComponent {
-    private readonly showWinnerAndTournamentTimeOffset = 1;
-
     onLoad() {
         super.onLoad();
         this.registerAllPhases();
@@ -19,7 +17,6 @@ export class PhasesRegistry extends ObserverComponent {
 
     protected registerAllPhases() {
         this.registerPhaseMatchWinner();
-        this.registerPhaseShowWinnerAndTournament();
         this.registerPhaseShowBetChoicesPrev();
         this.registerPhaseShowBetChoicesLive();
         this.registerPhaseShowIntroVideo();
@@ -35,17 +32,7 @@ export class PhasesRegistry extends ObserverComponent {
         const config: GamePhaseConfig = {
             id: PhaseId.MatchWinner,
             begin: TimePointShowMatchWinner,
-            end: TimePointTournament,
-        };
-        return config;
-    }
-
-    @handle(GamePhaseHandler, (handler, config: GamePhaseConfig) => handler.registerPhase(config))
-    protected registerPhaseShowWinnerAndTournament() {
-        const config: GamePhaseConfig = {
-            id: PhaseId.ShowWinnerAndTournament,
-            begin: TimePointShowMatchWinner + this.showWinnerAndTournamentTimeOffset,
-            end: settings.points.placingBetPreMatch + this.showWinnerAndTournamentTimeOffset,
+            end: 0,
         };
         return config;
     }

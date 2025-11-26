@@ -48,7 +48,6 @@ export class PlayArea extends ObserverComponent {
         this.initBetChoicesContainer();
         this.setupStaticTargets();
         super.onLoad();
-
     }
 
     private initBetChoicesContainer() {
@@ -74,7 +73,7 @@ export class PlayArea extends ObserverComponent {
             return;
         }
 
-        if (phase.id === PhaseId.Settlement || phase.id === PhaseId.ShowWinnerAndTournament) {
+        if (phase.id === PhaseId.Settlement) {
             this.handleSettlementOrShowWinnerPhase(phase);
             return;
         }

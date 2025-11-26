@@ -8,7 +8,6 @@ export type DurationSetting = {
     introVideo: number;
     placingBet: number;
     lockingBet: number;
-    tournament: number;
     matchWinner: number;
     videoDuration: number;
     showHaftTime: number;

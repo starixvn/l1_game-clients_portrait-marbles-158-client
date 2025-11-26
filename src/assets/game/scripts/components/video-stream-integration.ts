@@ -46,9 +46,7 @@ export default class VideoStreamIntegration extends ObserverComponent {
     private _systemIndicator: SystemIndicator = null;
 
     private readonly PHASES_WITH_VISIBLE_BG = new Set<PhaseId>([
-        PhaseId.ShowWinnerAndTournament,
         PhaseId.MatchWinner,
-        PhaseId.Tournament,
         PhaseId.Settlement,
         PhaseId.ShowBetChoicesLive,
         PhaseId.ShowBetChoicesPrev,

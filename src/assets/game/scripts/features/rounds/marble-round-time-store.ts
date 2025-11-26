@@ -77,10 +77,6 @@ export class MarbleRoundTimeStore {
         return this.gameSetting.durations.startRound;
     }
 
-    get tournament() {
-        return this.gameSetting.durations.tournament;
-    }
-
     get matchWinner() {
         return this.gameSetting.durations.matchWinner;
     }

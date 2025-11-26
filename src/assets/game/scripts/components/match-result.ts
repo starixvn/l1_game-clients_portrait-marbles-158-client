@@ -77,7 +77,7 @@ export class MatchResult extends ObserverComponent {
 
         this.currentPhase = phase;
 
-        if ((phase.id === PhaseId.MatchWinner || phase.id === PhaseId.Tournament) && this.node.active) {
+        if (phase.id === PhaseId.MatchWinner && this.node.active) {
             this.node.active = false;
         }
     }

@@ -2,7 +2,6 @@ import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
 import { MarbleFootballServiceMessages } from "../../marble-football-service-messages";
-import { TournamentStore } from "../tournament/tournament-store";
 import { MatchResultStore } from "./match-result-store";
 
 const { injectable, inject } = inversify;
@@ -18,7 +17,6 @@ export class MatchResultHandler {
     @inject(gc.RoundHistories.RoundHistoryStore) private readonly roundHistoryStore: gc.RoundHistories.RoundHistoryStore;
     @inject(gc.Settlements.SettlementStore) private readonly settlementStore: gc.Settlements.SettlementStore;
     @inject(MatchResultStore) private readonly store: MatchResultStore;
-    @inject(TournamentStore) private readonly tournamentStore: TournamentStore;
 
     constructor() {
         mobx.makeAutoObservable(this);
@@ -26,9 +24,6 @@ export class MatchResultHandler {
         setTimeout(() => {
             mobx.reaction(
                 () => {
-                    if (!this.tournamentStore.currentMatch) {
-                        return null;
-                    }
                     return this.roundHistoryStore.histories;
                 },
                 (histories: gc.RoundHistories.RoundHistory[]) => {
@@ -44,9 +39,6 @@ export class MatchResultHandler {
         setTimeout(() => {
             mobx.reaction(
                 () => {
-                    if (!this.tournamentStore.currentMatch) {
-                        return null;
-                    }
                     return this.settlementStore.currentFinish;
                 },
                 (currentFinish: RoundResult) => {
@@ -59,32 +51,7 @@ export class MatchResultHandler {
         }, 0);
     }
 
-    generateMatchResult(roundResult: RoundResult) {
-        const { roundId, result, settlementResult } = roundResult;
-
-        if (roundId === this.store.matchResult?.roundId) {
-            return;
-        }
-
-        const miniGame = result.homeWinsOnDraw !== undefined && settlementResult.draw;
-        const scores = this.parseMatchScore(result);
-
-        const currentMatch = this.tournamentStore.currentMatch;
-        const isHomeWin = settlementResult.home || (miniGame && result.homeWinsOnDraw);
-        const winner = isHomeWin ? currentMatch.home : currentMatch.away;
-        const penalty = result.penalty;
-
-        this.store.matchResult = {
-            roundId,
-            scores,
-            miniGame,
-            penalty,
-            winner,
-            isHomeWin,
-            homeWinsOnDraw: !!result.homeWinsOnDraw,
-            isFinal: this.tournamentStore.isFinal,
-        };
-    }
+    generateMatchResult(roundResult: RoundResult) {}
 
     parseMatchScore(result: MarbleFootballServiceMessages.Result) {
         const { firstHalf, secondHalf, firstHalfTimeline, secondHalfTimeline } = result;

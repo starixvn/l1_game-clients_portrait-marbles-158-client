@@ -21,15 +21,6 @@ export namespace MarbleFootballServiceMessages {
         static eventName = "liveStreamServer";
     }
 
-    export class Tournament {
-        code: string;
-        matches: MatchType[];
-        currentMatch: number;
-        ended: boolean;
-
-        static eventName = "tournament";
-    }
-
     export interface Penalty {
         home: number;
         away: number;
@@ -42,7 +33,6 @@ export namespace MarbleFootballServiceMessages {
         secondHalfVideo: string;
         overUnderValue: number;
         homeWinsOnDraw?: boolean;
-        tournamentId: string;
         firstHalfTimeline: number[];
         secondHalfTimeline: number[];
         penalty: Penalty;

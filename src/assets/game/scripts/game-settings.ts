@@ -1,10 +1,10 @@
-const GAME_NAME = "SoccerMarble";
+const GAME_NAME = "Marbles158";
 
 export const settings = {
     id: 156,
     name: GAME_NAME,
     observerNamespace: GAME_NAME,
-    namespaces: [GAME_NAME, "SoccerMarble"],
+    namespaces: [GAME_NAME],
     durations: {
         wholeRound: 126,
         placingBet: 20,
@@ -15,7 +15,6 @@ export const settings = {
         generatingResult: 2,
         showingResult: 5,
         startRound: 8,
-        tournament: 5,
         matchWinner: 3,
         outro: 0.67,
         showHaftTime: 3,
