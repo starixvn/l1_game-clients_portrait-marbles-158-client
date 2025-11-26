@@ -3,7 +3,6 @@ import { _decorator, CCBoolean, Widget } from "cc";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
 import observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
-import { MarbleRoundStore } from "../../features/rounds/marble-round-store";
 import BetItemCustomize from "./bet-item-customize";
 
 const { ccclass, property } = _decorator;
@@ -24,7 +23,7 @@ export class BetItems extends BetItemsPolygonBase {
             if (!betItem) {
                 return;
             }
-            
+
             const odd = odds[choice];
             console.log("odd ", choice, odd);
             if (odd <= 0) {
@@ -50,14 +49,12 @@ export class BetItems extends BetItemsPolygonBase {
 
     handleResetHighlight(isResetHighlight: boolean) {}
 
-    @render(MarbleRoundStore, (store) => store.isResetHighlightPrevMatch)
     handleResetHighlightPrevMatch(isResetHighlightPreMatch: boolean) {
         if (isResetHighlightPreMatch && !this.isLiveBets) {
             this.clearHighlightStatic();
         }
     }
 
-    @render(MarbleRoundStore, (store) => store.isResetHighlightLive)
     handleResetHighlightLive(isResetHighlightLive: boolean) {
         if (isResetHighlightLive && this.isLiveBets) {
             this.clearHighlightStatic();

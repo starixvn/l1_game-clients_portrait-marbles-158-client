@@ -10,7 +10,6 @@ import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { settings } from "../game-settings";
 import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
-import { SystemIndicator } from "./system-indicator/system-indicator";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
@@ -40,14 +39,6 @@ export default class Game extends GameComponent {
 
     private currentFinish: gc.GameServiceMessage.Finish = null;
     enableFixHandleFinish = true;
-    private _systemIndicator: SystemIndicator = null;
-
-    get systemIndicator() {
-        if (!this._systemIndicator) {
-            this._systemIndicator = this.nodeSystemIndicator.getComponentInChildren(SystemIndicator);
-        }
-        return this._systemIndicator;
-    }
 
     private _chipFlying: ChipFlying = null;
 
