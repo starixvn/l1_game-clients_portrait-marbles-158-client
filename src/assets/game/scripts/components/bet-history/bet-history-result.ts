@@ -1,7 +1,7 @@
 import { _decorator, Color, Label } from "cc";
 import gc from "@sg/game-client-base";
 import { BaseResultBodyItem } from "db://shared-components/game/bet-history/scripts/components/bet-history-body-item";
-import { Flag } from "./flag/flag";
+import { Flag } from "../flag/flag";
 const { ccclass, property } = _decorator;
 
 interface RoundResult {
