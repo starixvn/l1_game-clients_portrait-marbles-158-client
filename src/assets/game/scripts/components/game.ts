@@ -10,7 +10,7 @@ import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { settings } from "../game-settings";
 import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
-import { SystemIndicator } from "./system-indicator";
+import { SystemIndicator } from "./system-indicator/system-indicator";
 import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
