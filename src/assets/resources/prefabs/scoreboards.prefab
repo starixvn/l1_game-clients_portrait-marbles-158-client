@@ -1342,7 +1342,7 @@
     "__prefab": {
       "__id__": 51
     },
-    "key": "MarbleFootball.glossary_home",
+    "key": "SpinnerSoccerUltraLive.glossary_home",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -1873,7 +1873,7 @@
     "__prefab": {
       "__id__": 75
     },
-    "key": "MarbleFootball.glossary_away",
+    "key": "SpinnerSoccerUltraLive.glossary_away",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -2404,7 +2404,7 @@
     "__prefab": {
       "__id__": 99
     },
-    "key": "MarbleFootball.glossary_draw",
+    "key": "SpinnerSoccerUltraLive.glossary_draw",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -4733,7 +4733,7 @@
     "__prefab": {
       "__id__": 216
     },
-    "key": "MarbleFootball.glossary_odd",
+    "key": "SpinnerSoccerUltraLive.glossary_odd",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -5264,7 +5264,7 @@
     "__prefab": {
       "__id__": 240
     },
-    "key": "MarbleFootball.glossary_even",
+    "key": "SpinnerSoccerUltraLive.glossary_even",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -7623,7 +7623,7 @@
     "__prefab": {
       "__id__": 359
     },
-    "key": "MarbleFootball.glossary_over",
+    "key": "SpinnerSoccerUltraLive.glossary_over",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -8154,7 +8154,7 @@
     "__prefab": {
       "__id__": 383
     },
-    "key": "MarbleFootball.glossary_under",
+    "key": "SpinnerSoccerUltraLive.glossary_under",
     "format": 1,
     "prefix": "",
     "suffix": "",

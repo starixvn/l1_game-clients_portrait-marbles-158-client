@@ -28,14 +28,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 713
+        "__id__": 707
       },
       {
-        "__id__": 715
+        "__id__": 709
       }
     ],
     "_prefab": {
-      "__id__": 717
+      "__id__": 711
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -184,12 +184,6 @@
       },
       {
         "__id__": 705
-      },
-      {
-        "__id__": 707
-      },
-      {
-        "__id__": 710
       }
     ]
   },
@@ -1613,7 +1607,7 @@
     "__prefab": {
       "__id__": 62
     },
-    "key": "MarbleFootball2.pre_match",
+    "key": "SpinnerSoccerUltraLive..pre_match",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -4813,7 +4807,7 @@
     "__prefab": {
       "__id__": 200
     },
-    "key": "MarbleFootball.glossary_away",
+    "key": "SpinnerSoccerUltraLive.glossary_away",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -6730,7 +6724,7 @@
     "__prefab": {
       "__id__": 292
     },
-    "key": "MarbleFootball.glossary_under",
+    "key": "SpinnerSoccerUltraLive.glossary_under",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -8731,7 +8725,7 @@
     "__prefab": {
       "__id__": 387
     },
-    "key": "MarbleFootball.glossary_over",
+    "key": "SpinnerSoccerUltraLive.glossary_over",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -10732,7 +10726,7 @@
     "__prefab": {
       "__id__": 482
     },
-    "key": "MarbleFootball.glossary_even",
+    "key": "SpinnerSoccerUltraLive.glossary_even",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -12733,7 +12727,7 @@
     "__prefab": {
       "__id__": 577
     },
-    "key": "MarbleFootball.glossary_odd",
+    "key": "SpinnerSoccerUltraLive.glossary_odd",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -14517,7 +14511,7 @@
     "__prefab": {
       "__id__": 666
     },
-    "key": "MarbleFootball.glossary_home",
+    "key": "SpinnerSoccerUltraLive.glossary_home",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -15181,54 +15175,6 @@
     ]
   },
   {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": null,
-    "sourceInfo": null,
-    "propertyPath": [
-      "home"
-    ],
-    "target": {
-      "__id__": 708
-    },
-    "targetInfo": {
-      "__id__": 709
-    }
-  },
-  {
-    "__type__": "cc.Node",
-    "__editorExtras__": {}
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "ef1B5VDltIwZAg0YbdPjkz"
-    ]
-  },
-  {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": null,
-    "sourceInfo": null,
-    "propertyPath": [
-      "away"
-    ],
-    "target": {
-      "__id__": 711
-    },
-    "targetInfo": {
-      "__id__": 712
-    }
-  },
-  {
-    "__type__": "cc.Node",
-    "__editorExtras__": {}
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "ef1B5VDltIwZAg0YbdPjkz"
-    ]
-  },
-  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -15238,7 +15184,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 714
+      "__id__": 708
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -15266,7 +15212,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 716
+      "__id__": 710
     },
     "_alignFlags": 45,
     "_target": null,
