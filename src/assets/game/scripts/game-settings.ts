@@ -1,7 +1,7 @@
 const GAME_NAME = "Marbles158";
 
 export const settings = {
-    id: 156,
+    id: 158,
     name: GAME_NAME,
     observerNamespace: GAME_NAME,
     namespaces: [GAME_NAME],
