@@ -221,10 +221,10 @@
     "globalConfigKey": "migrationsConfig"
   },
   "macroConfig": {
-    "ENABLE_TRANSPARENT_CANVAS": true,
+    "ENABLE_TRANSPARENT_CANVAS": false,
     "ENABLE_TILEDMAP_CULLING": false,
     "ENABLE_WEBGL_ANTIALIAS": false,
     "ENABLE_WEBGL_HIGHP_STRUCT_VALUES": false,
-    "BATCHER2D_MEM_INCREMENT": 2048
+    "BATCHER2D_MEM_INCREMENT": 144
   }
 }
