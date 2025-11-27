@@ -1,16 +1,15 @@
-import { _decorator, assetManager, ImageAsset, Node } from "cc";
+import { _decorator, Node } from "cc";
 import { startGame } from "db://shared-components/shared/scripts/startup";
 import Observer from "observer";
 
 import gc from "@sg/game-client-base";
+import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
+import { siteConfigs } from "../../../../assets/scripts/site-configs";
 import "../../../resources/i18n";
-import { siteConfigs } from "../../../scripts/site-configs";
 import { containerOptions } from "../container-options";
 import { settings } from "../game-settings";
-import { DOMBackgroundImage } from "./../../../scripts/dom-background-image";
-import { ChipFlying } from "db://shared-components/game/chip-flying/scripts/components/chip-flying";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 
@@ -51,28 +50,10 @@ export default class Game extends GameComponent {
 
     override renderRoundId(roundId: number) {}
 
-    protected onEnable(): void {
-        this.initBackgroundImage();
-    }
+    protected onEnable(): void {}
 
     @handle(gc.Rounds.RoundRunningHandlers, (handle) => handle.stopRunner())
     stopRoundTimeRunner() {}
-
-    initBackgroundImage() {
-        const { origin, pathname } = window.location;
-        const name = this.isPortrait ? "background-portrait.webp" : "background.webp";
-        const imagePath = `${origin}${pathname}splash-resources/${name}?v=7`;
-        assetManager.loadRemote<ImageAsset>(imagePath, (err, imageAsset) => {
-            if (err) {
-                sentryLogger?.logError(`Failed to load image asset ${imagePath} with error ${err}`);
-                return;
-            }
-
-            const nativeUrl = imageAsset.nativeUrl;
-
-            DOMBackgroundImage.createBackgroundImageElement(nativeUrl);
-        });
-    }
 
     renderCurrentFinish(currentFinish: gc.GameServiceMessage.Finish) {
         this.currentFinish = currentFinish;
