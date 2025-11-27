@@ -1,12 +1,12 @@
 import gc from "@sg/game-client-base";
 import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
 import { sharedContainer } from "../../scripts/shared-container";
-import * as MarbleFootball from "./features/feature";
-import { settings } from "./game-settings";
-import { MarbleRoundTimeStore } from "./features/rounds/marble-round-time-store";
 import { BetHandler } from "./features/bet/bet-handler";
 import { MarbleBetStore } from "./features/bet/bet-store";
+import * as MarbleFootball from "./features/feature";
+import { MarbleRoundTimeStore } from "./features/rounds/marble-round-time-store";
 import { UltraLiveSettlementHandlers } from "./features/ultra-live-settlement/ultra-live-settlement-handler";
+import { settings } from "./game-settings";
 
 export const containerOptions: gc.IContainerOptions = {
     globalContainer: sharedContainer,
