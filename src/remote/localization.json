@@ -1,30 +1,4 @@
 {
-    "lobbyNames": {
-        "en": "Spinner Soccer X",
-        "es": "Fútbol Giratorio X",
-        "fil_ph": "Spinner Soccer X",
-        "id": "Spinner Soccer X",
-        "ja": "スピナーサッカーX",
-        "ko": "스피너 사커 X",
-        "pt_br": "Spinner Soccer X",
-        "th": "Spinner Soccer X",
-        "tr": "Spinner Soccer X",
-        "vi": "Bóng Xoáy X",
-        "zh_cn": "旋转足球 X",
-        "zh_tw": "旋轉足球 X"
-    },
-    "gameNames": {
-        "en": "Spinner Soccer X",
-        "es": "Fútbol Giratorio X",
-        "fil_ph": "Spinner Soccer X",
-        "id": "Spinner Soccer X",
-        "ja": "スピナーサッカーX",
-        "ko": "스피너 사커 X",
-        "pt_br": "Spinner Soccer X",
-        "th": "Spinner Soccer X",
-        "tr": "Spinner Soccer X",
-        "vi": "Bóng Xoáy X",
-        "zh_cn": "旋转足球 X",
-        "zh_tw": "旋轉足球 X"
-    }
+    "lobbyNames": {},
+    "gameNames": {}
 }

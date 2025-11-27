@@ -1,4 +1,4 @@
 {
-    "mainNamespace": "MarbleFootball2",
-    "additionalNamespaces": ["Common", "MarbleFootball"]
+    "mainNamespace": "SpinnerSoccerUltraLive",
+    "additionalNamespaces": ["Common"]
 }
