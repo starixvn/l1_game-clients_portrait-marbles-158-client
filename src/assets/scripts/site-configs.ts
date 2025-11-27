@@ -20,11 +20,11 @@ const defaultConfig: gc.Configs.SiteConfigs = {
     enableMsgpackParserOnNotification: false,
     enableMsgpackParserAllGames: false,
     websocket: {
-        proxyPath: "soccermarble",
-        route: "soccermarble",
+        proxyPath: "marbles158",
+        route: "marbles158",
     },
     tolgeeUrl: "",
-    storagePrefixKey: "portrait_soccerMarble",
+    storagePrefixKey: "portrait_marbles158",
     sentry: {
         dsn: "https://289e71b8cf3992d7e184e21f63aed0b5@sentry-k8s.lumigame.com/29",
         browserUrl: "https://browser.sentry-cdn.com/10.5.0/bundle.min.js",
