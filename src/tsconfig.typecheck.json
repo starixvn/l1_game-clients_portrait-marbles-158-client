@@ -1,0 +1,63 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        // Target and Module
+        "target": "ES2015",
+        "module": "ES2015",
+        "moduleResolution": "node",
+        "lib": ["ES2015", "DOM"],
+
+        // Strict Type Checking
+        "strict": true,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "strictFunctionTypes": false,
+        "strictBindCallApply": false,
+        "strictPropertyInitialization": false,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+
+        // Additional Checks
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": false,
+
+        // Decorators (Required for Cocos Creator)
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+        // Module Resolution
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "isolatedModules": false,
+        "forceConsistentCasingInFileNames": true,
+
+        // Output
+        "noEmit": true,
+        "skipLibCheck": true,
+
+        // Type Definitions (Including Cocos Creator)
+        "types": [
+            "node",
+            "./temp/declarations/cc.custom-macro",
+            "./temp/declarations/cc",
+            "./temp/declarations/jsb",
+            "./temp/declarations/cc.env"
+        ],
+
+        // Path Mappings (Cocos Creator db:// protocol)
+        "paths": {
+            "db://assets/*": ["./assets/*"],
+            "db://shared-components/*": ["./extensions/shared-components/assets/*"],
+            "db://direct-shared-components/*": ["./extensions/direct-shared-components/assets/*"],
+            "db://i18n/*": ["./extensions/i18n/assets/*"]
+        },
+
+        // Base URL for relative imports
+        "baseUrl": "."
+    },
+    "include": ["assets/**/*.ts"],
+    "exclude": ["node_modules", "library", "temp", "build", "dist", "tests", "**/*.test.ts", "**/*.spec.ts"]
+}

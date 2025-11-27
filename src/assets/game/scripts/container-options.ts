@@ -1,8 +1,6 @@
 import gc from "@sg/game-client-base";
 import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
 import { sharedContainer } from "../../scripts/shared-container";
-import { BetHandler } from "./features/bet/bet-handler";
-import { MarbleBetStore } from "./features/bet/bet-store";
 import * as MarbleFootball from "./features/feature";
 import { MarbleRoundTimeStore } from "./features/rounds/marble-round-time-store";
 import { UltraLiveSettlementHandlers } from "./features/ultra-live-settlement/ultra-live-settlement-handler";
@@ -15,8 +13,6 @@ export const containerOptions: gc.IContainerOptions = {
         container.bind(LogStore).to(LogStore);
         container.bind(MarbleRoundTimeStore).to(MarbleRoundTimeStore);
         container.bind(gc.Rounds.RoundTimeStore).toService(MarbleRoundTimeStore as any);
-        container.bind(MarbleBetStore).to(MarbleBetStore);
-        container.bind(gc.Bet.BetHandler).toService(BetHandler as any);
         container.bind(gc.Settlements.SettlementHandlers).toService(UltraLiveSettlementHandlers);
     },
     disabledFeatures: ["odds"],

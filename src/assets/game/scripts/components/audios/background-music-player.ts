@@ -1,8 +1,6 @@
 import { _decorator, AudioSource, tween } from "cc";
 import MusicPlayer from "db://shared-components/game/audios/scripts/component/music-player";
-import Observer from "observer";
 const { ccclass, property } = _decorator;
-const { render, handle } = Observer;
 
 @ccclass("BackgroundMusicPlayer")
 export class BackgroundMusicPlayer extends MusicPlayer {

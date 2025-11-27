@@ -23,7 +23,8 @@
         "obfuscator-config-file": "ts-node ./site-configs/site-config-obfuscator.ts",
         "install-dependencies": "npm install",
         "upgrade-game-base": "npm upgrade @sg/game-client-base --save",
-        "test:integration": "playwright test tests/integration-tests"
+        "test:integration": "playwright test tests/integration-tests",
+        "typecheck": "tsc --project tsconfig.typecheck.json"
     },
     "dependencies": {
         "@sg/cocos-integration-testing": "1.6.2",

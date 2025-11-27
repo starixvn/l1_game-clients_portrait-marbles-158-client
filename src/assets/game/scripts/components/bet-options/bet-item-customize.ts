@@ -3,7 +3,7 @@ import BetItem from "db://shared-components/game/bets/scripts/components/bet-ite
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
-import { MarbleBetStore } from "../../features/bet/bet-store";
+import gc from "@sg/game-client-base";
 
 const { property, ccclass } = _decorator;
 const { render } = Observer;
@@ -28,9 +28,14 @@ export default class BetItemCustomize extends BetItem {
         super.onLoad();
     }
 
-    @render(MarbleBetStore, (store) => store.allowBet)
-    renderAllowBet(allowBet: boolean) {
-        this.toggleBetOption(allowBet);
+    @render(gc.Rounds.RoundTimeStore, (store) => store.startPlacingBet)
+    renderStartPlacingBet(startPlacingBet: boolean) {
+        this.toggleBetOption(startPlacingBet);
+    }
+
+    @render(gc.Rounds.RoundTimeStore, (store) => store.endPlacingBet)
+    renderEndPlacingBet(endPlacingBet: boolean) {
+        this.toggleBetOption(!endPlacingBet);
     }
 
     @render(OddsStore, (store) => store.oddsWithConfig)
@@ -71,7 +76,7 @@ export default class BetItemCustomize extends BetItem {
     }
 
     blockBetOption() {
-        console.log("block bet option ", this.node.name)
+        console.log("block bet option ", this.node.name);
         this.setBlockIconVisibility(true);
         this.setDisabledVisibility(true);
         this.hideOddsIndicators();
