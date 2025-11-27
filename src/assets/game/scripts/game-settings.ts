@@ -1,4 +1,4 @@
-const GAME_NAME = "Marbles158";
+export const GAME_NAME = "Marbles158";
 
 export const settings = {
     id: 158,

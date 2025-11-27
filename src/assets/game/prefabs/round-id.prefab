@@ -39,8 +39,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 529.86,
+      "x": 304.736,
+      "y": 489.998,
       "z": 0
     },
     "_lrot": {
@@ -96,8 +96,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 3.362,
+      "y": -1,
       "z": 0
     },
     "_lrot": {
@@ -320,7 +320,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 154,
+      "width": 147,
       "height": 32
     },
     "_anchorPoint": {
@@ -356,7 +356,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "c91f76e7-44d1-4061-9094-1b1703d681d0@c647c",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 1,
     "_fillType": 0,
     "_sizeMode": 0,
@@ -369,7 +372,10 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_useGrayscale": false,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "c91f76e7-44d1-4061-9094-1b1703d681d0",
+      "__expectedType__": "cc.SpriteAtlas"
+    },
     "_id": ""
   },
   {
@@ -457,11 +463,11 @@
     "__prefab": {
       "__id__": 21
     },
-    "_alignFlags": 1,
+    "_alignFlags": 33,
     "_target": null,
     "_left": 358,
-    "_right": 0,
-    "_top": 6.639999999999986,
+    "_right": 32.26400000000001,
+    "_top": 11.201499999999953,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,

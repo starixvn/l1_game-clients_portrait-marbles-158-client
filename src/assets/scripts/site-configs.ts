@@ -1,4 +1,5 @@
 import gc from "@sg/game-client-base";
+import { GAME_NAME } from "../game/scripts/game-settings";
 
 declare global {
     interface Window {
@@ -20,11 +21,11 @@ const defaultConfig: gc.Configs.SiteConfigs = {
     enableMsgpackParserOnNotification: false,
     enableMsgpackParserAllGames: false,
     websocket: {
-        proxyPath: "marbles158",
-        route: "marbles158",
+        proxyPath: GAME_NAME.toLowerCase(),
+        route: GAME_NAME.toLowerCase(),
     },
     tolgeeUrl: "",
-    storagePrefixKey: "portrait_marbles158",
+    storagePrefixKey: `portrait_${GAME_NAME.toLowerCase()}`,
     sentry: {
         dsn: "https://289e71b8cf3992d7e184e21f63aed0b5@sentry-k8s.lumigame.com/29",
         browserUrl: "https://browser.sentry-cdn.com/10.5.0/bundle.min.js",
