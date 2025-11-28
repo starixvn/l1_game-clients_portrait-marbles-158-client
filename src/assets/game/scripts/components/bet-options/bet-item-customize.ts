@@ -30,7 +30,6 @@ export default class BetItemCustomize extends BetItem {
 
     @render(MarbleRoundTimeStore, (store) => store.startPlacingBet)
     renderStartPlacingBet(startPlacingBet: boolean) {
-        console.log("renderStartPlacingBet", startPlacingBet);
         this.toggleBetOption(startPlacingBet);
     }
 

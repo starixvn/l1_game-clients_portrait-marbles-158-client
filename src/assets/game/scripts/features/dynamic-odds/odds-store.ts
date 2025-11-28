@@ -25,7 +25,6 @@ export class OddsStore {
     }
 
     set odds(odds: Record<string, number>) {
-        this._oldOdds = this._odds ?? odds;
         this._odds = odds;
     }
 
@@ -37,6 +36,16 @@ export class OddsStore {
             fractional: this.mainPlayerStore.fractionalOddsFormat,
             deltaOdds,
         };
+    }
+
+    resetOdds() {
+        const odds = {};
+        Object.keys(this._odds || {}).forEach((choice) => {
+            odds[choice] = 0;
+        });
+
+        this._oldOdds = { ...odds };
+        this._odds = { ...odds };
     }
 
     deltaForAllBetOptions(odds: Record<string, number>, oldOdds: Record<string, number>) {

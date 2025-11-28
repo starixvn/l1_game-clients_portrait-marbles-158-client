@@ -4,5 +4,6 @@
             "fileMatch": ["integration-tests/**/*.json"],
             "url": "./src/node_modules/@sg/cocos-integration-testing/schema.json"
         }
-    ]
+    ],
+    "search-node-modules.path": "src/node_modules"
 }
