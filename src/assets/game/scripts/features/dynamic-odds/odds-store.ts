@@ -1,13 +1,14 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
+import { BetOptionsData } from "../types";
 
 const { injectable, inject } = inversify;
 
 export type OddsWithConfig = {
-    odds: Record<string, number>;
+    odds: BetOptionsData;
     fractional: boolean;
-    deltaOdds: Record<string, number>;
+    deltaOdds: BetOptionsData;
 };
 
 @injectable()
@@ -17,14 +18,14 @@ export class OddsStore {
     constructor() {
         mobx.makeAutoObservable(this);
     }
-    private _oldOdds = {};
-    private _odds = {};
+    private _oldOdds: BetOptionsData = {};
+    private _odds: BetOptionsData = {};
 
     get odds() {
         return this._odds;
     }
 
-    set odds(odds: Record<string, number>) {
+    set odds(odds: BetOptionsData) {
         this._odds = odds;
     }
 
@@ -39,7 +40,7 @@ export class OddsStore {
     }
 
     resetOdds() {
-        const odds = {};
+        const odds: BetOptionsData = {};
         Object.keys(this._odds || {}).forEach((choice) => {
             odds[choice] = 0;
         });
@@ -48,8 +49,8 @@ export class OddsStore {
         this._odds = { ...odds };
     }
 
-    deltaForAllBetOptions(odds: Record<string, number>, oldOdds: Record<string, number>) {
-        const deltaOdds = {};
+    deltaForAllBetOptions(odds: BetOptionsData, oldOdds: BetOptionsData) {
+        const deltaOdds: BetOptionsData = {};
         for (const betOptionName of Object.keys(odds)) {
             deltaOdds[`${betOptionName}`] = this.deltaOdds(odds[`${betOptionName}`] || 0, oldOdds[`${betOptionName}`] || 0);
         }

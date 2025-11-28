@@ -1,9 +1,12 @@
-import { _decorator, Node } from "cc";
+import gc from "@sg/game-client-base";
+import { _decorator, Label, Node } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
+import { PointsStore } from "../../features/points/points-store";
 import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
+import { BetOptionsData } from "../../features/types";
 
 const { property, ccclass } = _decorator;
 const { render } = Observer;
@@ -92,6 +95,21 @@ export default class BetItemCustomize extends BetItem {
         this.setBlockIconVisibility(!allowBet);
         if (allowBet) {
             this.updateStatusLabelOdds(true);
+        }
+    }
+
+    @render(PointsStore, (store) => store.points)
+    renderPoints(points: BetOptionsData) {
+        const names = ["over", "under"];
+        if (!names.includes(this.betChoice)) {
+            return;
+        }
+
+        const point = points[this.betChoice];
+        if (point) {
+            this.choice.getComponent(Label).string = gc.Translator.translate(`SpinnerSoccerUltraLive.glossary_${this.betChoice}`, {
+                point: point.toString(),
+            }).toUpperCase();
         }
     }
 }
