@@ -338,12 +338,12 @@ export const languages = {
         "team_GER": "Germany",
         "team_ESP": "Spain",
         "glossary_home": "Casa",
-        "glossary_away": "Fora)",
+        "glossary_away": "Fora",
         "glossary_draw": "Empate",
-        "glossary_over": "Acima",
+        "glossary_over": "Mais de %{point}",
         "glossary_odd": "Ímpar",
         "glossary_even": "Par",
-        "glossary_under": "Abaixo",
+        "glossary_under": "Menos de %{point}",
         "game_name": "Spinner Soccer Ultra Live",
         "game_icon_name": "Spinner Soccer Ultra Live"
     }

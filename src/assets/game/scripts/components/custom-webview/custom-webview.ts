@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, CCString, log, WebView } from 'cc';
+import { _decorator, CCInteger, CCString, log, WebView } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 
 const { ccclass, property } = _decorator;
@@ -6,13 +6,13 @@ const { ccclass, property } = _decorator;
 @ccclass
 export default class CustomWebview extends ObserverComponent {
     @property(WebView)
-    webview: WebView = null!;
+    webview: WebView = null;
 
     @property(CCString)
-    wrapperId: string = "custom-webview-wrapper";
+    wrapperId = "custom-webview-wrapper";
 
     @property(CCInteger)
-    zIndex: number = -1;
+    zIndex = -1;
 
     onLoad() {
         log("webview loaded");
@@ -25,7 +25,7 @@ export default class CustomWebview extends ObserverComponent {
     modifyWebViewWrapper() {
         const impl = (this.webview as any)._impl;
         if (!impl?._webview?.parentElement) {
-            console.warn('WebView not ready.');
+            console.warn("WebView not ready.");
             return;
         }
         const wrapper = impl._webview.parentElement;
@@ -36,5 +36,3 @@ export default class CustomWebview extends ObserverComponent {
         (impl._webview as HTMLIFrameElement).allow = "autoplay";
     }
 }
-
-
