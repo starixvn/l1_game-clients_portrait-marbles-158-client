@@ -1,4 +1,5 @@
 export const GAME_NAME = "Marbles158";
+export const TRANSLATE_NAMESPACE = "SpinnerSoccerUltraLive";
 
 export const settings = {
     id: 158,

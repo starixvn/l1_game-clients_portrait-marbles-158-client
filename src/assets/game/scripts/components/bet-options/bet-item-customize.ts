@@ -6,7 +6,8 @@ import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
 import { PointsStore } from "../../features/points/points-store";
 import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
-import { BetOptionsData } from "../../features/types";
+import { TRANSLATE_NAMESPACE } from "../../game-settings";
+import { BetOptionsData } from "../../types";
 
 const { property, ccclass } = _decorator;
 const { render } = Observer;
@@ -108,7 +109,7 @@ export default class BetItemCustomize extends BetItem {
 
         const point = points[this.betChoice] ?? 0;
         if (point > 0) {
-            this.choice.getComponent(Label).string = gc.Translator.translate(`SpinnerSoccerUltraLive.glossary_${this.betChoice}`, {
+            this.choice.getComponent(Label).string = gc.Translator.translate(`${TRANSLATE_NAMESPACE}.glossary_${this.betChoice}`, {
                 point: point.toString(),
             }).toUpperCase();
         }

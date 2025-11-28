@@ -1,7 +1,7 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
-import { BetOptionsData } from "../types";
+import { BetOptionsData } from "../../types";
 import { PointsStore } from "./points-store";
 
 const { injectable, inject } = inversify;

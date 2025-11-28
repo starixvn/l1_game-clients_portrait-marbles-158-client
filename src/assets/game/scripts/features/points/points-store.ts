@@ -1,6 +1,6 @@
 import inversify from "inversify";
 import mobx from "mobx";
-import { BetOptionsData } from "../types";
+import { BetOptionsData } from "../../types";
 
 const { injectable } = inversify;
 

@@ -1,8 +1,8 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
+import { BetOptionsData } from "../../types";
 import { MarbleRoundTimeStore } from "../rounds/marble-round-time-store";
-import { BetOptionsData } from "../types";
 import { OddsStore } from "./odds-store";
 
 const { injectable, inject } = inversify;
