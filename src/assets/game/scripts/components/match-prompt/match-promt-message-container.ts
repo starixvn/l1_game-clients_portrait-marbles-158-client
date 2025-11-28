@@ -20,13 +20,15 @@ export class MatchPromptMessageContainer extends PromptMessageContainer {
     @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
     async showMatchMessage(endPlacingBet: boolean) {
         if (endPlacingBet) {
+            console.log("showMatchMessage", endPlacingBet);
+            console.log("this.getComponent()", this.getComponent());
             this.scheduleOnce(() => this.getComponent()?.showTimeUpMessage(), 0.5);
         }
     }
 
-    @render(MarbleRoundTimeStore, (store) => store.isStartingRound)
-    showStartBetMessage(isStartingRound: boolean) {
-        if (isStartingRound) {
+    @render(MarbleRoundTimeStore, (store) => store.startPlacingBet)
+    showStartBetMessage(startPlacingBet: boolean) {
+        if (startPlacingBet) {
             this.scheduleOnce(() => {
                 this.getComponent()?.showStartBetMessage();
                 this.playSound(PROMPT_SOUND_ID.START_BETTING);
