@@ -1,4 +1,36 @@
 {
-    "lobbyNames": {},
-    "gameNames": {}
+    "lobbyNames": {
+        "en": "Spinner Soccer Ultra Live",
+        "th": "Spinner Soccer Ultra Live",
+        "id": "Spinner Soccer Ultra Live",
+        "vi": "Spinner Soccer Ultra Live",
+        "zh_cn": "Spinner Soccer Ultra Live",
+        "zh_tw": "Spinner Soccer Ultra Live",
+        "ja": "Spinner Soccer Ultra Live",
+        "es": "Spinner Soccer Ultra Live",
+        "tr": "Spinner Soccer Ultra Live",
+        "fil_ph": "Spinner Soccer Ultra Live",
+        "pt_br": "Spinner Soccer Ultra Live",
+        "ko": "Spinner Soccer Ultra Live",
+        "bn_bd": "Spinner Soccer Ultra Live",
+        "hi_in": "Spinner Soccer Ultra Live",
+        "ms_my": "Spinner Soccer Ultra Live"
+    },
+    "gameNames": {
+        "en": "Spinner Soccer Ultra Live",
+        "th": "Spinner Soccer Ultra Live",
+        "id": "Spinner Soccer Ultra Live",
+        "vi": "Spinner Soccer Ultra Live",
+        "zh_cn": "Spinner Soccer Ultra Live",
+        "zh_tw": "Spinner Soccer Ultra Live",
+        "ja": "Spinner Soccer Ultra Live",
+        "es": "Spinner Soccer Ultra Live",
+        "tr": "Spinner Soccer Ultra Live",
+        "fil_ph": "Spinner Soccer Ultra Live",
+        "pt_br": "Spinner Soccer Ultra Live",
+        "ko": "Spinner Soccer Ultra Live",
+        "bn_bd": "Spinner Soccer Ultra Live",
+        "hi_in": "Spinner Soccer Ultra Live",
+        "ms_my": "Spinner Soccer Ultra Live"
+    }
 }

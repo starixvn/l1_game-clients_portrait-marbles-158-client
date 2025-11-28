@@ -341,9 +341,11 @@ export const languages = {
         "glossary_away": "Fora)",
         "glossary_draw": "Empate",
         "glossary_over": "Acima",
-        "glossary_undergoal": "Abaixo",
         "glossary_odd": "Ímpar",
-        "glossary_even": "Par"
+        "glossary_even": "Par",
+        "glossary_under": "Abaixo",
+        "game_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer Ultra Live"
     }
 };
 

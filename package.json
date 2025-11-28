@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "get-tolgee-data": "npx tolgee-generator ./tolgee.json",
-        "generate-tolgee-game-name": "ts-node ./tolgee-generator/index.ts"
+        "generate-tolgee-remote-icon": "ts-node ./tolgee-generator/index.ts"
     },
     "keywords": [],
     "author": "",

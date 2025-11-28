@@ -341,9 +341,11 @@ export const languages = {
         "glossary_away": "(Lawan)",
         "glossary_draw": "Seri",
         "glossary_over": "Lebih",
-        "glossary_undergoal": "Bawah",
         "glossary_odd": "Ganjil",
-        "glossary_even": "Genap"
+        "glossary_even": "Genap",
+        "glossary_under": "Bawah",
+        "game_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer Ultra Live"
     }
 };
 

@@ -341,9 +341,11 @@ export const languages = {
         "glossary_away": "(দূরে)",
         "glossary_draw": "ড্র",
         "glossary_over": "উপরে",
-        "glossary_undergoal": "নীচে",
         "glossary_odd": "বিজোড়",
-        "glossary_even": "জোড়"
+        "glossary_even": "জোড়",
+        "glossary_under": "নীচে",
+        "game_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer Ultra Live"
     }
 };
 

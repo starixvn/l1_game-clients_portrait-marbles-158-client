@@ -341,9 +341,11 @@ export const languages = {
         "glossary_away": "어웨이)",
         "glossary_draw": "무승부",
         "glossary_over": "오버",
-        "glossary_undergoal": "언더",
         "glossary_odd": "홀",
-        "glossary_even": "짝"
+        "glossary_even": "짝",
+        "glossary_under": "언더",
+        "game_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer Ultra Live"
     }
 };
 
