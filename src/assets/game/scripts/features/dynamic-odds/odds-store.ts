@@ -18,7 +18,7 @@ export class OddsStore {
     constructor() {
         mobx.makeAutoObservable(this);
     }
-    private _oldOdds: BetOptionsData = {};
+    private _previousOdds: BetOptionsData = {};
     private _odds: BetOptionsData = {};
 
     get odds() {
@@ -29,11 +29,19 @@ export class OddsStore {
         this._odds = odds;
     }
 
+    set previousOdds(previousOdds: BetOptionsData) {
+        this._previousOdds = previousOdds;
+    }
+
+    get previousOdds() {
+        return this._previousOdds;
+    }
+
     get oddsWithConfig(): OddsWithConfig {
-        const deltaOdds = this.deltaForAllBetOptions(this._oldOdds, this._odds);
+        const deltaOdds = this.deltaForAllBetOptions(this._previousOdds, this.previousOdds);
 
         return {
-            odds: this._odds,
+            odds: this.odds,
             fractional: this.mainPlayerStore.fractionalOddsFormat,
             deltaOdds,
         };
@@ -41,12 +49,11 @@ export class OddsStore {
 
     resetOdds() {
         const odds: BetOptionsData = {};
-        Object.keys(this._odds || {}).forEach((choice) => {
+        Object.keys(this.odds || {}).forEach((choice) => {
             odds[choice] = 0;
         });
 
-        this._oldOdds = { ...odds };
-        this._odds = { ...odds };
+        this._previousOdds = { ...odds };
     }
 
     deltaForAllBetOptions(odds: BetOptionsData, oldOdds: BetOptionsData) {

@@ -8,7 +8,7 @@ import { OddsStore } from "./odds-store";
 const { injectable, inject } = inversify;
 
 @injectable()
-export class OddsHandler implements gc.Shared.IHandler<BetOptionsData> {
+export class OddsHandler implements gc.Shared.IMultipleHandlers {
     @inject(OddsStore) private readonly oddsStore: OddsStore;
     @inject(MarbleRoundTimeStore) private readonly marbleRoundTimeStore: MarbleRoundTimeStore;
 
@@ -27,9 +27,22 @@ export class OddsHandler implements gc.Shared.IHandler<BetOptionsData> {
         }, 0);
     }
 
-    name = gc.Shared.GameServiceMessage.GameOdds.eventName;
-    handle(input: BetOptionsData) {
+    eventHandleList = [
+        {
+            name: gc.Shared.GameServiceMessage.GameOdds.eventName,
+            handle: this.handleOdd,
+        },
+        {
+            name: "previousOdds",
+            handle: this.handlePreviousOdds,
+        },
+    ];
+
+    handleOdd(input: BetOptionsData) {
         this.oddsStore.odds = input;
+    }
+    handlePreviousOdds(input: BetOptionsData) {
+        this.oddsStore.previousOdds = input;
     }
 
     resetOdds() {

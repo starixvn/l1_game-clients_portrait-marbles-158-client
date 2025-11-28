@@ -25,6 +25,8 @@ export default class BetItemCustomize extends BetItem {
     @property(Node)
     blockIcon: Node = null;
 
+    protected readonly POINTS_SUPPORTED_BET_CHOICES = ["over", "under"];
+
     onLoad(): void {
         this.updateStatusLabelOdds(true);
         this.hideOddsIndicators();
@@ -100,13 +102,12 @@ export default class BetItemCustomize extends BetItem {
 
     @render(PointsStore, (store) => store.points)
     renderPoints(points: BetOptionsData) {
-        const names = ["over", "under"];
-        if (!names.includes(this.betChoice)) {
+        if (!this.POINTS_SUPPORTED_BET_CHOICES.includes(this.betChoice)) {
             return;
         }
 
-        const point = points[this.betChoice];
-        if (point) {
+        const point = points[this.betChoice] ?? 0;
+        if (point > 0) {
             this.choice.getComponent(Label).string = gc.Translator.translate(`SpinnerSoccerUltraLive.glossary_${this.betChoice}`, {
                 point: point.toString(),
             }).toUpperCase();
