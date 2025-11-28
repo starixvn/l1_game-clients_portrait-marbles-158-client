@@ -3,7 +3,7 @@ import BetItem from "db://shared-components/game/bets/scripts/components/bet-ite
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
-import gc from "@sg/game-client-base";
+import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
 
 const { property, ccclass } = _decorator;
 const { render } = Observer;
@@ -28,12 +28,13 @@ export default class BetItemCustomize extends BetItem {
         super.onLoad();
     }
 
-    @render(gc.Rounds.RoundTimeStore, (store) => store.startPlacingBet)
+    @render(MarbleRoundTimeStore, (store) => store.startPlacingBet)
     renderStartPlacingBet(startPlacingBet: boolean) {
+        console.log("renderStartPlacingBet", startPlacingBet);
         this.toggleBetOption(startPlacingBet);
     }
 
-    @render(gc.Rounds.RoundTimeStore, (store) => store.endPlacingBet)
+    @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
     renderEndPlacingBet(endPlacingBet: boolean) {
         this.toggleBetOption(!endPlacingBet);
     }

@@ -1,11 +1,10 @@
-import gc from "@sg/game-client-base";
 import { _decorator } from "cc";
 import { PromptMessageContainer } from "db://shared-components/game/prompt-message/scripts/prompt-message-container";
 import Observer from "observer";
 import { MatchPromptMessage } from "./match-promt-message";
+import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
 
 const { ccclass } = _decorator;
-const { Rounds } = gc;
 const { render } = Observer;
 
 const PROMPT_SOUND_ID = {
@@ -18,7 +17,7 @@ const PROMPT_SOUND_ID = {
 export class MatchPromptMessageContainer extends PromptMessageContainer {
     promptMessageComponent: MatchPromptMessage;
 
-    @render(Rounds.RoundTimeStore, (store) => store.roundTime)
+    @render(MarbleRoundTimeStore, (store) => store.roundTime)
     async showMatchMessage(time: number) {
         // TODO: update this to use the new prompt message component
         if (time === 0) {
@@ -26,7 +25,7 @@ export class MatchPromptMessageContainer extends PromptMessageContainer {
         }
     }
 
-    @render(Rounds.RoundTimeStore, (store) => store.isShowStartBetMessage)
+    @render(MarbleRoundTimeStore, (store) => store.isStartingRound)
     showStartBetMessage(isStartingRound: boolean) {
         if (isStartingRound) {
             this.scheduleOnce(() => {
@@ -36,9 +35,9 @@ export class MatchPromptMessageContainer extends PromptMessageContainer {
         }
     }
 
-    @render(Rounds.RoundTimeStore, (store) => store.isStartLocking)
-    renderIsStartLocking(isStartLocking: boolean) {
-        if (!this.shortLockingDuration && isStartLocking) {
+    @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
+    renderIsStartLocking(endPlacingBet: boolean) {
+        if (!this.shortLockingDuration && endPlacingBet) {
             this.getComponent()?.showStopBetMessage();
             this.playSound(PROMPT_SOUND_ID.STOP_BETTING);
         }
