@@ -17,11 +17,10 @@ const PROMPT_SOUND_ID = {
 export class MatchPromptMessageContainer extends PromptMessageContainer {
     promptMessageComponent: MatchPromptMessage;
 
-    @render(MarbleRoundTimeStore, (store) => store.roundTime)
-    async showMatchMessage(time: number) {
-        // TODO: update this to use the new prompt message component
-        if (time === 0) {
-            this.scheduleOnce(() => this.getComponent().showTimeUpMessage(), 0.5);
+    @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
+    async showMatchMessage(endPlacingBet: boolean) {
+        if (endPlacingBet) {
+            this.scheduleOnce(() => this.getComponent()?.showTimeUpMessage(), 0.5);
         }
     }
 
