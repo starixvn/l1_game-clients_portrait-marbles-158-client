@@ -1,6 +1,7 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import { MarbleRoundTimeStore } from "./marble-round-time-store";
+import { MarbleServiceMessage } from "../marble-service-message";
 
 export enum GameFlow {
     Start = "Start",
@@ -13,13 +14,11 @@ export type MarbleRoundHandlerInput = {
 
 const { injectable, inject } = inversify;
 @injectable()
-export class MarbleGameFlowHandler implements gc.Shared.IHandler<any> {
-    name = "gameFlow";
-
+export class MarbleRoundRunningHandler implements gc.Shared.IMultipleHandlers {
     @inject(MarbleRoundTimeStore) protected readonly roundTimeStore: MarbleRoundTimeStore;
     @inject(gc.Rounds.RoundStore) protected readonly roundStore: gc.Rounds.RoundStore;
 
-    handle(input: GameFlow) {
+    handleGameFlow(input: GameFlow) {
         switch (input) {
             case GameFlow.Start:
                 this.roundTimeStore.startNewRound = true;
@@ -30,4 +29,15 @@ export class MarbleGameFlowHandler implements gc.Shared.IHandler<any> {
                 break;
         }
     }
+
+    stopRunner() {
+        this.roundTimeStore.resetRoundTimeStore();
+    }
+
+    eventHandleList = [
+        {
+            name: MarbleServiceMessage.GameFlow.eventName,
+            handle: this.handleGameFlow,
+        },
+    ];
 }

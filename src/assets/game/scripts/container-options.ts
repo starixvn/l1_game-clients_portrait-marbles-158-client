@@ -5,6 +5,7 @@ import * as MarbleFootball from "./features/feature";
 import { MarbleRoundTimeStore } from "./features/rounds/marble-round-time-store";
 import { MarbleRoundTimeHandlers } from "./features/rounds/marble-round-time-handler";
 import { UltraLiveSettlementHandlers } from "./features/ultra-live-settlement/ultra-live-settlement-handler";
+import { MarbleRoundRunningHandler } from "./features/rounds/marble-round-running-handler";
 import { settings } from "./game-settings";
 
 export const containerOptions: gc.IContainerOptions = {
@@ -15,6 +16,7 @@ export const containerOptions: gc.IContainerOptions = {
         container.bind(MarbleRoundTimeStore).to(MarbleRoundTimeStore);
         container.bind(gc.Rounds.RoundTimeStore).toService(MarbleRoundTimeStore as any);
         container.bind(gc.Rounds.RoundTimeHandlers).toService(MarbleRoundTimeHandlers as any);
+        container.bind(gc.Rounds.RoundRunningHandlers).toService(MarbleRoundRunningHandler as any);
         container.bind(gc.Settlements.SettlementHandlers).toService(UltraLiveSettlementHandlers);
     },
     disabledFeatures: ["odds"],

@@ -7,11 +7,6 @@ const { injectable, inject } = inversify;
 export class MarbleRoundTimeHandlers implements gc.Shared.IMultipleHandlers {
     @inject(MarbleRoundTimeStore) protected readonly store: MarbleRoundTimeStore;
 
-    handleStartNewRoundStatus(snr: boolean) {
-        this.store.startNewRound = snr;
-        this.store.roundState = MARBLE_ROUND_STATE.STARTING_ROUND;
-    }
-
     handleStartPlacingBetStatus(spb: boolean) {
         this.store.startPlacingBet = spb;
         this.store.endPlacingBet = !spb;
@@ -35,10 +30,6 @@ export class MarbleRoundTimeHandlers implements gc.Shared.IMultipleHandlers {
     }
 
     eventHandleList = [
-        {
-            name: gc.GameServiceMessage.snr,
-            handle: this.handleStartNewRoundStatus,
-        },
         {
             name: gc.GameServiceMessage.spb,
             handle: this.handleStartPlacingBetStatus,
