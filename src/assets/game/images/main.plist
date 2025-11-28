@@ -86,13 +86,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{275,249}</string>
+                <string>{232,252}</string>
                 <key>spriteSourceSize</key>
-                <string>{275,249}</string>
+                <string>{232,252}</string>
                 <key>textureRect</key>
-                <string>{{3,3},{275,249}}</string>
+                <string>{{3,505},{232,252}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>disable_home_away.png</key>
             <dict>
@@ -101,13 +101,13 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{232,252}</string>
+                <string>{275,249}</string>
                 <key>spriteSourceSize</key>
-                <string>{232,252}</string>
+                <string>{275,249}</string>
                 <key>textureRect</key>
-                <string>{{3,505},{232,252}}</string>
+                <string>{{3,3},{275,249}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>disable_under_even.png</key>
             <dict>
@@ -228,7 +228,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:41268bac7e13a9e6ea4eb5f6240cadde:1533006205f958d5026b47fad1d31586:b0f8fbd393ae9d1a95baaa51e50f3d50$</string>
+            <string>$TexturePacker:SmartUpdate:a6ed65b38c5ae1fb6fd114d07b65ebed:2e911b7ff8cf3e10bb1f76536e933d82:b0f8fbd393ae9d1a95baaa51e50f3d50$</string>
             <key>textureFileName</key>
             <string>main.webp</string>
         </dict>

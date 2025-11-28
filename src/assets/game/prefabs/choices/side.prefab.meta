@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "4f0c68ca-2391-40a7-b583-3f3ab6fc82fc",
+  "uuid": "8aea7d57-4aae-464f-bfc9-eaba38b3d0d2",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "container-highlight"
+    "syncNodeName": "side"
   }
 }

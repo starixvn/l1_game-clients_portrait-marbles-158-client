@@ -1,5 +1,5 @@
-import inversify from "inversify";
 import gc from "@sg/game-client-base";
+import inversify from "inversify";
 import { MarbleRoundTimeStore } from "./marble-round-time-store";
 
 export enum GameFlow {
