@@ -47,7 +47,7 @@ export class OddsStore {
     }
 
     get oddsWithConfig(): OddsWithConfig {
-        const deltaOdds = this.deltaForAllBetOptions(this._previousOdds, this.previousOdds);
+        const deltaOdds = this.deltaForAllBetOptions(this._previousOdds, this._odds);
 
         return {
             odds: this.odds,
@@ -66,15 +66,15 @@ export class OddsStore {
         this._odds = { ...odds };
     }
 
-    deltaForAllBetOptions(odds: BetOptionsData, oldOdds: BetOptionsData) {
+    deltaForAllBetOptions(previousOdds: BetOptionsData, odds: BetOptionsData) {
         const deltaOdds: BetOptionsData = {};
         for (const betOptionName of Object.keys(odds)) {
-            deltaOdds[`${betOptionName}`] = this.deltaOdds(odds[`${betOptionName}`] || 0, oldOdds[`${betOptionName}`] || 0);
+            deltaOdds[`${betOptionName}`] = this.deltaOdds(previousOdds[`${betOptionName}`] || 0, odds[`${betOptionName}`] || 0);
         }
         return deltaOdds;
     }
 
-    deltaOdds(oldOdds: number, newOdds: number) {
-        return newOdds - oldOdds;
+    deltaOdds(previousOdds: number, odds: number) {
+        return odds - previousOdds;
     }
 }
