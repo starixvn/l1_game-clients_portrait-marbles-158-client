@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{19,12}</string>
                 <key>textureRect</key>
-                <string>{{478,186},{19,12}}</string>
+                <string>{{497,3},{19,12}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>arrow-up.png</key>
             <dict>
@@ -30,9 +30,9 @@
                 <key>spriteSourceSize</key>
                 <string>{19,12}</string>
                 <key>textureRect</key>
-                <string>{{478,200},{19,12}}</string>
+                <string>{{497,24},{19,12}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>bg-number.png</key>
             <dict>
@@ -45,7 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{70,70}</string>
                 <key>textureRect</key>
-                <string>{{356,391},{62,62}}</string>
+                <string>{{421,51},{62,62}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +60,7 @@
                 <key>spriteSourceSize</key>
                 <string>{74,46}</string>
                 <key>textureRect</key>
-                <string>{{280,391},{74,46}}</string>
+                <string>{{421,3},{74,46}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{48,48}</string>
                 <key>textureRect</key>
-                <string>{{280,439},{48,48}}</string>
+                <string>{{280,503},{48,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{232,252}</string>
                 <key>textureRect</key>
-                <string>{{3,505},{232,252}}</string>
+                <string>{{3,573},{232,252}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>disable_home_away.png</key>
             <dict>
@@ -105,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{275,249}</string>
                 <key>textureRect</key>
-                <string>{{3,3},{275,249}}</string>
+                <string>{{3,71},{275,249}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -120,7 +120,22 @@
                 <key>spriteSourceSize</key>
                 <string>{196,192}</string>
                 <key>textureRect</key>
-                <string>{{280,3},{196,192}}</string>
+                <string>{{280,115},{196,192}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>menu-expand.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{416,66}</string>
+                <key>spriteSourceSize</key>
+                <string>{416,66}</string>
+                <key>textureRect</key>
+                <string>{{3,3},{416,66}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -135,7 +150,7 @@
                 <key>spriteSourceSize</key>
                 <string>{24,33}</string>
                 <key>textureRect</key>
-                <string>{{478,151},{24,33}}</string>
+                <string>{{485,51},{24,33}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -150,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{14,15}</string>
                 <key>textureRect</key>
-                <string>{{478,214},{14,15}}</string>
+                <string>{{485,86},{14,15}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -165,7 +180,7 @@
                 <key>spriteSourceSize</key>
                 <string>{146,30}</string>
                 <key>textureRect</key>
-                <string>{{478,3},{146,30}}</string>
+                <string>{{478,115},{146,30}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -180,7 +195,7 @@
                 <key>spriteSourceSize</key>
                 <string>{275,249}</string>
                 <key>textureRect</key>
-                <string>{{3,254},{275,249}}</string>
+                <string>{{3,322},{275,249}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -195,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{232,248}</string>
                 <key>textureRect</key>
-                <string>{{257,505},{232,248}}</string>
+                <string>{{237,573},{232,248}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -210,7 +225,7 @@
                 <key>spriteSourceSize</key>
                 <string>{196,192}</string>
                 <key>textureRect</key>
-                <string>{{280,197},{196,192}}</string>
+                <string>{{280,309},{196,192}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -228,7 +243,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a6ed65b38c5ae1fb6fd114d07b65ebed:2e911b7ff8cf3e10bb1f76536e933d82:b0f8fbd393ae9d1a95baaa51e50f3d50$</string>
+            <string>$TexturePacker:SmartUpdate:386b96136efe1069ca0723915c22e7ea:48b96fb5cc437e9c6bf0cf97aa84378b:b0f8fbd393ae9d1a95baaa51e50f3d50$</string>
             <key>textureFileName</key>
             <string>main.webp</string>
         </dict>
