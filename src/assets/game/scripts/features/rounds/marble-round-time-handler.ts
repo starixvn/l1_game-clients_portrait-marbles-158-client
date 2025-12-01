@@ -10,13 +10,19 @@ export class MarbleRoundTimeHandlers implements gc.Shared.IMultipleHandlers {
     handleStartPlacingBetStatus(spb: boolean) {
         this.store.startPlacingBet = spb;
         this.store.endPlacingBet = !spb;
-        this.store.roundState = MARBLE_ROUND_STATE.PLACING_BET;
+
+        if (spb) {
+            this.store.roundState = MARBLE_ROUND_STATE.PLACING_BET;
+        }
     }
 
     handleEndPlacingBetStatus(epb: boolean) {
         this.store.endPlacingBet = epb;
         this.store.startPlacingBet = !epb;
-        this.store.roundState = MARBLE_ROUND_STATE.LOCKING_BET;
+
+        if (epb) {
+            this.store.roundState = MARBLE_ROUND_STATE.LOCKING_BET;
+        }
     }
 
     handleEndRoundStatus(finish: gc.GameServiceMessage.Finish | undefined) {
