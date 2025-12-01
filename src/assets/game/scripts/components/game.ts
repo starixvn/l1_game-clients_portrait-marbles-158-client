@@ -1,4 +1,4 @@
-import { _decorator } from "cc";
+import { _decorator, Label } from "cc";
 import { startGame } from "db://shared-components/shared/scripts/startup";
 import Observer from "observer";
 
@@ -17,6 +17,9 @@ const { observer, render, handle } = Observer;
 @ccclass
 @observer(settings.name)
 export default class Game extends GameComponent {
+    @property({ visible: false, override: true })
+    override lblRoundId: Label = null;
+
     @property({ visible: false, override: true })
     override lblMinBet = null;
 
