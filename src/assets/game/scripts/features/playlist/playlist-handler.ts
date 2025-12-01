@@ -9,7 +9,6 @@ export class PlaylistHandler implements gc.Shared.IHandler<string> {
     name = "playlist";
     @inject(PlaylistStore) private readonly playlistStore: PlaylistStore;
     handle(playlist: string) {
-        console.log("playlist-handler handle", playlist);
         this.playlistStore.playlist = playlist;
     }
 }

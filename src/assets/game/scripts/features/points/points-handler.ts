@@ -16,7 +16,6 @@ export class PointsHandler implements gc.Shared.IHandler<BetOptionsData> {
 
     name = "points";
     handle(data: BetOptionsData) {
-        console.log("points-handler handle", JSON.stringify(data));
         this.pointsStore.points = data;
     }
 }
