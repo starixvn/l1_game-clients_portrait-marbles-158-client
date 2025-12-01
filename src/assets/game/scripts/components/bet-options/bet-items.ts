@@ -43,22 +43,6 @@ export class BetItems extends BetItemsPolygonBase {
         }
     }
 
-    handleBetPercentage(betPercentage: gc.GameServiceMessage.BetPercentage) {}
-
-    handleResetHighlight(isResetHighlight: boolean) {}
-
-    handleResetHighlightPrevMatch(isResetHighlightPreMatch: boolean) {
-        if (isResetHighlightPreMatch && !this.isLiveBets) {
-            this.clearHighlightStatic();
-        }
-    }
-
-    handleResetHighlightLive(isResetHighlightLive: boolean) {
-        if (isResetHighlightLive && this.isLiveBets) {
-            this.clearHighlightStatic();
-        }
-    }
-
     @render(gc.Rounds.RoundStore, (store) => store.userBetPercentage)
     handleUserBetPercentage(userBetPercentage: gc.GameServiceMessage.UserBetPercentage) {
         this.betItemComponents?.forEach((betItem) => {
