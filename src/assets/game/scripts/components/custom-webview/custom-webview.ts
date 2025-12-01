@@ -34,5 +34,6 @@ export default class CustomWebview extends ObserverComponent {
         impl._webview.id = `${this.wrapperId}-webview`;
         impl._webview.title = `${this.wrapperId}-webview`;
         (impl._webview as HTMLIFrameElement).allow = "autoplay";
+        (impl._webview as HTMLIFrameElement).allow = "private-network";
     }
 }
