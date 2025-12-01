@@ -1,11 +1,12 @@
 import { _decorator } from "cc";
-import { PromptMessageContainer } from "db://shared-components/game/prompt-message/scripts/prompt-message-container";
 import Observer from "observer";
 import { MatchPromptMessage } from "./match-promt-message";
 import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
+import { NodeContainer } from "db://shared-components/shared/common-components/node-container/node-container";
+import gc from "@sg/game-client-base";
 
 const { ccclass } = _decorator;
-const { render } = Observer;
+const { render, handle } = Observer;
 
 const PROMPT_SOUND_ID = {
     START_BETTING: "start-betting",
@@ -14,31 +15,27 @@ const PROMPT_SOUND_ID = {
 };
 
 @ccclass("MatchPromptMessageContainer")
-export class MatchPromptMessageContainer extends PromptMessageContainer {
+export class MatchPromptMessageContainer extends NodeContainer {
     promptMessageComponent: MatchPromptMessage;
 
-    @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
-    async showMatchMessage(endPlacingBet: boolean) {
-        if (endPlacingBet) {
-            console.log("showMatchMessage", endPlacingBet);
-            console.log("this.getComponent()", this.getComponent());
-            this.scheduleOnce(() => this.getComponent()?.showTimeUpMessage(), 0.5);
+    @render(MarbleRoundTimeStore, (store) => store.endRound)
+    async showTimeUpMessage(endRound: boolean) {
+        if (endRound) {
+            this.getComponent()?.showTimeUpMessage();
         }
     }
 
     @render(MarbleRoundTimeStore, (store) => store.startPlacingBet)
     showStartBetMessage(startPlacingBet: boolean) {
         if (startPlacingBet) {
-            this.scheduleOnce(() => {
-                this.getComponent()?.showStartBetMessage();
-                this.playSound(PROMPT_SOUND_ID.START_BETTING);
-            }, 1);
+            this.getComponent()?.showStartBetMessage();
+            this.playSound(PROMPT_SOUND_ID.START_BETTING);
         }
     }
 
     @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
-    renderIsStartLocking(endPlacingBet: boolean) {
-        if (!this.shortLockingDuration && endPlacingBet) {
+    showStopBetMessage(endPlacingBet: boolean) {
+        if (endPlacingBet) {
             this.getComponent()?.showStopBetMessage();
             this.playSound(PROMPT_SOUND_ID.STOP_BETTING);
         }
@@ -51,5 +48,10 @@ export class MatchPromptMessageContainer extends PromptMessageContainer {
         }
 
         return this.promptMessageComponent;
+    }
+
+    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
+    playSound(id: string) {
+        return id;
     }
 }
