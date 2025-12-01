@@ -1,18 +1,15 @@
 import gc from "@sg/game-client-base";
-import { _decorator, CCBoolean, Widget } from "cc";
+import { _decorator, Widget } from "cc";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
 import observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
 import BetItemCustomize from "./bet-item-customize";
 
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 const { render } = observer;
 
 @ccclass
 export class BetItems extends BetItemsPolygonBase {
-    @property(CCBoolean)
-    isLiveBets = false;
-
     @render(OddsStore, (store) => store.oddsWithConfig)
     renderOdds(oddsWithConfig: OddsWithConfig) {
         const { odds, fractional } = oddsWithConfig;
