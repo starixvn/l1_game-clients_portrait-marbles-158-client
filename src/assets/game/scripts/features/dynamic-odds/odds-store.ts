@@ -20,6 +20,7 @@ export class OddsStore {
     }
     private _previousOdds: BetOptionsData = {};
     private _odds: BetOptionsData = {};
+    private _points: BetOptionsData = {};
 
     get odds() {
         return this._odds;
@@ -35,6 +36,14 @@ export class OddsStore {
 
     get previousOdds() {
         return this._previousOdds;
+    }
+
+    get points() {
+        return this._points;
+    }
+
+    set points(points: BetOptionsData) {
+        this._points = points;
     }
 
     get oddsWithConfig(): OddsWithConfig {
@@ -53,7 +62,8 @@ export class OddsStore {
             odds[choice] = 0;
         });
 
-        this._previousOdds = { ...odds };
+        this._previousOdds = { ...this.odds };
+        this._odds = { ...odds };
     }
 
     deltaForAllBetOptions(odds: BetOptionsData, oldOdds: BetOptionsData) {

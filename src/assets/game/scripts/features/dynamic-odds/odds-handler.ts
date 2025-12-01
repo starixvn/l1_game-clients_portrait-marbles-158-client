@@ -4,6 +4,7 @@ import mobx from "mobx";
 import { BetOptionsData } from "../../types";
 import { MarbleRoundTimeStore } from "../rounds/marble-round-time-store";
 import { OddsStore } from "./odds-store";
+import { MarbleServiceMessage } from "../marble-service-message";
 
 const { injectable, inject } = inversify;
 
@@ -27,25 +28,34 @@ export class OddsHandler implements gc.Shared.IMultipleHandlers {
         }, 0);
     }
 
-    eventHandleList = [
-        {
-            name: gc.Shared.GameServiceMessage.GameOdds.eventName,
-            handle: this.handleOdd,
-        },
-        {
-            name: "previousOdds",
-            handle: this.handlePreviousOdds,
-        },
-    ];
-
-    handleOdd(input: BetOptionsData) {
+    handleOdds(input: BetOptionsData) {
         this.oddsStore.odds = input;
     }
+
     handlePreviousOdds(input: BetOptionsData) {
         this.oddsStore.previousOdds = input;
+    }
+
+    handlePoints(input: BetOptionsData) {
+        this.oddsStore.points = input;
     }
 
     resetOdds() {
         this.oddsStore.resetOdds();
     }
+
+    eventHandleList = [
+        {
+            name: gc.Shared.GameServiceMessage.GameOdds.eventName,
+            handle: this.handleOdds,
+        },
+        {
+            name: MarbleServiceMessage.PreviousOdds.eventName,
+            handle: this.handlePreviousOdds,
+        },
+        {
+            name: MarbleServiceMessage.OddsPoints.eventName,
+            handle: this.handlePoints,
+        },
+    ];
 }
