@@ -8,6 +8,8 @@ import BetItemCustomize from "./bet-item-customize";
 const { ccclass } = _decorator;
 const { render } = observer;
 
+const { RoundHistories } = gc;
+
 @ccclass
 export class BetItems extends BetItemsPolygonBase {
     @render(OddsStore, (store) => store.oddsWithConfig)
@@ -46,5 +48,15 @@ export class BetItems extends BetItemsPolygonBase {
             const choice = betItem?.node?.name;
             betItem?.renderUserBetPercentage(userBetPercentage?.[choice] ?? 0);
         });
+    }
+
+    override setHighlightStatic(staticHighlight: boolean, animationHighlight: boolean, roundHistory: gc.RoundHistories.RoundHistory) {
+        if (staticHighlight || animationHighlight) {
+            const settlementResult = roundHistory.settlementResult as any;
+            if (settlementResult) {
+                const value = Object.values(settlementResult).at(-1) as gc.GameServiceMessage.TSettlementResult;
+                value && this.showHighlightStatic(value);
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
-import mobx from "mobx";
-import inversify from "inversify";
-const { injectable, inject } = inversify;
 import gc from "@sg/game-client-base";
+import inversify from "inversify";
+import mobx from "mobx";
 import { MarbleGameSetting } from "../game-configs/marble-game-setting";
+const { injectable, inject } = inversify;
 
 export const MARBLE_ROUND_STATE = {
     START_GAME_LOOP: "startGameLoop",
@@ -84,9 +84,7 @@ export class MarbleRoundTimeStore {
         this.roundState = MARBLE_ROUND_STATE.START_GAME_LOOP;
     }
 
-    resetRoundTimeStore() {
-        this.roundState = MARBLE_ROUND_STATE.STOP_GAME_LOOP;
-    }
+    resetRoundTimeStore() {}
 
     resetRoundTime() {}
 
