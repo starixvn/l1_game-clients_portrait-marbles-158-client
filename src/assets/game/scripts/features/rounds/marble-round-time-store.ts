@@ -38,11 +38,12 @@ export class MarbleRoundTimeStore {
     }
 
     get roundState() {
-        log("roundState-----", this._roundState, MARBLE_ROUND_STATE[this._roundState]);
+        log(`Get [${new Date().toLocaleTimeString()}] current round state-----`, this._roundState);
         return this._roundState;
     }
 
     set roundState(value: string) {
+        log(`Set[${new Date().toLocaleTimeString()}] current round state-----`, value);
         this._roundState = value;
     }
 

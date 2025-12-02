@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, log, Node } from "cc";
+import { _decorator, Label, Node } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
@@ -82,7 +82,6 @@ export default class BetItemCustomize extends BetItem {
     }
 
     blockBetOption() {
-        log("block bet option ", this.node.name);
         this.setBlockIconVisibility(true);
         this.setDisabledVisibility(true);
         this.hideOddsIndicators();

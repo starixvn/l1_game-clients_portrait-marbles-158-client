@@ -1,5 +1,4 @@
 import gc from "@sg/game-client-base";
-import { log } from "cc";
 import inversify from "inversify";
 import { MARBLE_ROUND_STATE, MarbleRoundTimeStore } from "./marble-round-time-store";
 const { injectable, inject } = inversify;
@@ -14,7 +13,6 @@ export class MarbleRoundTimeHandlers implements gc.Shared.IMultipleHandlers {
 
         if (spb) {
             this.store.roundState = MARBLE_ROUND_STATE.PLACING_BET;
-            log(`[${new Date().toLocaleTimeString()}] start bet-----`, this.store.roundState);
         }
     }
 
@@ -24,7 +22,6 @@ export class MarbleRoundTimeHandlers implements gc.Shared.IMultipleHandlers {
 
         if (epb) {
             this.store.roundState = MARBLE_ROUND_STATE.LOCKING_BET;
-            log(`[${new Date().toLocaleTimeString()}] block bet-----`, this.store.roundState);
         }
     }
 
