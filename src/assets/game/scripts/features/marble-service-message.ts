@@ -10,4 +10,8 @@ export namespace MarbleServiceMessage {
     export class OddsPoints {
         static eventName = "points";
     }
+
+    export class Playlist {
+        static eventName = "playlist";
+    }
 }
