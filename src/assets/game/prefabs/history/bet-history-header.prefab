@@ -162,7 +162,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -292.24154589371983,
+      "x": -327.81159420289856,
       "y": -0.001,
       "z": 0
     },
@@ -641,7 +641,7 @@
     "fileId": "7eGC6RtlhKAoCeKeJKOW84"
   },
   {
-    "__type__": "525b8vZ9z9HHJtOT/re0kLc",
+    "__type__": "d79a8JOa2JHfr/hBtgYdLqO",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -652,17 +652,18 @@
     "__prefab": {
       "__id__": 28
     },
-    "label": {
-      "__id__": 21
-    },
+    "key": "",
+    "format": 0,
+    "prefix": "",
+    "suffix": "",
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "67/VX5GUFNJIVy6YLr7fyj"
+    "fileId": "5bXEgfbKBAlKbtRYC/bUBx"
   },
   {
-    "__type__": "d79a8JOa2JHfr/hBtgYdLqO",
+    "__type__": "30f4bRtc7RCdZsWKHRUE8QM",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -673,15 +674,14 @@
     "__prefab": {
       "__id__": 30
     },
-    "key": "",
-    "format": 0,
-    "prefix": "",
-    "suffix": "",
+    "label": {
+      "__id__": 21
+    },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "5bXEgfbKBAlKbtRYC/bUBx"
+    "fileId": "6eTestdMFOg4gIUwP4F8/G"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -811,7 +811,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -153.005,
+      "x": -171.5262249824438,
       "y": -0.05,
       "z": 0
     },
@@ -852,7 +852,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50.3984375,
+      "width": 306.90625,
       "height": 20.16
     },
     "_anchorPoint": {
@@ -888,7 +888,7 @@
       "b": 2,
       "a": 255
     },
-    "_string": "Match",
+    "_string": "Spinnersoccerultralive.header_match",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 16,
@@ -1030,7 +1030,7 @@
     },
     "_alignFlags": 8,
     "_target": null,
-    "_left": 0.24971317591292136,
+    "_left": 0.08654026719790864,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -1095,7 +1095,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -0.10000000000002274,
+      "x": -5.307022471910159,
       "y": 0,
       "z": 0
     },
@@ -1555,27 +1555,6 @@
     "fileId": "28DRCEvgZGxplMkRkWN9sZ"
   },
   {
-    "__type__": "0e4b2ZKwL9JboDSRTyHriPC",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 68
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 76
-    },
-    "label": {
-      "__id__": 71
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "79waF35x9DR4FdLT7o7oJW"
-  },
-  {
     "__type__": "018c96iNgNBbL/A+Sjk3+FM",
     "_name": "",
     "_objFlags": 0,
@@ -1585,7 +1564,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 78
+      "__id__": 76
     },
     "groupId": 5,
     "_id": ""
@@ -1604,7 +1583,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 80
+      "__id__": 78
     },
     "key": "",
     "format": 0,
@@ -1615,6 +1594,27 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "fduupEvCJEpY8cwZC0zqbS"
+  },
+  {
+    "__type__": "91f9eJkVglEFKs+5KTJh+zT",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 68
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 80
+    },
+    "label": {
+      "__id__": 71
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "a6oatxDWhMXKMV3WqLJ9bR"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1744,7 +1744,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 177.79599999999996,
+      "x": 201.55075026334265,
       "y": 0,
       "z": 0
     },
@@ -2036,7 +2036,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 295.74540685386467,
+      "x": 332.0019576539854,
       "y": -0.05,
       "z": 0
     },
@@ -2304,7 +2304,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 712,
+      "width": 786,
       "height": 50
     },
     "_anchorPoint": {
@@ -2400,7 +2400,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 712,
+      "width": 786,
       "height": 80
     },
     "_anchorPoint": {
@@ -2459,6 +2459,7 @@
       "__id__": 0
     },
     "fileId": "dcUT5jxZhA1JsbObmV0VDW",
+    "instance": null,
     "targetOverrides": null
   }
 ]
