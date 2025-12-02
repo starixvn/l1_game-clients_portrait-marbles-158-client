@@ -1,4 +1,5 @@
 import gc from "@sg/game-client-base";
+import { log } from "cc";
 import inversify from "inversify";
 import mobx from "mobx";
 import { MarbleGameSetting } from "../game-configs/marble-game-setting";
@@ -37,6 +38,7 @@ export class MarbleRoundTimeStore {
     }
 
     get roundState() {
+        log("roundState-----", this._roundState, MARBLE_ROUND_STATE[this._roundState]);
         return this._roundState;
     }
 

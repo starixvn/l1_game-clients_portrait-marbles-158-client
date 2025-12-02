@@ -3,6 +3,7 @@ import { _decorator, Widget } from "cc";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
 import observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
+import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
 import BetItemCustomize from "./bet-item-customize";
 
 const { ccclass } = _decorator;
@@ -50,13 +51,36 @@ export class BetItems extends BetItemsPolygonBase {
         });
     }
 
+    @render(RoundHistories.RoundHistoryStore, (store) => store.firstJoinGameHistory)
+    override renderStaticResult(firstJoinGameHistory: gc.RoundHistories.IFirstJoinGameHistory) {
+        if (!firstJoinGameHistory) {
+            return;
+        }
+        const { roundHistory, staticHighlight, animationHighlight } = firstJoinGameHistory;
+        roundHistory && this.setHighlightStatic(staticHighlight, animationHighlight, roundHistory);
+    }
+
     override setHighlightStatic(staticHighlight: boolean, animationHighlight: boolean, roundHistory: gc.RoundHistories.RoundHistory) {
         if (staticHighlight || animationHighlight) {
-            const settlementResult = roundHistory.settlementResult as any;
+            const settlementResult = roundHistory?.settlementResult as unknown as Record<number, gc.GameServiceMessage.TSettlementResult>;
             if (settlementResult) {
-                const value = Object.values(settlementResult).at(-1) as gc.GameServiceMessage.TSettlementResult;
-                value && this.showHighlightStatic(value);
+                const values = Object.values(settlementResult);
+                if (!values.length) {
+                    return;
+                }
+                const value = values[values.length - 1];
+                if (value) {
+                    this.settlementResult = value;
+                    this.showHighlightStatic(value);
+                }
             }
+        }
+    }
+
+    @render(MarbleRoundTimeStore, (store) => store.isPlacingBet)
+    handleRoundState(isPlacingBet: boolean) {
+        if (isPlacingBet && this.settlementResult) {
+            this.showHighlightStatic(this.settlementResult);
         }
     }
 }
