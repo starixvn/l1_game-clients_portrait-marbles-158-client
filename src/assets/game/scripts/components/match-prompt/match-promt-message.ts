@@ -1,5 +1,5 @@
-import { _decorator, Enum, Sprite, SpriteAtlas, tween, UIOpacity, v3 } from "cc";
 import gc from "@sg/game-client-base";
+import { _decorator, Enum, Sprite, SpriteAtlas, tween, UIOpacity, v3 } from "cc";
 import PromptMessageComponent from "db://shared-components/game/prompt-message/scripts/prompt-message-component";
 const { ccclass, property } = _decorator;
 const { Translator } = gc;
@@ -78,18 +78,6 @@ export class MatchPromptMessage extends PromptMessageComponent {
     showTimeUpMessage() {
         const message = Translator.gameTranslate("time_up").toUpperCase();
         this.icon = IconName.WHISTLE;
-        this.content = message;
-    }
-
-    showStartBetMessage() {
-        const message = Translator.commonTranslate("message_place_bets").toUpperCase();
-        this.icon = IconName.COIN;
-        this.content = message;
-    }
-
-    showStopBetMessage() {
-        const message = Translator.commonTranslate("message_stop_bet").toUpperCase();
-        this.icon = IconName.HAND;
         this.content = message;
     }
 
