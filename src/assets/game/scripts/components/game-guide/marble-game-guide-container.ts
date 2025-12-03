@@ -10,8 +10,7 @@ const { ccclass } = _decorator;
 export class MarbleGameGuideContainer extends GameGuideContainer {
     private customWebview: CustomWebview | null = null;
 
-    onLoad() {
-        super.onLoad();
+    protected start(): void {
         this.customWebview = find("Canvas")?.getComponentInChildren(CustomWebview) || null;
     }
 
