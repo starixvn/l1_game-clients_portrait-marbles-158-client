@@ -345,7 +345,9 @@ export const languages = {
         "glossary_even": "Çift",
         "glossary_under": "Under %{point}",
         "game_name": "Spinner Soccer Ultra Live",
-        "game_icon_name": "Spinner Soccer Ultra Live"
+        "game_icon_name": "Spinner Soccer Ultra Live",
+        "time_up": "Süre Doldu",
+        "next_match": "Sonraki Maç"
     }
 };
 

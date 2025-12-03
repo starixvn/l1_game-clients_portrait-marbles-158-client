@@ -345,7 +345,9 @@ export const languages = {
         "glossary_even": "Par",
         "glossary_under": "Menos de %{point}",
         "game_name": "Spinner Soccer Ultra Live",
-        "game_icon_name": "Spinner Soccer Ultra Live"
+        "game_icon_name": "Spinner Soccer Ultra Live",
+        "time_up": "Tempo Esgotado",
+        "next_match": "Próximo Jogo"
     }
 };
 

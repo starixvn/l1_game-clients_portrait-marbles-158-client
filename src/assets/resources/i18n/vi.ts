@@ -345,7 +345,9 @@ export const languages = {
         "team_MCI": "Manchester Caliber",
         "team_NED": "Hà Lan",
         "team_POR": "Bồ Đào Nha",
-        "Team_RMA": "Unreal Madrid"
+        "Team_RMA": "Unreal Madrid",
+        "time_up": "Hết Giờ",
+        "next_match": "Trận Kế Tiếp"
     }
 };
 

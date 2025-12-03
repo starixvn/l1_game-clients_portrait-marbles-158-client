@@ -345,7 +345,9 @@ export const languages = {
         "glossary_even": "짝",
         "glossary_under": " %{point} 미만",
         "game_name": "Spinner Soccer Ultra Live",
-        "game_icon_name": "Spinner Soccer Ultra Live"
+        "game_icon_name": "Spinner Soccer Ultra Live",
+        "time_up": "시간 초과",
+        "next_match": "다음 경기"
     }
 };
 

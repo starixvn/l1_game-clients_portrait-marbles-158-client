@@ -345,7 +345,9 @@ export const languages = {
         "team_MCI": "マンチェスター・シティ",
         "team_NED": "オランダ",
         "team_POR": "ポルトガル",
-        "Team_RMA": "レアル・マドリッド"
+        "Team_RMA": "レアル・マドリッド",
+        "time_up": "時間切れ",
+        "next_match": "次戦"
     }
 };
 

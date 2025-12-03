@@ -345,7 +345,9 @@ export const languages = {
         "team_MCI": "แมนเชสเตอร์ ซิตี้",
         "team_NED": "เนเธอร์แลนด์",
         "team_POR": "โปรตุเกส",
-        "Team_RMA": "เรอัล มาดริด"
+        "Team_RMA": "เรอัล มาดริด",
+        "time_up": "หมดเวลา",
+        "next_match": "นัดถัดไป"
     }
 };
 

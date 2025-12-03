@@ -345,7 +345,9 @@ export const languages = {
         "glossary_even": "Even",
         "glossary_under": "Under %{point}",
         "game_name": "Spinner Soccer Ultra Live",
-        "game_icon_name": "Spinner Soccer\nUltra Live"
+        "game_icon_name": "Spinner Soccer\nUltra Live",
+        "time_up": "Time Up\n",
+        "next_match": "Next Match"
     }
 };
 

@@ -345,7 +345,9 @@ export const languages = {
         "glossary_even": "Genap",
         "glossary_under": "Bawah %{point}",
         "game_name": "Spinner Soccer Ultra Live",
-        "game_icon_name": "Spinner Soccer Ultra Live"
+        "game_icon_name": "Spinner Soccer Ultra Live",
+        "time_up": "Masa Tamat",
+        "next_match": "Perlawanan Seterusnya"
     }
 };
 

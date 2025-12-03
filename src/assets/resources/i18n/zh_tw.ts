@@ -345,7 +345,9 @@ export const languages = {
         "team_MCI": "曼城",
         "team_NED": "荷蘭",
         "team_POR": "葡萄牙",
-        "Team_RMA": "皇家馬德里"
+        "Team_RMA": "皇家馬德里",
+        "time_up": "時間到",
+        "next_match": "下一場"
     }
 };
 

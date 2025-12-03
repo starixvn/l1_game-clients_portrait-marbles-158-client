@@ -345,7 +345,9 @@ export const languages = {
         "team_MCI": "Manchester Caliber",
         "team_NED": "Belanda",
         "team_POR": "Portugal",
-        "Team_RMA": "Unreal Madrid"
+        "Team_RMA": "Unreal Madrid",
+        "time_up": "Waktu Habis",
+        "next_match": "Pertandingan Berikutnya"
     }
 };
 
