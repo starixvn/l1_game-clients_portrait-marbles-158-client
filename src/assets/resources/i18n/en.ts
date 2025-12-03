@@ -321,7 +321,7 @@ export const languages = {
         "opened_jackpot": "opened_jackpot"
     },
     "SpinnerSoccerUltraLive": {
-        "game_icon_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "Away",
         "glossary_draw": "Draw",

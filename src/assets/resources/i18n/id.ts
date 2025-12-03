@@ -321,12 +321,12 @@ export const languages = {
         "opened_jackpot": "opened_jackpot"
     },
     "SpinnerSoccerUltraLive": {
-        "game_icon_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "Tandang",
         "glossary_draw": "Seri",
         "glossary_even": "Genap",
-        "glossary_home": "Home",
+        "glossary_home": "Kandang",
         "glossary_odd": "Ganjil",
         "glossary_over": "Besar %{point}",
         "glossary_under": "Kecil %{point}",

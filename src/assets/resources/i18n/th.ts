@@ -321,12 +321,12 @@ export const languages = {
         "you_reach_max_win": "คุณถึงยอดชนะสูงสุด"
     },
     "SpinnerSoccerUltraLive": {
-        "game_icon_name": "Spinner Soccer Ultra Live",
+        "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "ทีมเยือน",
         "glossary_draw": "เสมอ",
         "glossary_even": "คู่",
-        "glossary_home": "Home",
+        "glossary_home": "ทีมเหย้า",
         "glossary_odd": "คี่",
         "glossary_over": "สูง %{point}",
         "glossary_under": "ต่ำ %{point}",
