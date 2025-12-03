@@ -811,7 +811,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -171.5262249824438,
+      "x": -171.52622498244378,
       "y": -0.05,
       "z": 0
     },
@@ -852,8 +852,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 306.90625,
-      "height": 20.16
+      "width": 50.3984375,
+      "height": 36.16
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -888,7 +888,7 @@
       "b": 2,
       "a": 255
     },
-    "_string": "Spinnersoccerultralive.header_match",
+    "_string": "Match\n",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 16,
@@ -1030,7 +1030,7 @@
     },
     "_alignFlags": 8,
     "_target": null,
-    "_left": 0.08654026719790864,
+    "_left": 0.2497131759129214,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
