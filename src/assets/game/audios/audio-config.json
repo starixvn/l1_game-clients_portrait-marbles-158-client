@@ -11,18 +11,6 @@
         "type": "sfx",
         "isLazyLoad": true
     },
-    "countdown-timer": {
-        "bundle": "resources",
-        "type": "sfx",
-        "isLazyLoad": true,
-        "path": "effects/countdown_V02"
-    },
-    "show-result": {
-        "bundle": "resources",
-        "type": "sfx",
-        "isLazyLoad": true,
-        "path": "effects/bettingboard_show"
-    },
     "start-betting": {
         "bundle": "resources",
         "type": "sfx",
@@ -33,12 +21,6 @@
         "bundle": "resources",
         "type": "sfx",
         "path": "effects/stop_bet",
-        "isLazyLoad": true
-    },
-    "winner": {
-        "bundle": "resources",
-        "type": "sfx",
-        "path": "effects/winner",
         "isLazyLoad": true
     },
     "next-match": {
