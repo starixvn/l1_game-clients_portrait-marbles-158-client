@@ -4,13 +4,6 @@ import { BaseResultBodyItem } from "db://shared-components/game/bet-history/scri
 import { Flag } from "../flag/flag";
 const { ccclass, property } = _decorator;
 
-interface RoundResult {
-    firstHalf: string;
-    secondHalf: string;
-
-    teamName: { home: string; away: string };
-}
-
 @ccclass("BetHistoryResult")
 export class BetHistoryResult extends BaseResultBodyItem {
     @property(Flag)
@@ -51,11 +44,14 @@ export class BetHistoryResult extends BaseResultBodyItem {
     }
 
     setData(result: gc.BetHistory.DynamicObject<any>, settlementResult: gc.BetHistory.DynamicObject<any>) {
-        const { teamName, firstHalf, secondHalf } = result as RoundResult;
-        this.setTeams(teamName.home, teamName.away);
-        const fullScore = `${firstHalf}${secondHalf}`;
-        const homeScore = this.countCharacters(fullScore, "H");
-        const awayScore = this.countCharacters(fullScore, "A");
+        const homeTeam = result.match?.home || "";
+        const awayTeam = result.match?.away || "";
+        this.setTeams(homeTeam, awayTeam);
+
+        const [homeScoreString, awayScoreString] = (result.result as unknown as string).split(":");
+        const homeScore = Number(homeScoreString);
+        const awayScore = Number(awayScoreString);
+
         this.setScore(homeScore, awayScore);
 
         if (homeScore > awayScore) {
