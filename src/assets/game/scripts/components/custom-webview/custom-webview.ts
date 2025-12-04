@@ -39,8 +39,8 @@ export default class CustomWebview extends ObserverComponent {
 
     protected currentPlaylist = "";
     protected parentElement: any = null;
-    protected isLoaded = false;
     protected webviewId = `${this.wrapperId}-webview`;
+    marbleTvReady = false;
 
     onLoad() {
         log("webview loaded");
@@ -48,13 +48,15 @@ export default class CustomWebview extends ObserverComponent {
         this.scheduleOnce(() => {
             this.modifyWebViewWrapper();
         }, 0.1);
-        this.webview.node.on(
-            "loaded",
-            () => {
-                this.isLoaded = true;
-            },
-            this
-        );
+
+        window.addEventListener("message", this.handleSoundEventFromParent.bind(this));
+    }
+
+    handleSoundEventFromParent(event: MessageEvent) {
+        const { marbleTvReady } = event.data;
+        if (marbleTvReady !== null && marbleTvReady !== undefined) {
+            this.marbleTvReady = marbleTvReady;
+        }
     }
 
     modifyWebViewWrapper() {
@@ -105,7 +107,7 @@ export default class CustomWebview extends ObserverComponent {
     }
 
     postMessageToIframe = <T extends Record<string, any>>(data: [string, T]): void => {
-        if (!this.isLoaded) {
+        if (!this.marbleTvReady) {
             return;
         }
         (document.getElementById(this.webviewId) as HTMLIFrameElement)?.contentWindow?.postMessage(data, this.currentPlaylist);
