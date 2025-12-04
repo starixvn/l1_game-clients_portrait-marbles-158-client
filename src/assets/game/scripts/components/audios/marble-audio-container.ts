@@ -3,15 +3,17 @@ import { _decorator, game } from "cc";
 import { AudioContainer } from "db://shared-components/game/audios/scripts/component/audio-container";
 import Observer from "observer";
 import { MarbleAudioStore } from "../../features/audios/marble-audio-store";
-import { PlaylistStore } from "../../features/playlist/playlist-store";
+import CustomWebview from "../custom-webview/custom-webview";
 
 const { Audios } = gc;
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
 const { render } = Observer;
 
 @ccclass
 export class MarbleAudioContainer extends AudioContainer {
-    protected currentPlaylist = "";
+    @property(CustomWebview)
+    customWebview: CustomWebview = null;
+
     @render(MarbleAudioStore, (store) => store.sfx, { fireImmediately: false })
     playSFXVoices(data: gc.Audios.AudioData) {
         if (data.action === Audios.AudioAction.PLAY && this.isUserGesture) {
@@ -23,15 +25,7 @@ export class MarbleAudioContainer extends AudioContainer {
 
     override enableMusic(musicEnable: boolean) {
         super.enableMusic(musicEnable);
-        this.handlePostMessageToPlaylist({ userMuted: musicEnable });
-    }
-
-    @render(PlaylistStore, (store) => store.playlist)
-    renderLinkPlay(playlist: string) {
-        if (!playlist) {
-            return;
-        }
-        this.currentPlaylist = playlist;
+        this.customWebview?.postMessageToIframe(["AudioStore", { userMuted: !musicEnable }]);
     }
 
     override initTouchBind() {
@@ -42,16 +36,12 @@ export class MarbleAudioContainer extends AudioContainer {
             this.isUserGesture = true;
             this.postMessageUserGestureToParent();
             this.updateTouchedScreen();
-            this.handlePostMessageToPlaylist({ browserBlocked: false });
+            this.customWebview?.postMessageToIframe(["AudioStore", { browserBlocked: false }]);
         };
 
         game.canvas.addEventListener(touchStartEvent, handleTouchEvent);
         game.canvas.addEventListener(touchEndEvent, handleTouchEvent);
 
         window.addEventListener("message", this.handleSoundEventFromParent);
-    }
-
-    handlePostMessageToPlaylist(value: any) {
-        window.postMessage(["AudioStore", { value }], this.currentPlaylist);
     }
 }

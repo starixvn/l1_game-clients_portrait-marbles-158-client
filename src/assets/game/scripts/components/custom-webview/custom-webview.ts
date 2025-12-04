@@ -39,6 +39,8 @@ export default class CustomWebview extends ObserverComponent {
 
     protected currentPlaylist = "";
     protected parentElement: any = null;
+    protected isLoaded = false;
+    protected webviewId = `${this.wrapperId}-webview`;
 
     onLoad() {
         log("webview loaded");
@@ -46,6 +48,13 @@ export default class CustomWebview extends ObserverComponent {
         this.scheduleOnce(() => {
             this.modifyWebViewWrapper();
         }, 0.1);
+        this.webview.node.on(
+            "loaded",
+            () => {
+                this.isLoaded = true;
+            },
+            this
+        );
     }
 
     modifyWebViewWrapper() {
@@ -58,8 +67,8 @@ export default class CustomWebview extends ObserverComponent {
         this.parentElement = impl._webview.parentElement;
         this.parentElement.style.zIndex = this.zIndex.toString();
         this.parentElement.id = this.wrapperId;
-        impl._webview.id = `${this.wrapperId}-webview`;
-        impl._webview.title = `${this.wrapperId}-webview`;
+        impl._webview.id = this.webviewId;
+        impl._webview.title = this.webviewId;
         (impl._webview as HTMLIFrameElement).allow = "autoplay";
     }
 
@@ -94,4 +103,11 @@ export default class CustomWebview extends ObserverComponent {
             impl._webview.style.opacity = opacity;
         }
     }
+
+    postMessageToIframe = <T extends Record<string, any>>(data: [string, T]): void => {
+        if (!this.isLoaded) {
+            return;
+        }
+        (document.getElementById(this.webviewId) as HTMLIFrameElement)?.contentWindow?.postMessage(data, this.currentPlaylist);
+    };
 }
