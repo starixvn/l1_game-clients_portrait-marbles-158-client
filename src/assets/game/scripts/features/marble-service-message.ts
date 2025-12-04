@@ -14,4 +14,12 @@ export namespace MarbleServiceMessage {
     export class Playlist {
         static eventName = "playlist";
     }
+
+    export class OddsIndex {
+        static eventName = "index";
+    }
+
+    export class OddsLatestIndex {
+        static eventName = "latestIndex";
+    }
 }

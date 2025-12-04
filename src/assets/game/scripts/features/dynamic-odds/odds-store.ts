@@ -21,6 +21,23 @@ export class OddsStore {
     private _previousOdds: BetOptionsData = {};
     private _odds: BetOptionsData = {};
     private _points: BetOptionsData = {};
+    private _index = -1;
+    private _latestIndex = -1;
+
+    set index(index: number) {
+        this._index = index;
+    }
+
+    get index() {
+        return this._index;
+    }
+
+    get latestIndex() {
+        return this._latestIndex;
+    }
+    set latestIndex(latestIndex: number) {
+        this._latestIndex = latestIndex;
+    }
 
     get odds() {
         return this._odds;

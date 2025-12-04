@@ -2,9 +2,9 @@ import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
 import { BetOptionsData } from "../../types";
+import { MarbleServiceMessage } from "../marble-service-message";
 import { MarbleRoundTimeStore } from "../rounds/marble-round-time-store";
 import { OddsStore } from "./odds-store";
-import { MarbleServiceMessage } from "../marble-service-message";
 
 const { injectable, inject } = inversify;
 
@@ -39,6 +39,12 @@ export class OddsHandler implements gc.Shared.IMultipleHandlers {
     handlePoints(input: BetOptionsData) {
         this.oddsStore.points = input;
     }
+    handleIndex(input: number) {
+        this.oddsStore.index = input;
+    }
+    handleLatestIndex(input: number) {
+        this.oddsStore.latestIndex = input;
+    }
 
     resetOdds() {
         this.oddsStore.resetOdds();
@@ -56,6 +62,14 @@ export class OddsHandler implements gc.Shared.IMultipleHandlers {
         {
             name: MarbleServiceMessage.OddsPoints.eventName,
             handle: this.handlePoints,
+        },
+        {
+            name: MarbleServiceMessage.OddsIndex.eventName,
+            handle: this.handleIndex,
+        },
+        {
+            name: MarbleServiceMessage.OddsLatestIndex.eventName,
+            handle: this.handleLatestIndex,
         },
     ];
 }

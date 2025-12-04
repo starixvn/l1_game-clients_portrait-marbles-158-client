@@ -1,8 +1,9 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, Node } from "cc";
+import { _decorator, Label, log, Node } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
+import { MarbleGameBetHandler } from "../../features/bets/marble-game-bet-handler";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
 import { PointsStore } from "../../features/points/points-store";
 import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
@@ -10,7 +11,7 @@ import { TRANSLATE_NAMESPACE } from "../../game-settings";
 import { BetOptionsData } from "../../types";
 
 const { property, ccclass } = _decorator;
-const { render } = Observer;
+const { render, handle } = Observer;
 
 @ccclass
 export default class BetItemCustomize extends BetItem {
@@ -42,6 +43,11 @@ export default class BetItemCustomize extends BetItem {
     @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
     renderEndPlacingBet(endPlacingBet: boolean) {
         this.toggleBetOption(!endPlacingBet);
+    }
+
+    @render(OddsStore, (store) => store.index, { fireImmediately: false })
+    renderIndex(index: number) {
+        log("render block video index---------", index);
     }
 
     @render(OddsStore, (store) => store.oddsWithConfig)
@@ -112,5 +118,10 @@ export default class BetItemCustomize extends BetItem {
                 point: point.toString(),
             }).toUpperCase();
         }
+    }
+
+    @handle(MarbleGameBetHandler, (handler, payload: string) => handler.handle(payload))
+    override onBet() {
+        return this.node.name;
     }
 }
