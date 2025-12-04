@@ -321,22 +321,6 @@ export const languages = {
         "title_total_multiplier": "TOPLAM ÇARPAN"
     },
     "SpinnerSoccerUltraLive": {
-        "Team_RMA": "Gerçeküstü Madrid",
-        "team_MCI": "Manchester Kalibre",
-        "team_FCB": "Baya Münih",
-        "team_LIV": "Livenpool",
-        "team_CHE": "Chelsee",
-        "team_INT": "Giriş Milan",
-        "team_BAR": "FC Barna",
-        "team_ARS": "Kundakçı",
-        "team_ARG": "Arjantin",
-        "team_FRA": "France",
-        "team_ENG": "England",
-        "team_BRA": "Brezilya",
-        "team_NED": "Netherlands",
-        "team_POR": "Portugal",
-        "team_GER": "Germany",
-        "team_ESP": "Spain",
         "glossary_home": "Home",
         "glossary_away": "Away",
         "glossary_draw": "Berabere",
@@ -347,7 +331,24 @@ export const languages = {
         "game_name": "Spinner Soccer Ultra Live",
         "game_icon_name": "Spinner Soccer Ultra Live",
         "time_up": "Süre Doldu",
-        "next_match": "Sonraki Maç"
+        "next_match": "Sonraki Maç",
+        "clb_rma": "Gerçeküstü Madrid",
+        "clb_mci": "Manchester Kalibre",
+        "clb_fcb": "Baya Münih",
+        "clb_liv": "Livenpool",
+        "clb_che": "Chelsee",
+        "clb_int": "Giriş Milan",
+        "clb_bar": "FC Barna",
+        "clb_ars": "Kundakçı",
+        "nt_arg": "Arjantin",
+        "nt_fra": "France",
+        "nt_eng": "England",
+        "nt_bra": "Brezilya",
+        "nt_ned": "Netherlands",
+        "nt_por": "Portugal",
+        "nt_ger": "Germany",
+        "nt_esp": "Spain",
+        "message_placebet_odds_update": "Oranlar güncelleniyor, lütfen bekleyiniz."
     }
 };
 

@@ -1113,7 +1113,7 @@
       "resultPrefab"
     ],
     "value": {
-      "__uuid__": "b5f9b9ec-786d-43f4-a243-6e0467ef142b",
+      "__uuid__": null,
       "__expectedType__": "cc.Prefab"
     }
   },

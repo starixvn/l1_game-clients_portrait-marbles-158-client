@@ -321,22 +321,6 @@ export const languages = {
         "title_total_multiplier": "कुल गुणक"
     },
     "SpinnerSoccerUltraLive": {
-        "Team_RMA": "Unreal Madrid",
-        "team_MCI": "Manchester Caliber",
-        "team_FCB": "Baya Munich",
-        "team_LIV": "Livenpool",
-        "team_CHE": "Chelsee",
-        "team_INT": "Enter Milan",
-        "team_BAR": "FC Barna",
-        "team_ARS": "Arsonist",
-        "team_ARG": "अर्जेंटीना",
-        "team_FRA": "France",
-        "team_ENG": "England",
-        "team_BRA": "Brazil",
-        "team_NED": "Netherlands",
-        "team_POR": "Portugal",
-        "team_GER": "जर्मनी",
-        "team_ESP": "Spain",
         "glossary_home": "होम",
         "glossary_away": "अवे",
         "glossary_draw": "ड्रॉ",
@@ -347,7 +331,24 @@ export const languages = {
         "game_name": "Spinner Soccer Ultra Live",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "time_up": "समय समाप्त",
-        "next_match": "अगला मैच"
+        "next_match": "अगला मैच",
+        "clb_rma": "Unreal Madrid",
+        "clb_mci": "Manchester Caliber",
+        "clb_fcb": "Baya Munich",
+        "clb_liv": "Livenpool",
+        "clb_che": "Chelsee",
+        "clb_int": "Enter Milan",
+        "clb_bar": "FC Barna",
+        "clb_ars": "Arsonist",
+        "nt_arg": "अर्जेंटीना",
+        "nt_fra": "France",
+        "nt_eng": "England",
+        "nt_bra": "Brazil",
+        "nt_ned": "Netherlands",
+        "nt_por": "Portugal",
+        "nt_ger": "जर्मनी",
+        "nt_esp": "Spain",
+        "message_placebet_odds_update": "ऑड्स अपडेट हो रहे हैं, कृपया कुछ देर प्रतीक्षा करें।"
     }
 };
 

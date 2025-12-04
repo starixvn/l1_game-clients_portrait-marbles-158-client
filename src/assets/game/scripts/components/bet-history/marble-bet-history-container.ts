@@ -17,7 +17,7 @@ export default class MarbleBetHistoryContainer extends BetHistoryContainer {
     }
 
     private setupDialogHideCallback() {
-        const dialog = this.table?.getComponentInChildren(Dialog);
+        const dialog = this.getComponentInChildren(Dialog);
         dialog &&
             (dialog.onHideComplete = () => {
                 this.restoreWebviewOpacity();

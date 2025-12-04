@@ -321,22 +321,6 @@ export const languages = {
         "title_total_multiplier": "총 배율"
     },
     "SpinnerSoccerUltraLive": {
-        "Team_RMA": "언리얼 Real Madrid",
-        "team_MCI": "맨체스터 칼리버",
-        "team_FCB": "바이에른 뮌헨 ",
-        "team_LIV": "라이븐 Liverpool",
-        "team_CHE": "첼시",
-        "team_INT": "인터밀란",
-        "team_BAR": "FC 바르나",
-        "team_ARS": "아서니스트",
-        "team_ARG": "아르헨티나",
-        "team_FRA": "프랑스",
-        "team_ENG": "잉글랜드",
-        "team_BRA": "브라질",
-        "team_NED": "네덜란드",
-        "team_POR": "포르투갈",
-        "team_GER": "독일",
-        "team_ESP": "스페인",
         "glossary_home": "홈",
         "glossary_away": "원정",
         "glossary_draw": "무승부",
@@ -347,7 +331,24 @@ export const languages = {
         "game_name": "Spinner Soccer Ultra Live",
         "game_icon_name": "Spinner Soccer Ultra Live",
         "time_up": "시간 초과",
-        "next_match": "다음 경기"
+        "next_match": "다음 경기",
+        "clb_rma": "언리얼 Real Madrid",
+        "clb_mci": "맨체스터 칼리버",
+        "clb_fcb": "바이에른 뮌헨 ",
+        "clb_liv": "라이븐 Liverpool",
+        "clb_che": "첼시",
+        "clb_int": "인터밀란",
+        "clb_bar": "FC 바르나",
+        "clb_ars": "아서니스트",
+        "nt_arg": "아르헨티나",
+        "nt_fra": "프랑스",
+        "nt_eng": "잉글랜드",
+        "nt_bra": "브라질",
+        "nt_ned": "네덜란드",
+        "nt_por": "포르투갈",
+        "nt_ger": "독일",
+        "nt_esp": "스페인",
+        "message_placebet_odds_update": "배당률을 업데이트하는 중입니다. 잠시만 기다려주세요."
     }
 };
 

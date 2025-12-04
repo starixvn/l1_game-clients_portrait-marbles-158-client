@@ -321,22 +321,6 @@ export const languages = {
         "title_total_multiplier": "Jumlah Pengganda"
     },
     "SpinnerSoccerUltraLive": {
-        "Team_RMA": "Unreal Madrid",
-        "team_MCI": "Manchester Caliber",
-        "team_FCB": "Baya Munich",
-        "team_LIV": "Livenpool",
-        "team_CHE": "Chelsee",
-        "team_INT": "Enter Milan",
-        "team_BAR": "FC Barna",
-        "team_ARS": "Arsonist",
-        "team_ARG": "Argentina",
-        "team_FRA": "France",
-        "team_ENG": "England",
-        "team_BRA": "Brazil",
-        "team_NED": "Netherlands",
-        "team_POR": "Portugal",
-        "team_GER": "Germany",
-        "team_ESP": "Spain",
         "glossary_home": "Home",
         "glossary_away": "Away",
         "glossary_draw": "Seri",
@@ -347,7 +331,24 @@ export const languages = {
         "game_name": "Spinner Soccer Ultra Live",
         "game_icon_name": "Spinner Soccer Ultra Live",
         "time_up": "Masa Tamat",
-        "next_match": "Perlawanan Seterusnya"
+        "next_match": "Perlawanan Seterusnya",
+        "clb_rma": "Unreal Madrid",
+        "clb_mci": "Manchester Caliber",
+        "clb_fcb": "Baya Munich",
+        "clb_liv": "Livenpool",
+        "clb_che": "Chelsee",
+        "clb_int": "Enter Milan",
+        "clb_bar": "FC Barna",
+        "clb_ars": "Arsonist",
+        "nt_arg": "Argentina",
+        "nt_fra": "France",
+        "nt_eng": "England",
+        "nt_bra": "Brazil",
+        "nt_ned": "Netherlands",
+        "nt_por": "Portugal",
+        "nt_ger": "Germany",
+        "nt_esp": "Spain",
+        "message_placebet_odds_update": "Mengemaskinikan kemungkinan, sila tunggu sebentar."
     }
 };
 
