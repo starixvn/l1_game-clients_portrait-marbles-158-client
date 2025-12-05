@@ -1,376 +1,376 @@
 
 icon-game.png
-size: 961,522
+size: 1871,269
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-BG
-  rotate: false
-  xy: 2, 100
-  size: 205, 205
-  orig: 205, 205
+BG-crop
+  rotate: true
+  xy: 217, 68
+  size: 199, 198
+  orig: 199, 198
   offset: 0, 0
   index: -1
 ball/b00
   rotate: false
-  xy: 187, 12
+  xy: 870, 70
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b03
   rotate: false
-  xy: 407, 17
+  xy: 931, 181
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b06
   rotate: false
-  xy: 487, 434
+  xy: 958, 93
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b09
   rotate: false
-  xy: 462, 144
+  xy: 1019, 181
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b12
   rotate: false
-  xy: 483, 262
+  xy: 1044, 5
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b15
   rotate: false
-  xy: 575, 434
+  xy: 1046, 93
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b18
   rotate: false
-  xy: 495, 56
+  xy: 1107, 181
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b21
   rotate: false
-  xy: 550, 174
+  xy: 1132, 5
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b24
   rotate: false
-  xy: 571, 262
+  xy: 1134, 93
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b27
   rotate: false
-  xy: 663, 434
+  xy: 1195, 181
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 ball/b30
   rotate: false
-  xy: 583, 86
+  xy: 1220, 5
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 eff/1
   rotate: true
-  xy: 264, 214
+  xy: 518, 137
   size: 130, 119
   orig: 130, 119
   offset: 0, 0
   index: -1
 eff/2
   rotate: true
-  xy: 318, 396
+  xy: 639, 143
   size: 124, 119
   orig: 130, 119
   offset: 3, 0
   index: -1
 eff/3
-  rotate: false
-  xy: 338, 105
+  rotate: true
+  xy: 712, 19
   size: 122, 107
   orig: 130, 119
   offset: 5, 6
   index: -1
 eff/4
-  rotate: false
-  xy: 275, 2
+  rotate: true
+  xy: 611, 5
   size: 130, 99
   orig: 130, 119
   offset: 0, 6
   index: -1
 eff/5
   rotate: true
-  xy: 264, 103
+  xy: 857, 158
   size: 109, 72
   orig: 109, 72
   offset: 0, 0
   index: -1
 eff/6
   rotate: true
-  xy: 217, 346
+  xy: 417, 93
   size: 174, 99
   orig: 174, 99
   offset: 0, 0
   index: -1
 empty
   rotate: false
-  xy: 2, 4
+  xy: 180, 2
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 light spinner
-  rotate: true
-  xy: 46, 8
+  rotate: false
+  xy: 499, 3
   size: 90, 88
   orig: 94, 92
   offset: 2, 2
   index: -1
 speed/speed000
   rotate: false
-  xy: 527, 350
+  xy: 1283, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed008
   rotate: false
-  xy: 611, 350
+  xy: 1305, 101
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed016
   rotate: false
-  xy: 695, 350
+  xy: 1367, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed024
   rotate: false
-  xy: 669, 2
+  xy: 1308, 17
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed032
   rotate: false
-  xy: 751, 438
+  xy: 1389, 101
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed040
   rotate: false
-  xy: 671, 90
+  xy: 1451, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed048
   rotate: false
-  xy: 681, 178
+  xy: 1392, 17
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed056
   rotate: false
-  xy: 699, 266
+  xy: 1473, 101
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed064
   rotate: false
-  xy: 779, 354
+  xy: 1535, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed072
   rotate: false
-  xy: 835, 438
+  xy: 1476, 17
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed080
   rotate: false
-  xy: 753, 6
+  xy: 1557, 101
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed088
   rotate: false
-  xy: 755, 94
+  xy: 1619, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed096
   rotate: false
-  xy: 765, 182
+  xy: 1560, 17
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed104
   rotate: false
-  xy: 783, 270
+  xy: 1641, 101
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed112
   rotate: false
-  xy: 863, 354
+  xy: 1703, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed120
   rotate: false
-  xy: 837, 10
+  xy: 1787, 185
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed128
   rotate: false
-  xy: 839, 98
+  xy: 1644, 17
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed136
   rotate: false
-  xy: 849, 186
+  xy: 1725, 101
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 speed/speed144
   rotate: false
-  xy: 867, 270
+  xy: 1728, 17
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 spinner/blue-spinner-1
   rotate: false
-  xy: 581, 13
+  xy: 956, 27
   size: 86, 41
   orig: 89, 43
   offset: 0, 2
   index: -1
 spinner/blue-spinner-2
   rotate: true
-  xy: 638, 174
+  xy: 1222, 93
   size: 86, 41
   orig: 89, 43
   offset: 3, 1
   index: -1
 spinner/blue-spinner-3
   rotate: true
-  xy: 919, 440
+  xy: 1809, 103
   size: 80, 40
   orig: 89, 43
   offset: 0, 2
   index: -1
 spinner/blue-spinner-4
   rotate: true
-  xy: 659, 262
+  xy: 1265, 93
   size: 86, 38
   orig: 89, 43
   offset: 0, 4
   index: -1
 spinner/mid spinner 1
   rotate: true
-  xy: 385, 231
+  xy: 808, 153
   size: 114, 47
   orig: 124, 50
   offset: 0, 0
   index: -1
 spinner/mid spinner 2
   rotate: false
-  xy: 318, 347
+  xy: 180, 5
   size: 120, 47
   orig: 124, 50
   offset: 0, 0
   index: -1
 spinner/mid spinner 3
   rotate: true
-  xy: 439, 402
+  xy: 760, 149
   size: 118, 46
   orig: 124, 50
   offset: 0, 0
   index: -1
 spinner/mid spinner 4
   rotate: true
-  xy: 434, 232
+  xy: 821, 38
   size: 113, 47
   orig: 124, 50
   offset: 0, 0
   index: -1
 spinner/red-spinner-1
-  rotate: true
-  xy: 2, 7
+  rotate: false
+  xy: 518, 93
   size: 91, 42
   orig: 99, 50
   offset: 8, 8
   index: -1
 spinner/red-spinner-2
   rotate: false
-  xy: 495, 7
+  xy: 870, 21
   size: 84, 47
   orig: 99, 50
   offset: 12, 3
   index: -1
 spinner/red-spinner-3
   rotate: false
-  xy: 440, 350
+  xy: 2, 2
   size: 85, 50
   orig: 99, 50
   offset: 4, 0
   index: -1
 spinner/red-spinner-4
-  rotate: true
-  xy: 136, 9
+  rotate: false
+  xy: 89, 3
   size: 89, 49
   orig: 99, 50
   offset: 3, 1
   index: -1
 top light frame
-  rotate: true
-  xy: 209, 110
+  rotate: false
+  xy: 302, 13
   size: 195, 53
   orig: 197, 77
   offset: 1, 23
   index: -1
 vien_icon
   rotate: false
-  xy: 2, 307
+  xy: 2, 54
   size: 213, 213
   orig: 215, 215
   offset: 1, 1
