@@ -348,7 +348,8 @@ export const languages = {
         "nt_por": "Portugal",
         "nt_ger": "\nGermany",
         "nt_esp": "\nSpain",
-        "message_placebet_odds_update": "Ina-update ang mga odds, maghintay lang po."
+        "message_placebet_odds_update": "Ina-update ang mga odds, maghintay lang po.",
+        "header_match": "Match"
     }
 };
 

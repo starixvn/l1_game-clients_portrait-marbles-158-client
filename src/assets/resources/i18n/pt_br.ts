@@ -348,7 +348,8 @@ export const languages = {
         "nt_por": "Portugal",
         "nt_ger": "Germany",
         "nt_esp": "Spain",
-        "message_placebet_odds_update": "Atualizando as probabilidades, aguarde um momento."
+        "message_placebet_odds_update": "Atualizando as probabilidades, aguarde um momento.",
+        "header_match": "Jogo"
     }
 };
 

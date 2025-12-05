@@ -321,6 +321,14 @@ export const languages = {
         "you_reach_max_win": "คุณถึงยอดชนะสูงสุด"
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "อาร์เซนอล",
+        "clb_bar": "บาร์เซโลนา",
+        "clb_che": "เชลซี",
+        "clb_fcb": "บาเยิร์น มิวนิก",
+        "clb_int": "อินเตอร์ มิลาน",
+        "clb_liv": "ลิเวอร์พูล",
+        "clb_mci": "แมนเชสเตอร์ ซิตี้",
+        "clb_rma": "เรอัล มาดริด",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "ทีมเยือน",
@@ -330,30 +338,23 @@ export const languages = {
         "glossary_odd": "คี่",
         "glossary_over": "สูง %{point}",
         "glossary_under": "ต่ำ %{point}",
-        "time_up": "หมดเวลา",
+        "header_match": "การแข่งขัน",
+        "message_placebet_odds_update": "กำลังอัปเดตอัตราต่อรอง โปรดรอสักครู่",
         "next_match": "นัดถัดไป",
-        "clb_rma": "เรอัล มาดริด",
-        "clb_mci": "แมนเชสเตอร์ ซิตี้",
-        "clb_fcb": "บาเยิร์น มิวนิก",
-        "clb_liv": "ลิเวอร์พูล",
-        "clb_che": "เชลซี",
-        "clb_int": "อินเตอร์ มิลาน",
-        "clb_bar": "บาร์เซโลนา",
-        "clb_ars": "อาร์เซนอล",
         "nt_arg": "อาร์เจนตินา",
-        "nt_fra": "ฝรั่งเศส",
-        "nt_eng": "อังกฤษ",
         "nt_bra": "บราซิล",
+        "nt_eng": "อังกฤษ",
+        "nt_esp": "สเปน",
+        "nt_fra": "ฝรั่งเศส",
+        "nt_ger": "เยอรมนี",
         "nt_ned": "เนเธอร์แลนด์",
         "nt_por": "โปรตุเกส",
-        "nt_ger": "เยอรมนี",
-        "nt_esp": "สเปน",
-        "message_placebet_odds_update": "กำลังอัปเดตอัตราต่อรอง โปรดรอสักครู่"
+        "time_up": "หมดเวลา"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.th = languages;

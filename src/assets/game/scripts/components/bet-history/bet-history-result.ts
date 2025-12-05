@@ -46,7 +46,9 @@ export class BetHistoryResult extends BaseResultBodyItem {
     setData(result: gc.BetHistory.DynamicObject<any>, settlementResult: gc.BetHistory.DynamicObject<any>) {
         const homeTeam = result.match?.home || "";
         const awayTeam = result.match?.away || "";
-        this.setTeams(homeTeam, awayTeam);
+        const homeTeamShortName = homeTeam.split("_")[1].toUpperCase();
+        const awayTeamShortName = awayTeam.split("_")[1].toUpperCase();
+        this.setTeams(homeTeamShortName, awayTeamShortName);
 
         const [homeScoreString, awayScoreString] = (result.result as unknown as string).split(":");
         const homeScore = Number(homeScoreString);

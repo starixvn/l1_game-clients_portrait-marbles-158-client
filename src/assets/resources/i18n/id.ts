@@ -313,14 +313,17 @@ export const languages = {
         "win": "Menang",
         "win_loss": "Menang Kalah",
         "wins": "Jml. menang",
-        "you_reach_max_win": "Anda mencapai Maksimal Menang",
-        "invalid_payline": "invalid_payline",
-        "invalid_bonus": "invalid_bonus",
-        "opened_bonus": "opened_bonus",
-        "invalid_jackpot": "invalid_jackpot",
-        "opened_jackpot": "opened_jackpot"
+        "you_reach_max_win": "Anda mencapai Maksimal Menang"
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "Arsonist",
+        "clb_bar": "FC Barna",
+        "clb_che": "Chelsee",
+        "clb_fcb": "Baya Munich",
+        "clb_int": "Enter Milan",
+        "clb_liv": "Livenpool",
+        "clb_mci": "Manchester Caliber",
+        "clb_rma": "Unreal Madrid",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "Tandang",
@@ -330,30 +333,23 @@ export const languages = {
         "glossary_odd": "Ganjil",
         "glossary_over": "Besar %{point}",
         "glossary_under": "Kecil %{point}",
-        "time_up": "Waktu Habis",
+        "header_match": "Pertandingan",
+        "message_placebet_odds_update": "Memperbarui odds, mohon tunggu sejenak.",
         "next_match": "Pertandingan Berikutnya",
-        "clb_rma": "Unreal Madrid",
-        "clb_mci": "Manchester Caliber",
-        "clb_fcb": "Baya Munich",
-        "clb_liv": "Livenpool",
-        "clb_che": "Chelsee",
-        "clb_int": "Enter Milan",
-        "clb_bar": "FC Barna",
-        "clb_ars": "Arsonist",
         "nt_arg": "Argentina",
-        "nt_fra": "Prancis",
-        "nt_eng": "Inggris",
         "nt_bra": "Brasil",
+        "nt_eng": "Inggris",
+        "nt_esp": "Spanyol",
+        "nt_fra": "Prancis",
+        "nt_ger": "Jerman",
         "nt_ned": "Belanda",
         "nt_por": "Portugal",
-        "nt_ger": "Jerman",
-        "nt_esp": "Spanyol",
-        "message_placebet_odds_update": "Memperbarui odds, mohon tunggu sejenak."
+        "time_up": "Waktu Habis"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.id = languages;

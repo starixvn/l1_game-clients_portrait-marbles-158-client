@@ -348,7 +348,8 @@ export const languages = {
         "nt_por": "포르투갈",
         "nt_ger": "독일",
         "nt_esp": "스페인",
-        "message_placebet_odds_update": "배당률을 업데이트하는 중입니다. 잠시만 기다려주세요."
+        "message_placebet_odds_update": "배당률을 업데이트하는 중입니다. 잠시만 기다려주세요.",
+        "header_match": "경기"
     }
 };
 

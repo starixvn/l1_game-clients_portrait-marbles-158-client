@@ -313,14 +313,17 @@ export const languages = {
         "win": "贏",
         "win_loss": "贏 輸",
         "wins": "勝次數",
-        "you_reach_max_win": "您達到了最大勝利",
-        "invalid_payline": "invalid_payline",
-        "invalid_bonus": "invalid_bonus",
-        "opened_bonus": "opened_bonus",
-        "invalid_jackpot": "invalid_jackpot",
-        "opened_jackpot": "opened_jackpot"
+        "you_reach_max_win": "您達到了最大勝利"
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "阿仙奴",
+        "clb_bar": "巴塞隆拿",
+        "clb_che": "車路士",
+        "clb_fcb": "拜仁慕尼黑",
+        "clb_int": "國際米蘭",
+        "clb_liv": "利物浦",
+        "clb_mci": "曼城",
+        "clb_rma": "皇家馬德里",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "客隊",
@@ -330,30 +333,23 @@ export const languages = {
         "glossary_odd": "單",
         "glossary_over": "大 %{point}",
         "glossary_under": "小 %{point}",
-        "time_up": "時間到",
+        "header_match": "比賽",
+        "message_placebet_odds_update": "正在更新賠率，請稍候。",
         "next_match": "下一場",
-        "clb_rma": "皇家馬德里",
-        "clb_mci": "曼城",
-        "clb_fcb": "拜仁慕尼黑",
-        "clb_liv": "利物浦",
-        "clb_che": "車路士",
-        "clb_int": "國際米蘭",
-        "clb_bar": "巴塞隆拿",
-        "clb_ars": "阿仙奴",
         "nt_arg": "阿根廷",
-        "nt_fra": "法國",
-        "nt_eng": "英格蘭",
         "nt_bra": "巴西",
+        "nt_eng": "英格蘭",
+        "nt_esp": "西班牙",
+        "nt_fra": "法國",
+        "nt_ger": "德國",
         "nt_ned": "荷蘭",
         "nt_por": "葡萄牙",
-        "nt_ger": "德國",
-        "nt_esp": "西班牙",
-        "message_placebet_odds_update": "正在更新賠率，請稍候。"
+        "time_up": "時間到"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.zh_tw = languages;

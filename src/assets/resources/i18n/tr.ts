@@ -348,7 +348,8 @@ export const languages = {
         "nt_por": "Portugal",
         "nt_ger": "Germany",
         "nt_esp": "Spain",
-        "message_placebet_odds_update": "Oranlar güncelleniyor, lütfen bekleyiniz."
+        "message_placebet_odds_update": "Oranlar güncelleniyor, lütfen bekleyiniz.",
+        "header_match": "Maç"
     }
 };
 

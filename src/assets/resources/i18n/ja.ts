@@ -313,14 +313,17 @@ export const languages = {
         "win": "勝利",
         "win_loss": "損益",
         "wins": "勝数",
-        "you_reach_max_win": "最大勝利額に達しました",
-        "invalid_payline": "invalid_payline",
-        "invalid_bonus": "invalid_bonus",
-        "opened_bonus": "opened_bonus",
-        "invalid_jackpot": "invalid_jackpot",
-        "opened_jackpot": "opened_jackpot"
+        "you_reach_max_win": "最大勝利額に達しました"
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "アーセナル",
+        "clb_bar": "バルセロナ",
+        "clb_che": "チェルシー",
+        "clb_fcb": "バイエルン・ミュンヘン",
+        "clb_int": "インターミラン",
+        "clb_liv": "リバプール",
+        "clb_mci": "マンチェスター・シティ",
+        "clb_rma": "レアル・マドリッド",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "アウェイ",
@@ -330,30 +333,23 @@ export const languages = {
         "glossary_odd": "奇数",
         "glossary_over": "オーバー %{point}",
         "glossary_under": "アンダー %{point}",
-        "time_up": "時間切れ",
+        "header_match": "一致",
+        "message_placebet_odds_update": "オッズを更新しています。しばらくお待ちください。",
         "next_match": "次戦",
-        "clb_rma": "レアル・マドリッド",
-        "clb_mci": "マンチェスター・シティ",
-        "clb_fcb": "バイエルン・ミュンヘン",
-        "clb_liv": "リバプール",
-        "clb_che": "チェルシー",
-        "clb_int": "インターミラン",
-        "clb_bar": "バルセロナ",
-        "clb_ars": "アーセナル",
         "nt_arg": "アルゼンチン",
-        "nt_fra": "フランス",
-        "nt_eng": "イングランド",
         "nt_bra": "ブラジル",
+        "nt_eng": "イングランド",
+        "nt_esp": "スペイン",
+        "nt_fra": "フランス",
+        "nt_ger": "ドイツ",
         "nt_ned": "オランダ",
         "nt_por": "ポルトガル",
-        "nt_ger": "ドイツ",
-        "nt_esp": "スペイン",
-        "message_placebet_odds_update": "オッズを更新しています。しばらくお待ちください。"
+        "time_up": "時間切れ"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.ja = languages;

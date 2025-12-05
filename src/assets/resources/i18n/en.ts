@@ -313,14 +313,17 @@ export const languages = {
         "win": "Win",
         "win_loss": "Win Loss",
         "wins": "No. Wins",
-        "you_reach_max_win": "You reached the max win",
-        "invalid_payline": "invalid_payline",
-        "invalid_bonus": "invalid_bonus",
-        "opened_bonus": "opened_bonus",
-        "invalid_jackpot": "invalid_jackpot",
-        "opened_jackpot": "opened_jackpot"
+        "you_reach_max_win": "You reached the max win"
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "Arsonist",
+        "clb_bar": "FC Barna",
+        "clb_che": "Chelsee",
+        "clb_fcb": "Baya Munich",
+        "clb_int": "Enter Milan",
+        "clb_liv": "Livenpool",
+        "clb_mci": "Manchester Caliber",
+        "clb_rma": "Unreal Madrid",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "Away",
@@ -330,30 +333,23 @@ export const languages = {
         "glossary_odd": "Odd",
         "glossary_over": "Over %{point}",
         "glossary_under": "Under  %{point}",
-        "time_up": "Time Up",
+        "header_match": "Match",
+        "message_placebet_odds_update": "Updating odds, please wait a moment!",
         "next_match": "Next Match",
-        "clb_rma": "Unreal Madrid",
-        "clb_mci": "Manchester Caliber",
-        "clb_fcb": "Baya Munich",
-        "clb_liv": "Livenpool",
-        "clb_che": "Chelsee",
-        "clb_int": "Enter Milan",
-        "clb_bar": "FC Barna",
-        "clb_ars": "Arsonist",
         "nt_arg": "Argentina",
-        "nt_fra": "France",
-        "nt_eng": "England",
         "nt_bra": "Brazil",
+        "nt_eng": "England",
+        "nt_esp": "Spain",
+        "nt_fra": "France",
+        "nt_ger": "Germany",
         "nt_ned": "Netherlands",
         "nt_por": "Portugal",
-        "nt_ger": "Germany",
-        "nt_esp": "Spain",
-        "message_placebet_odds_update": "Updating odds, please wait a moment!"
+        "time_up": "Time Up"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.en = languages;

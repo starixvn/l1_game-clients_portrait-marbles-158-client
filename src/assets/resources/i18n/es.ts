@@ -313,14 +313,17 @@ export const languages = {
         "win": "Ganar",
         "win_loss": "Ganancia/Pérdida",
         "wins": "Nº victorias",
-        "you_reach_max_win": "Has alcanzado la ganancia máxima.",
-        "invalid_payline": "invalid_payline",
-        "invalid_bonus": "invalid_bonus",
-        "opened_bonus": "opened_bonus",
-        "invalid_jackpot": "invalid_jackpot",
-        "opened_jackpot": "opened_jackpot"
+        "you_reach_max_win": "Has alcanzado la ganancia máxima."
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "Arsonist",
+        "clb_bar": "FC Barna",
+        "clb_che": "Chelsee",
+        "clb_fcb": "Baya Munich",
+        "clb_int": "Enter Milan",
+        "clb_liv": "Livenpool",
+        "clb_mci": "Manchester Caliber",
+        "clb_rma": "Unreal Madrid",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "Visitante",
@@ -330,30 +333,23 @@ export const languages = {
         "glossary_odd": "Impar",
         "glossary_over": "Más de %{point}",
         "glossary_under": "Menos de %{point}",
-        "time_up": "¡Tiempo Agotado!",
+        "header_match": "Partido",
+        "message_placebet_odds_update": "Actualizando cuotas, por favor espere un momento.",
         "next_match": "Próximo Partido",
-        "clb_rma": "Unreal Madrid",
-        "clb_mci": "Manchester Caliber",
-        "clb_fcb": "Baya Munich",
-        "clb_liv": "Livenpool",
-        "clb_che": "Chelsee",
-        "clb_int": "Enter Milan",
-        "clb_bar": "FC Barna",
-        "clb_ars": "Arsonist",
         "nt_arg": "Argentina",
-        "nt_fra": "France",
-        "nt_eng": "England",
         "nt_bra": "Brazil",
+        "nt_eng": "England",
+        "nt_esp": "Spain",
+        "nt_fra": "France",
+        "nt_ger": "Germany",
         "nt_ned": "Netherlands",
         "nt_por": "Portugal",
-        "nt_ger": "Germany",
-        "nt_esp": "Spain",
-        "message_placebet_odds_update": "Actualizando cuotas, por favor espere un momento."
+        "time_up": "¡Tiempo Agotado!"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.es = languages;

@@ -348,7 +348,8 @@ export const languages = {
         "nt_por": "Portugal",
         "nt_ger": "Germany",
         "nt_esp": "Spain",
-        "message_placebet_odds_update": "অডস আপডেট করা হচ্ছে, অনুগ্রহ করে একটু অপেক্ষা করুন।"
+        "message_placebet_odds_update": "অডস আপডেট করা হচ্ছে, অনুগ্রহ করে একটু অপেক্ষা করুন।",
+        "header_match": "মিল"
     }
 };
 

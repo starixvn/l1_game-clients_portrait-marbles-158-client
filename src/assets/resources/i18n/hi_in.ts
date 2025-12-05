@@ -348,7 +348,8 @@ export const languages = {
         "nt_por": "Portugal",
         "nt_ger": "जर्मनी",
         "nt_esp": "Spain",
-        "message_placebet_odds_update": "ऑड्स अपडेट हो रहे हैं, कृपया कुछ देर प्रतीक्षा करें।"
+        "message_placebet_odds_update": "ऑड्स अपडेट हो रहे हैं, कृपया कुछ देर प्रतीक्षा करें।",
+        "header_match": "मिलान"
     }
 };
 

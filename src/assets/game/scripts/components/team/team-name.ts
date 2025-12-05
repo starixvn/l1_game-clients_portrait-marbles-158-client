@@ -8,7 +8,7 @@ export class TeamName extends Component {
     setName(shortName: string) {
         const label = this.getComponent("LocalizedLabel") as any;
         if (label) {
-            label.setKey(`${TRANSLATE_NAMESPACE}.team_${shortName}`);
+            label.setKey(`${TRANSLATE_NAMESPACE}.${shortName}`);
         }
     }
 }

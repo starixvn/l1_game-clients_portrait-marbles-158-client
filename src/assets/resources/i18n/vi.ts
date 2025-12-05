@@ -313,14 +313,17 @@ export const languages = {
         "win": "Thắng",
         "win_loss": "Thắng Thua",
         "wins": "Phiên Thắng",
-        "you_reach_max_win": "Bạn Đã Đạt Mức Tiền Thắng Tối Đa",
-        "invalid_payline": "invalid_payline",
-        "invalid_bonus": "invalid_bonus",
-        "opened_bonus": "opened_bonus",
-        "invalid_jackpot": "invalid_jackpot",
-        "opened_jackpot": "opened_jackpot"
+        "you_reach_max_win": "Bạn Đã Đạt Mức Tiền Thắng Tối Đa"
     },
     "SpinnerSoccerUltraLive": {
+        "clb_ars": "Arsonist",
+        "clb_bar": "FC Barna",
+        "clb_che": "Chelsee",
+        "clb_fcb": "Baya Munich",
+        "clb_int": "Enter Milan",
+        "clb_liv": "Livenpool",
+        "clb_mci": "Manchester Caliber",
+        "clb_rma": "Unreal Madrid",
         "game_icon_name": "Spinner Soccer\nUltra Live",
         "game_name": "Spinner Soccer Ultra Live",
         "glossary_away": "Đội Khách",
@@ -330,30 +333,23 @@ export const languages = {
         "glossary_odd": "Lẻ",
         "glossary_over": "Tài %{point}",
         "glossary_under": "Xỉu %{point}",
-        "time_up": "Hết Giờ",
+        "header_match": "Trận",
+        "message_placebet_odds_update": "Odds đang cập nhật, vui lòng chờ!",
         "next_match": "Trận Kế Tiếp",
-        "clb_rma": "Unreal Madrid",
-        "clb_mci": "Manchester Caliber",
-        "clb_fcb": "Baya Munich",
-        "clb_liv": "Livenpool",
-        "clb_che": "Chelsee",
-        "clb_int": "Enter Milan",
-        "clb_bar": "FC Barna",
-        "clb_ars": "Arsonist",
         "nt_arg": "Argentina",
-        "nt_fra": "Pháp",
-        "nt_eng": "Anh",
         "nt_bra": "Brazil",
+        "nt_eng": "Anh",
+        "nt_esp": "Tây Ban Nha",
+        "nt_fra": "Pháp",
+        "nt_ger": "Đức",
         "nt_ned": "Hà Lan",
         "nt_por": "Bồ Đào Nha",
-        "nt_ger": "Đức",
-        "nt_esp": "Tây Ban Nha",
-        "message_placebet_odds_update": "Odds đang cập nhật, vui lòng chờ!"
+        "time_up": "Hết Giờ"
     }
 };
 
 if (!win.languages) {
     win.languages = {};
 }
-
+                          
 win.languages.vi = languages;
