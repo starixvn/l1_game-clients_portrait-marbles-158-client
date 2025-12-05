@@ -21,7 +21,16 @@ export class OddsHandler implements gc.Shared.IMultipleHandlers {
                 () => this.marbleRoundTimeStore.endPlacingBet,
                 (endPlacingBet) => {
                     if (endPlacingBet) {
-                        this.resetOdds();
+                        this.zeroOdds();
+                    }
+                }
+            );
+
+            mobx.reaction(
+                () => this.marbleRoundTimeStore.startNewRound,
+                (startNewRound) => {
+                    if (startNewRound) {
+                        this.resetAllOdds();
                     }
                 }
             );
@@ -46,8 +55,12 @@ export class OddsHandler implements gc.Shared.IMultipleHandlers {
         this.oddsStore.latestIndex = input;
     }
 
-    resetOdds() {
-        this.oddsStore.resetOdds();
+    zeroOdds() {
+        this.oddsStore.zeroOdds();
+    }
+
+    resetAllOdds() {
+        this.oddsStore.resetAllOdds();
     }
 
     eventHandleList = [

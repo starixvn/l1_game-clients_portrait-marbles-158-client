@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Widget } from "cc";
+import { _decorator, log, Widget } from "cc";
 import { BetItemsPolygon as BetItemsPolygonBase } from "db://shared-components/game/bets/scripts/components/bet-items-polygon";
 import observer from "observer";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
@@ -13,6 +13,11 @@ const { RoundHistories } = gc;
 
 @ccclass
 export class BetItems extends BetItemsPolygonBase {
+    @render(OddsStore, (store) => store.index, { fireImmediately: false })
+    renderIndex(index: number) {
+        log("render block video index---------", index);
+    }
+
     @render(OddsStore, (store) => store.oddsWithConfig)
     renderOdds(oddsWithConfig: OddsWithConfig) {
         const { odds, fractional } = oddsWithConfig;

@@ -15,9 +15,6 @@ export const MARBLE_ROUND_STATE = {
     SHOW_RESULT: "showResult",
     CHANGE_REMAINING_TIME: "changeRemainingTime",
     STOP_GAME_LOOP: "stopGameLoop",
-    PLAYING_VIDEO: "playingVideo",
-    HALF_TIME: "halfTime",
-    INTRO_VIDEO: "introVideo",
     NONE: "none",
 };
 
@@ -38,7 +35,6 @@ export class MarbleRoundTimeStore {
     }
 
     get roundState() {
-        log(`Get [${new Date().toLocaleTimeString()}] current round state-----`, this._roundState);
         return this._roundState;
     }
 

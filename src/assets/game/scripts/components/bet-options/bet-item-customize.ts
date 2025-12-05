@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, log, Node, sp } from "cc";
+import { _decorator, Label, Node, sp } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
@@ -31,6 +31,7 @@ export default class BetItemCustomize extends BetItem {
 
     protected readonly POINTS_SUPPORTED_BET_CHOICES = ["over", "under"];
     protected readonly ANIMATION_DURATION = 0.3;
+    protected currentRoundState = "";
 
     onLoad(): void {
         this.updateStatusLabelOdds(true);
@@ -38,19 +39,28 @@ export default class BetItemCustomize extends BetItem {
         super.onLoad();
     }
 
+    @render(MarbleRoundTimeStore, (store) => store.roundState)
+    renderRoundState(roundState: string) {
+        this.currentRoundState = roundState;
+    }
+
     @render(MarbleRoundTimeStore, (store) => store.startPlacingBet)
     renderStartPlacingBet(startPlacingBet: boolean) {
-        this.toggleBetOption(startPlacingBet);
+        if (startPlacingBet) {
+            this.updateBetItemState(false, true);
+        }
     }
 
-    @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
-    renderEndPlacingBet(endPlacingBet: boolean) {
-        this.toggleBetOption(!endPlacingBet);
+    @render(MarbleRoundTimeStore, (store) => store.endRound)
+    renderEndPlacingBet(endRound: boolean) {
+        if (endRound) {
+            this.updateBetItemState(true, false);
+        }
     }
 
-    @render(OddsStore, (store) => store.index, { fireImmediately: false })
-    renderIndex(index: number) {
-        log("render block video index---------", index);
+    private updateBetItemState(blockIconVisible: boolean, statusLabelVisible: boolean): void {
+        this.setBlockIconVisibility(blockIconVisible);
+        this.updateStatusLabelOdds(statusLabelVisible);
     }
 
     @render(OddsStore, (store) => store.oddsWithConfig)
@@ -106,13 +116,6 @@ export default class BetItemCustomize extends BetItem {
         this.lblOdds && (this.lblOdds.node.active = status);
     }
 
-    private toggleBetOption(allowBet: boolean) {
-        this.setBlockIconVisibility(!allowBet);
-        if (allowBet) {
-            this.updateStatusLabelOdds(true);
-        }
-    }
-
     @render(PointsStore, (store) => store.points)
     renderPoints(points: BetOptionsData) {
         if (!this.POINTS_SUPPORTED_BET_CHOICES.includes(this.betChoice)) {
@@ -130,5 +133,10 @@ export default class BetItemCustomize extends BetItem {
     @handle(MarbleGameBetHandler, (handler, payload: string) => handler.handle(payload))
     override onBet() {
         return this.node.name;
+    }
+
+    @render(MarbleRoundTimeStore, (store) => store.startNewRound)
+    renderStartNewRound(startNewRound: boolean) {
+        startNewRound && this.hideOddsIndicators();
     }
 }

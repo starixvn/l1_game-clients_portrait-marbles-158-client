@@ -8,3 +8,5 @@ export type BetOptionsData = {
     draw?: number;
     [key: string]: number | undefined;
 };
+
+export const BET_OPTIONS_KEYS = ["over", "under", "even", "odd", "home", "away", "draw"];

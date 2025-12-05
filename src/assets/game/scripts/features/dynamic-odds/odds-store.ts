@@ -1,7 +1,7 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
 import mobx from "mobx";
-import { BetOptionsData } from "../../types";
+import { BET_OPTIONS_KEYS, BetOptionsData } from "../../types";
 
 const { injectable, inject } = inversify;
 
@@ -44,7 +44,14 @@ export class OddsStore {
     }
 
     set odds(odds: BetOptionsData) {
-        this._odds = odds;
+        const clonedOdds = { ...odds };
+        BET_OPTIONS_KEYS.forEach((key) => {
+            if (clonedOdds[key] === undefined) {
+                clonedOdds[key] = 0;
+            }
+        });
+
+        this._odds = clonedOdds;
     }
 
     set previousOdds(previousOdds: BetOptionsData) {
@@ -77,7 +84,7 @@ export class OddsStore {
         return this.index === this.latestIndex;
     }
 
-    resetOdds() {
+    zeroOdds() {
         const odds: BetOptionsData = {};
         Object.keys(this.odds || {}).forEach((choice) => {
             odds[choice] = 0;
@@ -89,13 +96,29 @@ export class OddsStore {
 
     deltaForAllBetOptions(previousOdds: BetOptionsData, odds: BetOptionsData) {
         const deltaOdds: BetOptionsData = {};
+        const safePreviousOdds = previousOdds || {};
+        if (Object.keys(safePreviousOdds).length === 0) {
+            for (const betOptionName of Object.keys(odds)) {
+                deltaOdds[`${betOptionName}`] = 0;
+            }
+            return deltaOdds;
+        }
+
         for (const betOptionName of Object.keys(odds)) {
-            deltaOdds[`${betOptionName}`] = this.deltaOdds(previousOdds[`${betOptionName}`] || 0, odds[`${betOptionName}`] || 0);
+            deltaOdds[`${betOptionName}`] = this.deltaOdds(safePreviousOdds[`${betOptionName}`] || 0, odds[`${betOptionName}`] || 0);
         }
         return deltaOdds;
     }
 
     deltaOdds(previousOdds: number, odds: number) {
         return odds - previousOdds;
+    }
+
+    resetAllOdds() {
+        this._previousOdds = {};
+        this._odds = {};
+        this._points = {};
+        this._index = -1;
+        this._latestIndex = -1;
     }
 }
