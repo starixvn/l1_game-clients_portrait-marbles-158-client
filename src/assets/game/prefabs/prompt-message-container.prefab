@@ -30,7 +30,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 40.652,
       "z": 0
     },
     "_lrot": {
@@ -72,7 +72,6 @@
       "__uuid__": "634347df-b859-4246-a0ac-0792f61dcca2",
       "__expectedType__": "cc.Prefab"
     },
-    "shortLockingDuration": true,
     "_id": ""
   },
   {
@@ -88,7 +87,6 @@
       "__id__": 0
     },
     "fileId": "5ceghaIQhLk4YelIL4MX6k",
-    "instance": null,
     "targetOverrides": null
   }
 ]

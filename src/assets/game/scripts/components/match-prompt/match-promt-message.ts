@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Enum, Sprite, SpriteAtlas, tween, UIOpacity, v3 } from "cc";
+import { _decorator, Enum, Sprite, SpriteAtlas, tween, UIOpacity } from "cc";
 import PromptMessageComponent from "db://shared-components/game/prompt-message/scripts/prompt-message-component";
 const { ccclass, property } = _decorator;
 const { Translator } = gc;
@@ -40,44 +40,30 @@ export class MatchPromptMessage extends PromptMessageComponent {
     @property(SpriteAtlas)
     iconAtlas: SpriteAtlas = null;
 
+    protected durationAnimOpacity = 1;
+
     prompt() {
-        const opacity = this.node.getComponent(UIOpacity);
-        opacity.opacity = 1;
-        const clonePositionX = this.node.position.x;
-        const clonePositionY = this.node.position.y;
+        const cpmOpacity = this.node.getComponent(UIOpacity);
+        cpmOpacity.opacity = 1;
 
-        tween(opacity)
-            .to(this.durationAnimOpacity, { opacity: 255 }, { easing: this.easingStart })
-            .delay(this.durationShow - this.durationAnimOpacity * 2)
-            .to(this.durationAnimOpacity, { opacity: 0 }, { easing: this.easingStart })
-            .start();
-
-        tween(this.node)
-            .to(
-                this.durationAnimMove,
-                {
-                    position: v3(0, 0, 0),
-                },
-                { easing: this.easingStart }
-            )
-            .delay(this.durationShow - this.durationAnimMove * 2)
-            .to(
-                this.durationAnimMove,
-                {
-                    position: v3(Math.abs(clonePositionX), Math.abs(clonePositionY), 0),
-                },
-                { easing: this.easingStart }
-            )
-            .delay(0.2)
-            .to(0.1, {
-                position: v3(clonePositionX, clonePositionY, 0),
-            })
-            .start();
+        tween(cpmOpacity).to(this.durationAnimOpacity, { opacity: 255 }, { easing: this.easingStart }).start();
     }
 
     showTimeUpMessage() {
         const message = Translator.gameTranslate("time_up").toUpperCase();
         this.icon = IconName.WHISTLE;
+        this.content = message;
+    }
+
+    showStartBetMessage() {
+        const message = Translator.commonTranslate("message_place_bets").toUpperCase();
+        this.icon = IconName.COIN;
+        this.content = message;
+    }
+
+    showStopBetMessage() {
+        const message = Translator.commonTranslate("message_stop_bet").toUpperCase();
+        this.icon = IconName.HAND;
         this.content = message;
     }
 

@@ -39,8 +39,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 375,
-      "y": 536.1995,
+      "x": 378,
+      "y": 540.1995,
       "z": 0
     },
     "_lrot": {
@@ -466,8 +466,8 @@
     "_alignFlags": 33,
     "_target": null,
     "_left": 358,
-    "_right": 18,
-    "_top": -35,
+    "_right": 15,
+    "_top": -39,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,

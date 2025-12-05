@@ -1,9 +1,9 @@
-import gc from "@sg/game-client-base";
 import { _decorator } from "cc";
-import { NodeContainer } from "db://shared-components/shared/common-components/node-container/node-container";
 import Observer from "observer";
-import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
 import { MatchPromptMessage } from "./match-promt-message";
+import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
+import { NodeContainer } from "db://shared-components/shared/common-components/node-container/node-container";
+import gc from "@sg/game-client-base";
 
 const { ccclass } = _decorator;
 const { render, handle } = Observer;
@@ -28,6 +28,7 @@ export class MatchPromptMessageContainer extends NodeContainer {
     @render(MarbleRoundTimeStore, (store) => store.startPlacingBet)
     showStartBetMessage(startPlacingBet: boolean) {
         if (startPlacingBet) {
+            this.getComponent()?.showStartBetMessage();
             this.playSound(PROMPT_SOUND_ID.START_BETTING);
         }
     }
@@ -35,6 +36,7 @@ export class MatchPromptMessageContainer extends NodeContainer {
     @render(MarbleRoundTimeStore, (store) => store.endPlacingBet)
     showStopBetMessage(endPlacingBet: boolean) {
         if (endPlacingBet) {
+            this.getComponent()?.showStopBetMessage();
             this.playSound(PROMPT_SOUND_ID.STOP_BETTING);
         }
     }
