@@ -99,10 +99,11 @@ export default class CustomWebview extends ObserverComponent {
         this.setOpacityIframe(1);
     }
 
-    setOpacityIframe(opacity: number) {
+    setOpacityIframe(cssOpacity: number) {
         const impl = (this.webview as any)?._impl;
         if (impl?._webview?.style) {
-            impl._webview.style.opacity = opacity;
+            impl._webview.style.opacity = cssOpacity;
+            this.parentElement.style.setProperty("left", cssOpacity === 0 ? "-100%" : "0px", "important");
         }
     }
 
