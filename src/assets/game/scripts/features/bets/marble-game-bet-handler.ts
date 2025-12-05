@@ -16,19 +16,26 @@ export class MarbleGameBetHandler extends gc.Bet.BetHandler {
         const isPreventBet = this.roundTimeStore.roundState !== Rounds.ROUND_STATE.PLACING_BET;
 
         if (isPreventBet) {
-            let warningMsg = "";
-            const isStartingRound = this.roundTimeStore.isStartingRound;
-            if (isStartingRound) {
-                warningMsg = Translator.commonTranslate("message_cannot_bet");
-            } else if (this.roundTimeStore.showingResult) {
-                warningMsg = Translator.commonTranslate("message_placebet_next_round");
-            } else {
-                warningMsg = Translator.gameTranslate("message_placebet_odds_update");
-            }
-
+            const warningMsg = this.getWarningMessage(
+                this.roundTimeStore.roundState,
+                this.roundTimeStore.isStartingRound,
+                this.oddsStore.isFinalBlock
+            );
             this.noticeStore.addWarning(warningMsg);
         }
 
         return isPreventBet;
+    }
+
+    private getWarningMessage(roundState: string, isStartingRound: boolean, isFinalBlock: boolean) {
+        if (isStartingRound) {
+            return Translator.commonTranslate("message_cannot_bet");
+        }
+
+        if (roundState === Rounds.ROUND_STATE.LOCKING_BET && !isFinalBlock) {
+            return Translator.gameTranslate("message_placebet_odds_update");
+        }
+
+        return Translator.commonTranslate("message_placebet_next_round");
     }
 }

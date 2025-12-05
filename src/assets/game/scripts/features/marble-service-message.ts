@@ -20,6 +20,6 @@ export namespace MarbleServiceMessage {
     }
 
     export class OddsLatestIndex {
-        static eventName = "latestIndex";
+        static eventName = "lastIndex";
     }
 }

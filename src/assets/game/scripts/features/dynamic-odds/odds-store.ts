@@ -73,6 +73,10 @@ export class OddsStore {
         };
     }
 
+    get isFinalBlock() {
+        return this.index === this.latestIndex;
+    }
+
     resetOdds() {
         const odds: BetOptionsData = {};
         Object.keys(this.odds || {}).forEach((choice) => {
