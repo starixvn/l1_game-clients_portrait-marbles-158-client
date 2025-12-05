@@ -1,7 +1,7 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, log, Node } from "cc";
+import { _decorator, Label, log, Node, sp } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
-import { ComponentUtils } from "db://shared-components/shared/utils";
+import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { MarbleGameBetHandler } from "../../features/bets/marble-game-bet-handler";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
@@ -13,6 +13,11 @@ import { BetOptionsData } from "../../types";
 const { property, ccclass } = _decorator;
 const { render, handle } = Observer;
 
+enum AnimNames {
+    INCREASE_ODD = "odd-up",
+    DECREASE_ODD = "odd-down",
+}
+
 @ccclass
 export default class BetItemCustomize extends BetItem {
     @property(Node)
@@ -22,12 +27,10 @@ export default class BetItemCustomize extends BetItem {
     decreaseOdd: Node = null;
 
     @property(Node)
-    disableNode: Node = null;
-
-    @property(Node)
     blockIcon: Node = null;
 
     protected readonly POINTS_SUPPORTED_BET_CHOICES = ["over", "under"];
+    protected readonly ANIMATION_DURATION = 0.3;
 
     onLoad(): void {
         this.updateStatusLabelOdds(true);
@@ -64,23 +67,29 @@ export default class BetItemCustomize extends BetItem {
     }
 
     private hideOddsIndicators(): void {
-        ComponentUtils.setOpacityNode(this.increaseOdd, 1);
-        ComponentUtils.setOpacityNode(this.decreaseOdd, 1);
+        AnimationUtils.fadeOutAndDeactivate(this.increaseOdd, this.ANIMATION_DURATION);
+        AnimationUtils.fadeOutAndDeactivate(this.decreaseOdd, this.ANIMATION_DURATION);
     }
 
     private updateOddsIndicators(deltaOdd: number): void {
         if (deltaOdd === 0) {
-            ComponentUtils.setOpacityNode(this.increaseOdd, 1);
-            ComponentUtils.setOpacityNode(this.decreaseOdd, 1);
+            this.hideOddsIndicators();
             return;
         }
         const isIncrease = deltaOdd > 0;
-        ComponentUtils.setOpacityNode(this.increaseOdd, isIncrease ? 255 : 1);
-        ComponentUtils.setOpacityNode(this.decreaseOdd, isIncrease ? 1 : 255);
-    }
-
-    setDisabledVisibility(status: boolean) {
-        this.disableNode && (this.disableNode.active = status);
+        if (isIncrease) {
+            AnimationUtils.fadeOutAndDeactivate(this.decreaseOdd, this.ANIMATION_DURATION);
+            Promise.all([
+                AnimationUtils.fadeInAndActivate(this.increaseOdd, 0),
+                AnimationUtils.playSpine(this.increaseOdd?.getComponent(sp.Skeleton), AnimNames.INCREASE_ODD, false),
+            ]);
+        } else {
+            AnimationUtils.fadeOutAndDeactivate(this.increaseOdd, this.ANIMATION_DURATION);
+            Promise.all([
+                AnimationUtils.fadeInAndActivate(this.decreaseOdd, 0),
+                AnimationUtils.playSpine(this.decreaseOdd?.getComponent(sp.Skeleton), AnimNames.DECREASE_ODD, false),
+            ]);
+        }
     }
 
     setBlockIconVisibility(status: boolean) {
@@ -89,7 +98,6 @@ export default class BetItemCustomize extends BetItem {
 
     blockBetOption() {
         this.setBlockIconVisibility(true);
-        this.setDisabledVisibility(true);
         this.hideOddsIndicators();
         this.updateStatusLabelOdds(false);
     }
@@ -99,7 +107,6 @@ export default class BetItemCustomize extends BetItem {
     }
 
     private toggleBetOption(allowBet: boolean) {
-        this.setDisabledVisibility(!allowBet);
         this.setBlockIconVisibility(!allowBet);
         if (allowBet) {
             this.updateStatusLabelOdds(true);

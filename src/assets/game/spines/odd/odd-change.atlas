@@ -1,0 +1,20 @@
+
+odd-change.png
+size: 33,28
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+odd/down
+  rotate: true
+  xy: 2, 2
+  size: 24, 14
+  orig: 24, 14
+  offset: 0, 0
+  index: -1
+odd/up
+  rotate: true
+  xy: 18, 2
+  size: 24, 13
+  orig: 24, 13
+  offset: 0, 0
+  index: -1
