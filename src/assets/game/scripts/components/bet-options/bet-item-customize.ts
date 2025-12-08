@@ -3,7 +3,6 @@ import { _decorator, Label, Node, sp } from "cc";
 import BetItem from "db://shared-components/game/bets/scripts/components/bet-item";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
-import { MarbleGameBetHandler } from "../../features/bets/marble-game-bet-handler";
 import { OddsStore, OddsWithConfig } from "../../features/dynamic-odds/odds-store";
 import { PointsStore } from "../../features/points/points-store";
 import { MarbleRoundTimeStore } from "../../features/rounds/marble-round-time-store";
@@ -128,11 +127,6 @@ export default class BetItemCustomize extends BetItem {
                 point: point.toString(),
             }).toUpperCase();
         }
-    }
-
-    @handle(MarbleGameBetHandler, (handler, payload: string) => handler.handle(payload))
-    override onBet() {
-        return this.node.name;
     }
 
     @render(MarbleRoundTimeStore, (store) => store.startNewRound)

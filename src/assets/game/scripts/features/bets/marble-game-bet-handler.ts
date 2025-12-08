@@ -8,8 +8,6 @@ const { Rounds, Translator } = gc;
 
 @injectable()
 export class MarbleGameBetHandler extends gc.Bet.BetHandler {
-    @inject(gc.Rounds.RoundTimeStore) protected readonly roundTimeStore: gc.Rounds.RoundTimeStore;
-    @inject(gc.Notices.NoticeStore) protected readonly noticeStore: gc.Notices.NoticeStore;
     @inject(OddsStore) protected readonly oddsStore: OddsStore;
 
     isInPhasePreventBet() {
